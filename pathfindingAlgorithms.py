@@ -26,3 +26,11 @@ class Path():
             for x in graph[node]:
                 Path.DFS(graph,x,visited)
         return visited
+
+    @classmethod
+    def Astar():
+        pass
+
+    @classmethod
+    def Djikstra():
+        pass
