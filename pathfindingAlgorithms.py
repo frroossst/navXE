@@ -27,3 +27,13 @@ class Path():
                 Path.DFS(graph,x,visited)
         return visited
 
+<<<<<<< HEAD:traverse.py
+=======
+    @classmethod
+    def Astar():
+        pass
+
+    @classmethod
+    def Djikstra():
+        pass
+>>>>>>> traversal_algorithms:pathfindingAlgorithms.py
