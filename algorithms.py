@@ -1,9 +1,15 @@
+from copy import deepcopy
+
 class Path():
 
     def __init__(self,graph):
-        pass
+        dict_copy = deepcopy(graph)
+        for i in dict_copy.values():
+            for j in i:
+                if j != []:
+                    if j not in graph:
+                        graph[j] = []
 
-    @classmethod
     def BFS(self,graph,node):
         # node is the starting position
         visited = []
@@ -27,8 +33,6 @@ class Path():
                 Path.DFS(graph,x,visited)
         return visited
 
-<<<<<<< HEAD:traverse.py
-=======
     @classmethod
     def Astar():
         pass
@@ -36,4 +40,3 @@ class Path():
     @classmethod
     def Djikstra():
         pass
->>>>>>> traversal_algorithms:pathfindingAlgorithms.py

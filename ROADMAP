@@ -1,0 +1,26 @@
+Version 0
+
+Description
+    A MVP backend, website and PWA
+
+Abilities 
+    
+    1. Create a graph and add node characteristics
+    2. Store the graph and node characteristics in a file that can be loaded later
+    3. Find a path from home node to destination node
+    4. Display the shortest path to the user
+   
+
+
+Version 1
+
+Description
+    Tending towards a viable mobile web app
+
+Abilities 
+
+    1. QR code generation upon node creation
+    2. QR code read
+    3. Auto update home node on reading the current QR codej
+        a. Find the path to destination again
+        b. Return the shortest path
