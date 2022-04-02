@@ -1,1 +1,10 @@
-{"key2desc" : {"abc" : "the mega huge place"}, "desc2key" : {}}
+{
+      "key2desc": {
+            "hom0": "home",
+            "Bpa0": "Bpath"
+      },
+      "desc2key": {
+            "home": "hom0",
+            "Bpath": "Bpa0"
+      }
+}

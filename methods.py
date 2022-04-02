@@ -1,6 +1,7 @@
+from copy import deepcopy
 import json
 
-class methods():
+class method():
 
     def __init__(self):
         pass
@@ -12,7 +13,7 @@ class methods():
             return content
 
     @classmethod
-    def dumpJSON(self,data,file : str) -> dict:
+    def dumpJSON(self,data : dict,file : str) -> dict:
         """
         Best practive is to read and write all data rather than modify 
         """
@@ -20,4 +21,23 @@ class methods():
             json.dump(data,fobj,indent=6)
             fobj.close()
 
+    @classmethod
+    def clearFileData(self, file : str) -> None:
+        
+        with open(file,"w") as fobj:
+            json.dump({},fobj)
+            fobj.close()
 
+        return None
+
+    @classmethod
+    def leafifyChildren(self,graph : dict) -> dict:
+        
+        copyGraph = deepcopy(graph)
+
+        for i in copyGraph.values():
+            for j in i:
+                if j not in copyGraph:
+                    graph[j] = [] # Generating a leaf for the children
+                
+        return graph

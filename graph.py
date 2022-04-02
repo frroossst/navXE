@@ -1,6 +1,6 @@
 # To generate and create a graph
 
-from methods import methods
+from methods import method
 
 class Graphs():
 
@@ -10,10 +10,10 @@ class Graphs():
     desc2key = {}
 
     def __init__(self):
-            Graphs.graphDB = methods.loadJSON("graphDB.json")
-            Graphs.propertiesDB = methods.loadJSON("propertiesDB.json")
-            Graphs.key2desc = methods.loadJSON("indexDB.json")["key2desc"]
-            Graphs.desc2key = methods.loadJSON("indexDB.json")["desc2key"]
+            Graphs.graphDB = method.loadJSON("graphDB.json")
+            Graphs.propertiesDB = method.loadJSON("propertiesDB.json")
+            Graphs.key2desc = method.loadJSON("indexDB.json")["key2desc"]
+            Graphs.desc2key = method.loadJSON("indexDB.json")["desc2key"]
 
     def addNode(self,name,children=[],weight=0.0,isMajor=False):
         """
@@ -36,10 +36,11 @@ class Graphs():
         Graphs.key2desc[node_key] = name
         Graphs.desc2key[name] = node_key
 
-        # ! Not adding a children iterator to generate gGNNs for children as if they are not leaves and connect to existing nodes,
-        # ! we accidentally reset the graph. The children are modified as leaves in the algorithms.py script right before the
-        # ! actual traversal takes place, for now this is only done for the temporary graph variable and the database is not modified in any way 
+        # Store the children nngs in the key2desc and desc2key DB for methods.leafifyChidlren to access later
 
+        method.dumpJSON(Graphs.graphDB,"graphDB.json")
+        index_build = {"key2desc" : Graphs.key2desc, "desc2key" : Graphs.desc2key}
+        method.dumpJSON(index_build,"indexDB.json")
 
     @classmethod
     def generateGraphNodeNames(self,name) -> str:
@@ -52,13 +53,17 @@ class Graphs():
                 new_name = name[0:3:1] + str(count)
                 count += 1
             else:
-                break
-
-
+                return new_name
 
     def removeNode(self,name):
+
+        nodeName = Graphs.desc2key[name]
+
         try:
-            del Graphs.graphDB[name]
+            del Graphs.graphDB[nodeName]
+            del Graphs.propertiesDB[name]
+            del Graphs.key2desc[nodeName]
+            del Graphs.desc2key[name]
         except KeyError:
             pass # Ignoring deletion cause node does not exist
 
@@ -72,6 +77,9 @@ class Graphs():
         "type" => detailed description of the form
             Eg : water fountain, hand sanitising station etc."""
 
+
+
+method.clearFileData("graphDB.json")
 G = Graphs()
 G.addNode("home",["Bpath","Cpath","Dpath"],isMajor=True)
 G.addNode("Bpath",[])
@@ -81,5 +89,4 @@ print(G.graphDB)
 
 from algorithms import Path
 P = Path(G.graphDB)
-print(P.BFS(G.graphDB,"home"))
-print(P.BFS(G.graphDB,"root"))
+print(P.BFS(G.graphDB,Graphs.desc2key["home"]))

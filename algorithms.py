@@ -1,17 +1,24 @@
+from methods import method
 from copy import deepcopy
 
 class Path():
 
     def __init__(self,graph):
+        pass
+        """
         dict_copy = deepcopy(graph)
         for i in dict_copy.values():
             for j in i:
                 if j != []:
                     if j not in graph:
                         graph[j] = []
+        """
 
     def BFS(self,graph,node):
         # node is the starting position
+
+        graph = method.leafifyChildren(graph)
+
         visited = []
         queue = []
         visited.append(node)

@@ -1,7 +1,7 @@
-Version 0
+Version 0 (Boilerplate)
 
 Description
-    A MVP backend, website and PWA
+    A MVP backend
 
 Abilities 
     
@@ -9,13 +9,14 @@ Abilities
     2. Store the graph and node characteristics in a file that can be loaded later
     3. Find a path from home node to destination node
     4. Display the shortest path to the user
+    5. Store data in a JSON database
    
 
 
-Version 1
+Version 1 (mvp?)
 
 Description
-    Tending towards a viable mobile web app
+    A MVP website
 
 Abilities 
 
@@ -24,3 +25,17 @@ Abilities
     3. Auto update home node on reading the current QR codej
         a. Find the path to destination again
         b. Return the shortest path
+    4. Basic website UI
+
+
+
+Version 2 ()
+
+Description
+
+
+Abilities
+
+    1.
+    2.
+    3.
