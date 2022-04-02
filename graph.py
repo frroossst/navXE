@@ -15,7 +15,7 @@ class Graphs():
             Graphs.key2desc = method.loadJSON("indexDB.json")["key2desc"]
             Graphs.desc2key = method.loadJSON("indexDB.json")["desc2key"]
 
-    def addNode(self,name,children=[],weight=0.0,isMajor=False):
+    def addNode(self,name : str,children=[],weight=0.0,isMajor=False):
         """
         name <string> name of the node
         children <list> list of the names of all children, empty list if leaf
@@ -55,7 +55,7 @@ class Graphs():
             else:
                 return new_name
 
-    def removeNode(self,name):
+    def removeNode(self,name : str):
 
         nodeName = Graphs.desc2key[name]
 

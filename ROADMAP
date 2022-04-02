@@ -1,7 +1,7 @@
 Version 0 (Boilerplate)
 
 Description
-    A MVP backend
+    A MVP Python backend
 
 Abilities 
     
@@ -16,7 +16,7 @@ Abilities
 Version 1 (mvp?)
 
 Description
-    A MVP website
+    A MVP Flask website
 
 Abilities 
 
@@ -32,7 +32,7 @@ Abilities
 Version 2 ()
 
 Description
-
+    A MVP Flask PWA
 
 Abilities
 
