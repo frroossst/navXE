@@ -1,8 +1,9 @@
 from flask import Flask
 
 def create_app():
+
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = "dgksdjkljsfklgjlksfdgjfdnv iewnsd" # Change this for production
+    app.config['SECRET_KEY'] = "dgksdjkljsfklgjlksfdgjfdnv iewnsd" # Change this for production and make it more secure
 
     from .views import views
 

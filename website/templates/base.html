@@ -5,12 +5,20 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         
-        <title>{% block title %}{% endblock %}</title>
+        <title> navXE - a local campus navigation app</title>
 
     </head>
     <body>
         <h1> "Hello World!" </h1>
 
+        <div id="nav-bar">
+            <ul>
+                <a href="" style="text-decoration: none"></a> 
+                <li><a href="{{url_for('views.navigate')}}">Navigate</a></li>
+                <li><a href="{{url_for('views.create')}}">Create</a></li>
+                <li><a href="{{url_for('views.code')}}">Source Code</a></li>
+            </ul>
+        </div>
 
     </body>
 
