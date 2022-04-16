@@ -77,8 +77,6 @@ class Graphs():
         undirected_graph_iter = copy.deepcopy(self.graph)
         undirected_graph = copy.deepcopy(self.graph)
 
-        print(self.graph)
-
         # Undirecting using key-value pairs
         for key_undir, value_list in undirected_graph_iter.items():
             for val in value_list:
@@ -103,8 +101,6 @@ class Graphs():
                 if key not in undirected_graph[v]:
                     undirected_graph[v].append(key)
 
-        print(undirected_graph)
-
         # Removing duplicate value items
         for key, val in undirected_graph.items():
             nonDup = []
@@ -114,7 +110,27 @@ class Graphs():
 
             undirected_graph[key] = nonDup
 
+        # Preventing cyclic trip ups
+        for key, val in undirected_graph.items():
+            val_copy = copy.deepcopy(val)
+            for v in val:
+                flag0 = False
+                if v in self.graph[key] or key in self.graph[v]:
+                    flag0 = True
+               # else:
+               #     flag0 = False
+                if not flag0:
+                    val_copy.remove(v)
+            undirected_graph[key] = val_copy
+
+                    
+
+
+
+
         print(undirected_graph)
+        print()
+        print(self.graph)
         return undirected_graph
 
 
