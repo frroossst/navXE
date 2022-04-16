@@ -1,4 +1,5 @@
 # To generate and create a graph
+
 from methods import method
 import copy
 
@@ -65,7 +66,8 @@ class Graphs():
             del Graphs.key2desc[nodeName]
             del Graphs.desc2key[name]
         except KeyError:
-            print("Node does not exist") # Ignoring deletion cause node does not exist
+            pass # Ignoring deletion cause node does not exist
+
 
     @classmethod
     def undirectGraph(self,graph : dict):
@@ -77,6 +79,7 @@ class Graphs():
 
         print(self.graph)
 
+        # Undirecting using key-value pairs
         for key_undir, value_list in undirected_graph_iter.items():
             for val in value_list:
                 for k, v in self.graph.items():
@@ -86,6 +89,7 @@ class Graphs():
         undirected_graph = method.leafifyChildren(undirected_graph) 
         undirected_graph_iter = copy.deepcopy(undirected_graph)
 
+
         # Populating empty 
         for key, value in undirected_graph_iter.items():
             if value == []:
@@ -93,6 +97,14 @@ class Graphs():
                     if key in val_list:
                         undirected_graph[key].append(k)
                 
+        # Fixing some key-value pairs
+        for key, val in undirected_graph.items():
+            for v in val:
+                if key not in undirected_graph[v]:
+                    undirected_graph[v].append(key)
+
+        print(undirected_graph)
+
         # Removing duplicate value items
         for key, val in undirected_graph.items():
             nonDup = []
@@ -104,8 +116,6 @@ class Graphs():
 
         print(undirected_graph)
         return undirected_graph
-
-
 
 
 
