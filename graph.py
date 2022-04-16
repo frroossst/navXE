@@ -1,6 +1,6 @@
 # To generate and create a graph
-
 from methods import method
+import copy
 
 class Graphs():
 
@@ -65,28 +65,49 @@ class Graphs():
             del Graphs.key2desc[nodeName]
             del Graphs.desc2key[name]
         except KeyError:
-            pass # Ignoring deletion cause node does not exist
+            print("Node does not exist") # Ignoring deletion cause node does not exist
+
+    @classmethod
+    def undirectGraph(self,graph : dict):
+        # ! This is a terrible mess for the love of all that is holy there must be a better way to do this
+
+        self.graph = graph
+        undirected_graph_iter = copy.deepcopy(self.graph)
+        undirected_graph = copy.deepcopy(self.graph)
+
+        print(self.graph)
+
+        for key_undir, value_list in undirected_graph_iter.items():
+            for val in value_list:
+                for k, v in self.graph.items():
+                    if val in v:
+                        # if val not in undirected_graph[key_undir]:
+                            undirected_graph[key_undir].append(k)
+        undirected_graph = method.leafifyChildren(undirected_graph) 
+        undirected_graph_iter = copy.deepcopy(undirected_graph)
+
+        # Populating empty 
+        for key, value in undirected_graph_iter.items():
+            if value == []:
+                for k,val_list in undirected_graph_iter.items():
+                    if key in val_list:
+                        undirected_graph[key].append(k)
+                
+        # Removing duplicate value items
+        for key, val in undirected_graph.items():
+            nonDup = []
+            for i in val:
+                if i not in nonDup and i != key:
+                    nonDup.append(i)
+
+            undirected_graph[key] = nonDup
+
+        print(undirected_graph)
+        return undirected_graph
 
 
-    # Form should have different methods to add characteristics
-"""form <str> characteristics of the node
-        "junction" => multiple edges leading upto the node
-        "place" => the node represents a room or a place
-        "stairs" => node has stairs
-        ""
-        "type" => detailed description of the form
-            Eg : water fountain, hand sanitising station etc."""
 
 
 
-method.clearFileData("graphDB.json")
 G = Graphs()
-G.addNode("home",["Bpath","Cpath","Dpath"],isMajor=True)
-G.addNode("Bpath",[])
-print(G.graphDB)
-
-# Testing and Debugging
-
-from algorithms import Path
-P = Path(G.graphDB)
-print(P.BFS(G.graphDB,Graphs.desc2key["home"]))
+G.undirectGraph(Graphs.graphDB)

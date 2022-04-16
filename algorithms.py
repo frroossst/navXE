@@ -32,7 +32,6 @@ class Path():
                     queue.append(x)
         return visited
 
-    @classmethod
     def DFS(self,graph,node,visited):
         if node not in visited:
             visited.append(node)
@@ -40,10 +39,8 @@ class Path():
                 Path.DFS(graph,x,visited)
         return visited
 
-    @classmethod
     def Astar():
         pass
 
-    @classmethod
     def Djikstra():
         pass

@@ -8,7 +8,7 @@ def home():
 
 @views.route("/navigate",methods=["GET","POST"])
 def navigate():
-    return "This is the navigation page"
+    return render_template("navigate.html")
 
 @views.route("/maps")
 def maps():

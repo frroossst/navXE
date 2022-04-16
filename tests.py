@@ -1,12 +1,13 @@
-import unittest
-from traverse import Path
+from algorithms import Path
+from methods import method
+from graph import Graphs
 
 
-# Checkign if BFS works
-test = {"a" : ["b","c"], "b" : [], "c" : ["d","e"], "d" : [], "e" : []}
-expected = ["a","b","c","d","e"]
-result = Path.BFS(test,"a")
-if result != expected:
-    print(f"BFS test failed; Path.BFS() \nExpected : {expected}\nGot : {result} ")
-
-
+# Testing BFS for basic dataset
+method.clearFileData("graphDB.json")
+G = Graphs()
+G.addNode("home",["Bpath","Cpath","Dpath"],isMajor=True)
+G.addNode("Bpath",[])
+print(G.graphDB)
+P = Path(G.graphDB)
+print(P.BFS(G.graphDB,Graphs.desc2key["home"]))
