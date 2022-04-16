@@ -4,10 +4,10 @@ from graph import Graphs
 
 
 # Testing BFS for basic dataset
-method.clearFileData("graphDB.json")
+# method.clearFileData("graphDB.json")
 G = Graphs()
-G.addNode("home",["Bpath","Cpath","Dpath"],isMajor=True)
-G.addNode("Bpath",[])
+Graphs.graphDB = G.undirectGraph(Graphs.graphDB)
+P = Path(Graphs.graphDB)
 print(G.graphDB)
-P = Path(G.graphDB)
-print(P.BFS(G.graphDB,Graphs.desc2key["home"]))
+print(P.BFS_SP(G.graphDB,"a","i"))
+print(P.BFS_SP(G.graphDB,"j","i"))

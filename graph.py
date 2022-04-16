@@ -123,17 +123,6 @@ class Graphs():
                     val_copy.remove(v)
             undirected_graph[key] = val_copy
 
-                    
-
-
-
-
-        print(undirected_graph)
-        print()
-        print(self.graph)
         return undirected_graph
 
 
-
-G = Graphs()
-G.undirectGraph(Graphs.graphDB)
