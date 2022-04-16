@@ -4,6 +4,9 @@ from graph import Graphs
 
 
 # Testing BFS for basic dataset
+
+method.clearFileData("graphDB.json")
+
 G = Graphs()
 
 G.addNode("a",["b","c"])
