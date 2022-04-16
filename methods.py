@@ -15,7 +15,7 @@ class method():
     @classmethod
     def dumpJSON(self,data : dict,file : str) -> dict:
         """
-        Best practive is to read and write all data rather than modify 
+        Best practice is to read and write all data rather than modify 
         """
         with open(file,"w") as fobj:
             json.dump(data,fobj,indent=6)

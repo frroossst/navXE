@@ -16,6 +16,8 @@ class Graphs():
             Graphs.key2desc = method.loadJSON("indexDB.json")["key2desc"]
             Graphs.desc2key = method.loadJSON("indexDB.json")["desc2key"]
 
+
+
     def addNode(self,name : str,children=[],weight=0.0,isMajor=False):
         """
         name <string> name of the node
@@ -26,7 +28,8 @@ class Graphs():
         propDict = {"nodeKey" : "", "children" : children, "description" : "", "weight" : weight, "isMajor" : isMajor, "type" : {}}
 
         if len(name) < 3:
-            raise NameError ("Node name must be atleast three characters in length")
+            pass
+        #    raise NameError ("Node name must be atleast three characters in length")
         elif name in Graphs.graphDB:
             raise NameError ("Node name already in use, cannot create duplicate nodes")
 
@@ -43,6 +46,8 @@ class Graphs():
         index_build = {"key2desc" : Graphs.key2desc, "desc2key" : Graphs.desc2key}
         method.dumpJSON(index_build,"indexDB.json")
 
+
+
     @classmethod
     def generateGraphNodeNames(self,name) -> str:
 
@@ -56,6 +61,8 @@ class Graphs():
             else:
                 return new_name
 
+
+
     def removeNode(self,name : str):
 
         nodeName = Graphs.desc2key[name]
@@ -67,6 +74,7 @@ class Graphs():
             del Graphs.desc2key[name]
         except KeyError:
             pass # Ignoring deletion cause node does not exist
+
 
 
     @classmethod
@@ -86,7 +94,6 @@ class Graphs():
                             undirected_graph[key_undir].append(k)
         undirected_graph = method.leafifyChildren(undirected_graph) 
         undirected_graph_iter = copy.deepcopy(undirected_graph)
-
 
         # Populating empty 
         for key, value in undirected_graph_iter.items():

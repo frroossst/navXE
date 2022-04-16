@@ -1,51 +1,22 @@
 from methods import method
-from copy import deepcopy
+import copy
 
 class Path():
 
-    def __init__(self,graph):
+    def __init__(self,graph : dict):
         pass
-        """
-        dict_copy = deepcopy(graph)
-        for i in dict_copy.values():
-            for j in i:
-                if j != []:
-                    if j not in graph:
-                        graph[j] = []
-        """
-
-    def BFS(self,graph : dict,node : str):
-        # node is the starting position
-
-        graph = method.leafifyChildren(graph)
-
-        visited = []
-        queue = []
-        visited.append(node)
-        queue.append(node)
-
-        while queue:
-            s = queue.pop(0)
-            for x in graph[s]:
-                if x not in visited:
-                    visited.append(x)
-                    queue.append(x)
-        return visited
 
     def DFS(self,graph,node,visited):
+
         if node not in visited:
             visited.append(node)
             for x in graph[node]:
                 Path.DFS(graph,x,visited)
+
         return visited
 
-    def Astar():
-        pass
-
-    def Djikstra():
-        pass
-
     def BFS_SP(self, graph, start, goal):
+
         explored = []
         
         # Queue for traversing the
@@ -55,8 +26,7 @@ class Path():
         # If the desired node is
         # reached
         if start == goal:
-            print("Same Node")
-            return
+            return 0
         
         # Loop to traverse the graph
         # with the help of the queue
@@ -80,4 +50,11 @@ class Path():
                     # neighbour node is the goal
                     if neighbour == goal:
                         return new_path
+
                 explored.append(node)
+    
+    def Astar():
+        pass
+
+    def Djikstra():
+        pass
