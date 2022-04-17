@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, flash
 
 views = Blueprint('views',__name__)
 
@@ -8,6 +8,11 @@ def home():
 
 @views.route("/navigate",methods=["GET","POST"])
 def navigate():
+    if request.method == "POST":
+        home_node = request.form.get("home")
+        destn_node = request.form.get("destination")
+        print(f"home : {home_node} destination : {destn_node}")
+
     return render_template("navigate.html")
 
 @views.route("/maps")

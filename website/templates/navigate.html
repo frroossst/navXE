@@ -1,7 +1,9 @@
 <html>
 
 <head>
-
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title> navXE - a local campus navigation app</title>
 <style>
       body {
         background-image: url('https://wallpaperaccess.com/full/1560285.jpg');
@@ -19,7 +21,30 @@
 <center>
 
 <h1>The Navigation Page</h1>
+<br> <br> <br> <br>
 
+<form method="POST">
+      <div class="nav-form">
+            <label for="home">Home</label>
+            <input 
+                  type="text"
+                  id = "home"
+                  name = "home"
+                  placeholder="enter current location"
+            />
+      </div>
+      <div class="nav-form">
+            <label for="destination">Destination</label>
+            <input 
+                  type="text"
+                  id = "destination"
+                  name = "destination"
+                  placeholder="enter destination location"
+            />
+      </div>
+      <br>
+      <button type="submit">Submit</button>
+</form>
 
 </center>
 </font>
