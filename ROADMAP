@@ -1,7 +1,7 @@
 Version 0 (Boilerplate)
 
 Description
-    A MVP Python backend
+    A basic functional MVP
 
 Abilities 
     
@@ -10,32 +10,9 @@ Abilities
     3. Find a path from home node to destination node
     4. Display the shortest path to the user
     5. Store data in a JSON database
-   
 
+Achievements 
 
-Version 1 (mvp?)
-
-Description
-    A MVP Flask website
-
-Abilities 
-
-    1. QR code generation upon node creation
-    2. QR code read
-    3. Auto update home node on reading the current QR codej
-        a. Find the path to destination again
-        b. Return the shortest path
-    4. Basic website UI
-
-
-
-Version 2 ()
-
-Description
-    A MVP Flask PWA
-
-Abilities
-
-    1.
-    2.
-    3.
+    a. Python backend
+    b. Basic Flask website
+    c. Web Hosting test
