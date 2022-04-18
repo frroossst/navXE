@@ -35,7 +35,9 @@
 
       <canvas  id="myCanvas" width="400" height="350"></canvas>  
       <script defer>
-            called_startWebcam = false;
+
+            let called_startWebcam = false;
+            sessionStorage.setItem("called_startWebcam",called_startWebcam);
             //--------------------
             // GET USER MEDIA CODE
             //--------------------
@@ -50,6 +52,7 @@
             function startWebcam() {
                   console.log("called startWebcam()");
                   var called_startWebcam = true;
+                  sessionStorage.setItem("called_startWebcam",called_startWebcam);
             if (navigator.getUserMedia) {
                   navigator.getUserMedia (
       
@@ -90,13 +93,17 @@
      
             function snapshot() {
          // Draws current image from the video element into the canvas
-                  if (called_startWebcam){
+                  console.log("called snapshot()");
+
+                  console.log("called_startWebcam : ",sessionStorage.getItem("called_startWebcam"));
+
+                  if (sessionStorage.getItem("called_startWebcam") == true){
                         init()
                         ctx.drawImage(video, 0,0, canvas.width, canvas.height);
                         let imgURL = canvas.toDataURL();
                         document.getElementById("qr-URL").value = imgURL;
                   }
-                  else {
+                  else if (sessionStorage.getItem("called_startWebcam") == false){
                         let imgURL = "None"
                         document.getElementById("qr-URL").value = imgURL;
                         console.log("imgURL set to None, webcam never started");
