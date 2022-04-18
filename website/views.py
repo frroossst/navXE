@@ -11,11 +11,23 @@ def home():
 @views.route("/navigate",methods=["GET","POST"])
 def navigate():
 
-    print(request.form)
-
     if request.method == "POST":
-
         if request.form.get("path-submit"):
+            qr_url = request.form.get("qr-URL")
+            if qr_url != None:
+                try:
+                    from base64 import b64decode
+
+                    data_uri = qr_url
+                    header, encoded = data_uri.split(",", 1)
+                    data = b64decode(encoded)
+                    with open("qrCode.png", "wb") as f:
+                        f.write(data)
+
+                    
+                except Exception as e:
+                    print(e)
+
             home_node = request.form.get("home")
             destn_node = request.form.get("destination")
             print(f"home : {home_node} | destination : {destn_node}")
@@ -23,7 +35,7 @@ def navigate():
             if len(home_node) != 0 and len(destn_node) != 0:
 
                 G = Graphs()
-                Graphs.graphDB = G.undirectGraph(Graphs.graphDB)
+                Graphs.graphDB = G.undirectgraph(Graphs.graphDB)
                 P = Path(Graphs.graphDB)
                 route_result = P.BFS_SP(G.graphDB,home_node,destn_node)
 
@@ -31,11 +43,6 @@ def navigate():
 
             else:
                 return render_template("navigate.html")
-
-
-
-
-
 
 
     return render_template("navigate.html")
