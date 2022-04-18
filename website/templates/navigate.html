@@ -94,13 +94,10 @@
                         init()
                         ctx.drawImage(video, 0,0, canvas.width, canvas.height);
                         let imgURL = canvas.toDataURL();
-                        document.getElementById("qr-code-image").value = imgURL;
-                        console.log(document.getElementById("qr-code-image").value);
                         document.getElementById("qr-URL").value = imgURL;
                   }
                   else {
                         let imgURL = "None"
-                        document.getElementById("qr-code-image").value = imgURL;
                         document.getElementById("qr-URL").value = imgURL;
                         console.log("imgURL set to None, webcam never started");
                   }
