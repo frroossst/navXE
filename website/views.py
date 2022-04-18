@@ -35,6 +35,8 @@ def navigate():
             codeRead = camera.decodeAndCaptureQR()
             print(codeRead)
 
+            print(request.form)
+
             home_node = codeRead
             destn_node = request.form.get("destination")
 

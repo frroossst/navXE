@@ -26,3 +26,13 @@ Flask PWA tutorial
 https://opensourcelibs.com/lib/flask-pwa
 https://python-for-android.readthedocs.io/en/latest/quickstart/#
 
+
+Flask Webcam Server
+
+https://github.com/dxue2012/python-webcam-flask
+
+https://stackoverflow.com/questions/35736499/access-clients-webcam-from-flask-server#35746942
+
+https://stackoverflow.com/questions/50213683/capture-image-from-a-webcam-and-upload-it-to-flask-server#50214389
+
+https://blog.miguelgrinberg.com/post/video-streaming-with-flask
