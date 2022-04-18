@@ -33,8 +33,7 @@ def navigate():
             home_node = request.form.get("home")
             destn_node = request.form.get("destination")
 
-            if home_node == "":
-
+            if home_node == "" or len(home_node) == 0:
                 import camera
                 home_node = camera.decodeAndCaptureQR()
 
