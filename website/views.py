@@ -10,7 +10,8 @@ def home():
 
 @views.route("/navigate",methods=["GET","POST"])
 def navigate():
-
+    
+    print(request.form)
     if request.method == "POST":
 
         if request.form.get("path-submit"):
