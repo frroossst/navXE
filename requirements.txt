@@ -1,0 +1,3 @@
+Flask==1.1.4
+Flask_WTF==1.0.1
+WTForms==3.0.1

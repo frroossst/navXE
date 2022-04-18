@@ -11,13 +11,15 @@ def home():
 @views.route("/navigate",methods=["GET","POST"])
 def navigate():
     if request.method == "POST":
+
         home_node = request.form.get("home")
         destn_node = request.form.get("destination")
         print(f"home : {home_node} destination : {destn_node}")
+
         if len(home_node) != 0 and len(destn_node) != 0:
+
             G = Graphs()
             Graphs.graphDB = G.undirectGraph(Graphs.graphDB)
-            P = Path(Graphs.graphDB)
             P = Path(Graphs.graphDB)
             route_result = P.BFS_SP(G.graphDB,home_node,destn_node)
 
