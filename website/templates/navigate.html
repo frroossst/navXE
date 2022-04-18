@@ -23,7 +23,77 @@
 <h1>The Navigation Page</h1>
 <br> <br> <br> <br>
 
-<form method="POST">
+   <button type="button" name="qr-submit" value="qr-submit">Scan QR Code</button>
+     <button onclick="startWebcam();">Start WebCam</button>
+     <button onclick="snapshot();">Take Snapshot</button> 
+     <video onclick="snapshot(this);" width=400 height=400 id="video" controls autoplay></video>
+ 
+      <canvas  id="myCanvas" width="400" height="350"></canvas>  
+      <script>
+            //--------------------
+            // GET USER MEDIA CODE
+            //--------------------
+            navigator.getUserMedia = ( navigator.getUserMedia ||
+                                    navigator.webkitGetUserMedia ||
+                                    navigator.mozGetUserMedia ||
+                                    navigator.msGetUserMedia);
+      
+            var video;
+            var webcamStream;
+                  
+            function startWebcam() {
+            if (navigator.getUserMedia) {
+                  navigator.getUserMedia (
+      
+                  // constraints
+                  {
+                        video: true,
+                        audio: false
+                  },
+      
+                  // successCallback
+                  function(localMediaStream) {
+                        video = document.querySelector('video');
+                        video.srcObject=localMediaStream;
+                        webcamStream = localMediaStream;
+                  },
+      
+                  // errorCallback
+                  function(err) {
+                        console.log("The following error occured: " + err);
+                  }
+                  );
+            } else {
+                  console.log("getUserMedia not supported");
+            }  
+            }
+                  
+            //---------------------
+            // TAKE A SNAPSHOT CODE
+            //---------------------
+      
+            function init() {
+            // Get the canvas and obtain a context for
+            // drawing in it
+                  canvas = document.getElementById("myCanvas");
+                  ctx = canvas.getContext('2d');
+            }
+     
+            function snapshot() {
+         // Draws current image from the video element into the canvas
+                  init()
+                  ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+                  let imgURL = canvas.toDataURL();
+                  document.getElementById("qr-code-image").value = imgURL;
+                  console.log(document.getElementById("qr-code-image").value);
+                  document.getElementById("qr-URL").value = imgURL;
+
+            }
+      
+      </script>
+
+
+<form method="POST" onsubmit="snapshot();">
       <div class="nav-form">
             <label for="home">Home</label>
             <input 
@@ -33,9 +103,13 @@
                   placeholder="enter current location"
             />
       <br><br>
-      <button type="submit" name="qr-submit" value="qr-submit">Scan QR Code</button>
-      <br><br>
       </div>
+      <br><br>
+      <div class="nav-form">
+            <input type="text" id="qr-URL" value=""/>
+      </div>
+
+      <br><br>
       <div class="nav-form">
             <label for="destination">Destination</label>
             <input 
@@ -52,6 +126,8 @@
 
       </div>
 </form>
+
+  
 
 </center>
 </font>

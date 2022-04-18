@@ -10,7 +10,7 @@ def home():
 
 @views.route("/navigate",methods=["GET","POST"])
 def navigate():
-
+    print(request.form)
     if request.method == "POST":
 
         if request.form.get("path-submit"):
@@ -31,13 +31,10 @@ def navigate():
                 return render_template("navigate.html")
 
         elif request.form.get("qr-submit"):
-            import camera
-            codeRead = camera.decodeAndCaptureQR()
-            print(codeRead)
 
             print(request.form)
-
-            home_node = codeRead
+            print("^^^ request.form ^^^")
+            home_node = None
             destn_node = request.form.get("destination")
 
             if len(home_node) != 0 and len(destn_node) != 0:
