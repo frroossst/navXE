@@ -12,37 +12,45 @@ def home():
 def navigate():
 
     if request.method == "POST":
+
         if request.form.get("path-submit"):
             qr_url = request.form.get("qr-URL")
+
             if qr_url != None:
+
                 try:
                     from base64 import b64decode
 
                     data_uri = qr_url
-                    header, encoded = data_uri.split(",", 1)
+                    _, encoded = data_uri.split(",", 1)
                     data = b64decode(encoded)
                     with open("qrCode.png", "wb") as f:
                         f.write(data)
-
                     
                 except Exception as e:
                     print(e)
 
             home_node = request.form.get("home")
             destn_node = request.form.get("destination")
+
+            if home_node == "":
+
+                import camera
+                home_node = camera.decodeAndCaptureQR()
+
             print(f"home : {home_node} | destination : {destn_node}")
 
             if len(home_node) != 0 and len(destn_node) != 0:
 
                 G = Graphs()
-                Graphs.graphDB = G.undirectgraph(Graphs.graphDB)
+                Graphs.graphDB = Graphs.undirectgraph(Graphs.graphDB)
                 P = Path(Graphs.graphDB)
                 route_result = P.BFS_SP(G.graphDB,home_node,destn_node)
 
                 return render_template("navigate.html",route=route_result)
 
             else:
-                return render_template("navigate.html")
+                return render_template("navigate.html",route="Missing home or destination location")
 
 
     return render_template("navigate.html")
@@ -66,8 +74,3 @@ def login():
 @views.route("/docs")
 def docs():
     return "Documentation"
-
-@views.route("/camera")
-def camera():
-    import camera
-    codeRead = camera.decodeAndCaptureQR()
