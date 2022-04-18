@@ -4,7 +4,10 @@ Flask==1.1.4
 Flask_WTF==1.0.1
 gunicorn==20.1.0
 itsdangerous==1.1.0
-Jinja2>=2.11.2
+<<<<<<< HEAD
+=======
+Jinja2==2.11.3
+>>>>>>> master
 MarkupSafe==2.0.1
 Werkzeug==1.0.1
 wincertstore==0.2
