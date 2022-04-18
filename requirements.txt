@@ -1,5 +1,4 @@
 Flask==1.1.4
 Flask_WTF==1.0.1
 gunicorn==20.1.0
-Jinga2==2.11.2
 WTForms==3.0.1
