@@ -32,6 +32,7 @@
       <canvas  id="myCanvas" width="400" height="350"></canvas>  
       <script defer>
 
+
             let called_startWebcam = false;
             sessionStorage.setItem("called_startWebcam",called_startWebcam);
             //--------------------
@@ -46,65 +47,75 @@
                   console.log("called startWebcam()");
                   var called_startWebcam = true;
                   sessionStorage.setItem("called_startWebcam",called_startWebcam);
-            if (navigator.getUserMedia) {
-                  navigator.getUserMedia (
-      
-                  // constraints
-                  {
-                        video: true,
-                        audio: false
-                  },
-      
-                  // successCallback
-                  function(localMediaStream) {
-                        video = document.querySelector('video');
-                        video.srcObject=localMediaStream;
-                        webcamStream = localMediaStream;
-                  },
-      
-                  // errorCallback
-                  function(err) {
-                        console.log("The following error occured: " + err);
-                  }
-                  );
-            } else {
-                  console.log("getUserMedia not supported");
-            }  
-            }
-                  
-            //---------------------
-            // TAKE A SNAPSHOT CODE
-            //---------------------
-      
-            function init() {
-            // Get the canvas and obtain a context for
-            // drawing in it
-                  console.log("called init()");
-                  canvas = document.getElementById("myCanvas");
-                  ctx = canvas.getContext('2d');
-            }
-     
-            function snapshot() {
-         // Draws current image from the video element into the canvas
-                  console.log("called snapshot()");
 
-                  console.log("called_startWebcam : ",sessionStorage.getItem("called_startWebcam"));
-
-                  if (sessionStorage.getItem("called_startWebcam") == 'true'){
-                        init()
-                        ctx.drawImage(video, 0,0, canvas.width, canvas.height);
-                        let imgURL = canvas.toDataURL();
-                        document.getElementById("qr-URL").value = imgURL;
-                  }
-                  else if (sessionStorage.getItem("called_startWebcam") == 'false'){
-                        let imgURL = "None"
-                        document.getElementById("qr-URL").value = imgURL;
-                        console.log("imgURL set to None, webcam never started");
+                  const isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+                  if (isMobile == true || isMobile == 'true'){
+                        console.log("mobile device detected")
+                        document.getElementById("qr-URL").visibility = 'hidden';
+                        document.getElementById("mobile-qr-scan").visibility = 'visible';
                   }
 
-                  console.log(document.getElementById("qr-URL").value)
 
-            }
+                  else if (navigator.getUserMedia) {
+                        document.getElementById("mobile-qr-scan").visibility = 'hidden';
+                        navigator.getUserMedia (
+            
+                        // constraints
+                        {
+                              video: true,
+                              audio: false
+                        },
+            
+                        // successCallback
+                        function(localMediaStream) {
+                              video = document.querySelector('video');
+                              video.srcObject=localMediaStream;
+                              webcamStream = localMediaStream;
+                        },
+            
+                        // errorCallback
+                        function(err) {
+                              console.log("The following error occured: " + err);
+                        }
+                        );
+                  } else {
+                        console.log("getUserMedia not supported");
+                  }  
+                  }
+                        
+                  //---------------------
+                  // TAKE A SNAPSHOT CODE
+                  //---------------------
+            
+                  function init() {
+                  // Get the canvas and obtain a context for
+                  // drawing in it
+                        console.log("called init()");
+                        canvas = document.getElementById("myCanvas");
+                        ctx = canvas.getContext('2d');
+                  }
+      
+                  function snapshot() {
+            // Draws current image from the video element into the canvas
+                        console.log("called snapshot()");
+
+                        console.log("called_startWebcam : ",sessionStorage.getItem("called_startWebcam"));
+
+                        if (sessionStorage.getItem("called_startWebcam") == 'true'){
+                              init()
+                              ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+                              let imgURL = canvas.toDataURL();
+                              document.getElementById("qr-URL").value = imgURL;
+                        }
+                        else if (sessionStorage.getItem("called_startWebcam") == 'false'){
+                              let imgURL = "None"
+                              document.getElementById("qr-URL").value = imgURL;
+                              console.log("imgURL set to None, webcam never started");
+                        }
+
+                        console.log(document.getElementById("qr-URL").value)
+
+                  }
       
       </script>
 
@@ -134,6 +145,9 @@
       <br><br>
       <div class="nav-form">
             <input type="hidden" id="qr-URL" name="qr-URL" value=""/>
+      </div>
+      <div class="nav-form">
+            <input type="file" accept="image/*" capture="camera" id="mobile-qr-scan" name="mobile-qr-scan"/> 
       </div>
       <br>
       <button type="submit" value="path-submit" name="path-submit">Submit</button>
