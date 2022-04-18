@@ -16,7 +16,7 @@ def navigate():
         if request.form.get("path-submit"):
             qr_url = request.form.get("qr-URL")
 
-            if qr_url != None:
+            if qr_url != None or qr_url != "None":
 
                 try:
                     from base64 import b64decode
@@ -43,9 +43,9 @@ def navigate():
             if len(home_node) != 0 and len(destn_node) != 0:
 
                 G = Graphs()
-                Graphs.graphDB = Graphs.undirectgraph(Graphs.graphDB)
+                Graphs.graphDB = G.undirectGraph(Graphs.graphDB)
                 P = Path(Graphs.graphDB)
-                route_result = P.BFS_SP(G.graphDB,home_node,destn_node)
+                route_result = P.BFS_SP(G.graphDB,home_node,destn_node) 
 
                 return render_template("navigate.html",route=route_result)
 

@@ -17,6 +17,9 @@ class Path():
 
     def BFS_SP(self, graph, start, goal):
 
+        if start not in graph or goal not in graph:
+            return None
+
         explored = []
         
         # Queue for traversing the
