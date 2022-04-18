@@ -28,10 +28,6 @@
      <!--<button onclick="snapshot();">Take Snapshot</button> -->
      <video onclick="snapshot(this);" width=400 height=400 id="video" controls autoplay></video>
  
-      <br><br>
-      <div>
-            <input type="hidden" id="qr-URL" value=""/>
-      </div>
 
       <canvas  id="myCanvas" width="400" height="350"></canvas>  
       <script defer>
@@ -97,17 +93,19 @@
 
                   console.log("called_startWebcam : ",sessionStorage.getItem("called_startWebcam"));
 
-                  if (sessionStorage.getItem("called_startWebcam") == true){
+                  if (sessionStorage.getItem("called_startWebcam") == 'true'){
                         init()
                         ctx.drawImage(video, 0,0, canvas.width, canvas.height);
                         let imgURL = canvas.toDataURL();
                         document.getElementById("qr-URL").value = imgURL;
                   }
-                  else if (sessionStorage.getItem("called_startWebcam") == false){
+                  else if (sessionStorage.getItem("called_startWebcam") == 'false'){
                         let imgURL = "None"
                         document.getElementById("qr-URL").value = imgURL;
                         console.log("imgURL set to None, webcam never started");
                   }
+
+                  console.log(document.getElementById("qr-URL").value)
 
             }
       
@@ -135,6 +133,10 @@
                   name = "destination"
                   placeholder="enter destination location"
             />
+      </div>
+      <br><br>
+      <div class="nav-form">
+            <input type="hidden" id="qr-URL" name="qr-URL" value=""/>
       </div>
       <br>
       <button type="submit" value="path-submit" name="path-submit">Submit</button>
