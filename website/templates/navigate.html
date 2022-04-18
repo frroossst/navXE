@@ -23,13 +23,19 @@
 <h1>The Navigation Page</h1>
 <br> <br> <br> <br>
 
-   <button type="button" name="qr-submit" value="qr-submit">Scan QR Code</button>
+<!--   <button type="button" name="qr-submit" value="qr-submit">Scan QR Code</button> -->
      <button onclick="startWebcam();">Start WebCam</button>
-     <button onclick="snapshot();">Take Snapshot</button> 
+     <!--<button onclick="snapshot();">Take Snapshot</button> -->
      <video onclick="snapshot(this);" width=400 height=400 id="video" controls autoplay></video>
  
+      <br><br>
+      <div>
+            <input type="hidden" id="qr-URL" value=""/>
+      </div>
+
       <canvas  id="myCanvas" width="400" height="350"></canvas>  
-      <script>
+      <script defer>
+            called_startWebcam = false;
             //--------------------
             // GET USER MEDIA CODE
             //--------------------
@@ -42,6 +48,8 @@
             var webcamStream;
                   
             function startWebcam() {
+                  console.log("called startWebcam()");
+                  var called_startWebcam = true;
             if (navigator.getUserMedia) {
                   navigator.getUserMedia (
       
@@ -75,18 +83,27 @@
             function init() {
             // Get the canvas and obtain a context for
             // drawing in it
+                  console.log("called init()");
                   canvas = document.getElementById("myCanvas");
                   ctx = canvas.getContext('2d');
             }
      
             function snapshot() {
          // Draws current image from the video element into the canvas
-                  init()
-                  ctx.drawImage(video, 0,0, canvas.width, canvas.height);
-                  let imgURL = canvas.toDataURL();
-                  document.getElementById("qr-code-image").value = imgURL;
-                  console.log(document.getElementById("qr-code-image").value);
-                  document.getElementById("qr-URL").value = imgURL;
+                  if (called_startWebcam){
+                        init()
+                        ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+                        let imgURL = canvas.toDataURL();
+                        document.getElementById("qr-code-image").value = imgURL;
+                        console.log(document.getElementById("qr-code-image").value);
+                        document.getElementById("qr-URL").value = imgURL;
+                  }
+                  else {
+                        let imgURL = "None"
+                        document.getElementById("qr-code-image").value = imgURL;
+                        document.getElementById("qr-URL").value = imgURL;
+                        console.log("imgURL set to None, webcam never started");
+                  }
 
             }
       
@@ -103,10 +120,6 @@
                   placeholder="enter current location"
             />
       <br><br>
-      </div>
-      <br><br>
-      <div class="nav-form">
-            <input type="text" id="qr-URL" value=""/>
       </div>
 
       <br><br>

@@ -10,7 +10,9 @@ def home():
 
 @views.route("/navigate",methods=["GET","POST"])
 def navigate():
+
     print(request.form)
+
     if request.method == "POST":
 
         if request.form.get("path-submit"):
@@ -30,24 +32,6 @@ def navigate():
             else:
                 return render_template("navigate.html")
 
-        elif request.form.get("qr-submit"):
-
-            print(request.form)
-            print("^^^ request.form ^^^")
-            home_node = None
-            destn_node = request.form.get("destination")
-
-            if len(home_node) != 0 and len(destn_node) != 0:
-
-                G = Graphs()
-                Graphs.graphDB = G.undirectGraph(Graphs.graphDB)
-                P = Path(Graphs.graphDB)
-                route_result = P.BFS_SP(G.graphDB,home_node,destn_node)
-
-                return render_template("navigate.html",route=route_result)
-
-            else:
-                return render_template("navigate.html")
 
 
 
