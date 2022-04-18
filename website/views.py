@@ -12,21 +12,27 @@ def home():
 def navigate():
     if request.method == "POST":
 
-        home_node = request.form.get("home")
-        destn_node = request.form.get("destination")
-        print(f"home : {home_node} destination : {destn_node}")
+        if request.form.get("path-submit"):
+            home_node = request.form.get("home")
+            destn_node = request.form.get("destination")
+            print(f"home : {home_node} destination : {destn_node}")
 
-        if len(home_node) != 0 and len(destn_node) != 0:
+            if len(home_node) != 0 and len(destn_node) != 0:
 
-            G = Graphs()
-            Graphs.graphDB = G.undirectGraph(Graphs.graphDB)
-            P = Path(Graphs.graphDB)
-            route_result = P.BFS_SP(G.graphDB,home_node,destn_node)
+                G = Graphs()
+                Graphs.graphDB = G.undirectGraph(Graphs.graphDB)
+                P = Path(Graphs.graphDB)
+                route_result = P.BFS_SP(G.graphDB,home_node,destn_node)
 
-            return render_template("navigate.html",route=route_result)
+                return render_template("navigate.html",route=route_result)
 
-        else:
-            return render_template("navigate.html")
+            else:
+                return render_template("navigate.html")
+
+        elif request.form.get("qr-submit"):
+            import camera
+            codeRead = camera.decodeAndCaptureQR()
+            print(codeRead)
 
     return render_template("navigate.html")
 
@@ -49,3 +55,8 @@ def login():
 @views.route("/docs")
 def docs():
     return "Documentation"
+
+@views.route("/camera")
+def camera():
+    import camera
+    codeRead = camera.decodeAndCaptureQR()
