@@ -44,6 +44,7 @@ def navigate():
                 print("[LOG] reading QR code to home_node")
                 import camera
                 home_node = camera.decodeAndCaptureQR()
+                print(f"[LOG] home_node : {home_node}")
 
             print(f"home : {home_node} | destination : {destn_node}")
 
@@ -52,8 +53,9 @@ def navigate():
                 G = Graphs()
                 Graphs.graphDB = G.undirectGraph(Graphs.graphDB)
                 P = Path(Graphs.graphDB)
+                print(f"[LOG] BFS from {home_node} to {destn_node}")
                 route_result = P.BFS_SP(G.graphDB,home_node,destn_node) 
-
+                print(f"[LOG] BFS route = {route_result}")
                 return render_template("navigate.html",route=route_result)
 
             else:
