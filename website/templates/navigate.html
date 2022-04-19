@@ -37,44 +37,33 @@
       </div>
       <center>
       <div class="nav-form">
-            <input type="file" accept="image/*" capture="user" id="fileinput" name="mobile-qr-scan"> 
-            <canvas id="canvas" width="100" height="100"></canvas>
-      </div>
-      <div class="nav-form">
             <input type="hidden" id="qr-URL" name="qr-URL" value=""/>
       </div>
       </center>
       <br>
+      <div>   <input type="file" id="fileinput" accept = "image/*">  </div>
+      <canvas id= "canvas"></canvas>
       <script>
-            let canvas = document.getElementById('canvas');
-            let context = canvas.getContext('2d');
             let fileInput = document.getElementById('fileinput');
-            fileInput.addEventListener('change', function(ev) {   if(ev.target.files) {   
-                     let file = ev.target.files[0];
-                     var reader  = new FileReader();
-                     reader.readAsDataURL(file);      
-                     reader.onloadend = function (e) {          
-                              var image = new Image();          
-                              image.src = e.target.result;          
-                              image.onload = function(ev) {             
-                                    var canvas = document.getElementById('canvas');             
-                                    canvas.width = image.width;             
-                                    canvas.height = image.height;             
-                                    var ctx = canvas.getContext('2d');             
-                                    ctx.drawImage(image,0,0);
-                                 }     
-                         }  
-                }
-            }
-         );
-                console.log("canvas data URI");
-                let data_uri = document.getElementById("canvas").toDataURL()
-                console.log(data_uri);
-                sessionStorage.setItem("data_uri",data_uri);
-                document.getElementById("qr-URL").value = data_uri
-
-      </script>
-
+            fileInput.addEventListener('change', function(ev)
+            {   if(ev.target.files) { 
+                  let file = ev.target.files[0];      
+                  var reader  = new FileReader();      
+                  reader.readAsDataURL(file);      
+                  reader.onloadend = function (e) {          
+                  var image = new Image();          
+                  image.src = e.target.result;          
+                  image.onload = function(ev) {             
+                        var canvas = document.getElementById('canvas');             
+                        canvas.width = image.width;             
+                        canvas.height = image.height;             
+                        var ctx = canvas.getContext('2d');             
+                        ctx.drawImage(image,0,0);
+                        let data_url = document.getElementById("canvas").toDataURL();
+                        document.getElementById("qr-URL").value = data_url;
+                        console.log(data_url)}
+                  }      }   });
+        </script>
       <br><br>
       <div class="nav-form">
             <label for="destination">Destination</label>
