@@ -1,3 +1,4 @@
+from base64 import decode
 import cv2
 
 def decodeAndCaptureQR():
@@ -18,3 +19,5 @@ def decodeAndCaptureQR():
             return codeStr
         else:
             return val 
+
+print(decodeAndCaptureQR())
