@@ -18,7 +18,9 @@ class Path():
     def BFS_SP(self, graph, start, goal):
 
         if start not in graph or goal not in graph:
-            return None
+            return None # Path does not exist because node does not exist
+        elif start == goal:
+            return 0 # Path is 0 as both nodes are the same
 
         explored = []
         

@@ -3,7 +3,7 @@ import cv2
 
 def decodeAndCaptureQR():
 
-    img = cv2.imread("zeb_multi.jpg")
+    img = cv2.imread("qrCode.png")
 
     while True:
 
@@ -20,4 +20,4 @@ def decodeAndCaptureQR():
         else:
             return val 
 
-print(f"decodeAndCaptureQR() output : {decodeAndCaptureQR()}")
+# print(f"decodeAndCaptureQR() output : {decodeAndCaptureQR()}")
