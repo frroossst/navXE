@@ -11,6 +11,8 @@ def decodeAndCaptureQR():
         detect = cv2.QRCodeDetector()
 
         val, pts, _ = detect.detectAndDecode(img)
+        print(f"[LOG] val : {val} | pts : {pts}")
+        print(f"[LOG] codeStr = {codeStr}")
 
         if pts is None:
             return codeStr
