@@ -40,7 +40,7 @@ def navigate():
 
             print(f"home : {home_node} | destination : {destn_node}")
 
-            if len(home_node) != 0 and len(destn_node) != 0:
+            if len(destn_node) != 0:
 
                 G = Graphs()
                 Graphs.graphDB = G.undirectGraph(Graphs.graphDB)
