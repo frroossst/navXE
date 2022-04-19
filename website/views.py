@@ -10,12 +10,15 @@ def home():
 
 @views.route("/navigate",methods=["GET","POST"])
 def navigate():
-    
+    print("[LOG] redirect to /navigate")
     print(request.form)
+
     if request.method == "POST":
+        print("[LOG] POST method on /navigate")
 
         if request.form.get("path-submit"):
             qr_url = request.form.get("qr-URL")
+            print(f"[LOG] qr_url : {qr_url}")
 
             if qr_url != None or qr_url != "None":
 
@@ -25,16 +28,20 @@ def navigate():
                     data_uri = qr_url
                     _, encoded = data_uri.split(",", 1)
                     data = b64decode(encoded)
+
                     with open("qrCode.png", "wb") as f:
                         f.write(data)
+                        print("[LOG] writing qr code to PNG")
                     
                 except Exception as e:
-                    print(e)
+                    print(f"[ERROR] {e}")
 
             home_node = request.form.get("home")
+            print(f"[LOG] {home_node}, {type(home_node)}")
             destn_node = request.form.get("destination")
 
             if home_node == "" or home_node is None or  home_node == "None" or len(home_node) == 0:
+                print("[LOG] reading QR code to home_node")
                 import camera
                 home_node = camera.decodeAndCaptureQR()
 
