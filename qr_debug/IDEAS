@@ -3,3 +3,7 @@
 2. Use segno to experiment with different styles of QR codes
 
 3. Black background with white backgroudn?
+
+4. Offload all qr code processing to external website or API, delete openCV dependencies
+
+5. Create own software to DEBUG QR code

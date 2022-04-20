@@ -83,3 +83,7 @@ def login():
 @views.route("/docs")
 def docs():
     return "Documentation"
+
+@views.route("/qr")
+def qr_test():
+    return render_template("qr_front.html")
