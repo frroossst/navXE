@@ -10,7 +10,7 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
-        background-size: 100% 100%;
+        background-size: 1920px auto;
       }
 
     </style>
@@ -18,13 +18,23 @@
 </head>
 
 <body>
+
 <font color="white">
 <center>
 
 <h1>The Navigation Page</h1>
 <br> <br> <br> <br>
 
-<form method="POST">
+<script>
+      function saveFields(){
+            destnValue = document.getElementById("destination").value
+            destnValue = sessionStorage.setItem("destn-value",destnValue)
+      }
+
+
+</script>
+
+<form method="POST" onsubmit="saveFields();">
       <div class="nav-form">
             <label for="home">Home</label>
             <input 
@@ -57,6 +67,10 @@
             />
       </div>
       <br><br>
+      <script>
+            destnValue = sessionStorage.getItem("destn-value")
+            document.getElementById("destination").value = destnValue
+      </script>
       <button type="submit" value="path-submit" name="path-submit">Submit</button>
       <div id="result_nav">
             <p> {{route}} </p>
@@ -67,6 +81,7 @@
 
 </center>
 </font>
+</div>
 </body>
 
 </html>

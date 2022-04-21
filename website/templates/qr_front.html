@@ -1,14 +1,28 @@
 <html>
 
 <head>
-
 <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width">
         <title> navXE - a local campus navigation app</title>
+        <style>
+            body {
+              background-image: url('https://wallpaperaccess.com/full/1560285.jpg');
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+              background-position: center;
+              background-size: 2800px auto;
+            }
+            .center-ol{
+                text-align: center;
+                list-style-position: inside;
+            }
+            
+          </style>
 </head>
 
 <body>
+<font color="white">
 <center>
 <div id="qr-reader" style="width: 600px"></div>
 
@@ -37,6 +51,25 @@ var html5QrcodeScanner = new Html5QrcodeScanner(
 html5QrcodeScanner.render(onScanSuccess);
 
 </script>
+
+<br><br><br>
+
+<a href="{{url_for('views.navigate')}}">Navigation Page</a>
+
+<br><br><br>
+<p>
+    <h3>How to use the scanner?</h3>
+    <ol class="center-ol">
+        <li>Click on "Requst Camera Permissions"</li>
+        <li>Click Allow on the dialog box that pops up</li>
+        <li>Select the camera you want to use</li>
+        <li>Click on "Start Scanning" and place the QR code inside the bounding box</li>
+        <li>To go back or change the camera simply click on "Stop Scanning"</li>
+        <li>You can also go back to the navigation page by going back in your browser or clicking the hyperlink</li>
+    </ol>
+</p>
+
+
 </center>>
 
 </body>
