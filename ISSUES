@@ -1,7 +1,1 @@
-openCV cannot read QR codes from large images
-
-    a. Sliding window method
-
-    b. Crop out QR > Save QR > Read saved image
-
-    c. Convert qr picture into video and then scan
+http site will NOT work with scan QR
