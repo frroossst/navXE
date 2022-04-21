@@ -10,16 +10,32 @@
 
 <div id="qr-reader" style="width: 600px"></div>
 
+<form id="qr-form" method="POST">
+
+    <input hidden type="text" name="qr-scan-value" id="qr-scan-value">
+    
+</form>
+
 <script>
 
 function onScanSuccess(decodedText, decodedResult) {
+
     console.log(`Code scanned = ${decodedText}`, decodedResult);
+
+    if (decodedText != ""){
+        document.getElementById("qr-scan-value").value = decodedText;
+        document.getElementById("qr-form").submit();
+        sessionStorage.setItem("qr-value",decodedText);
+        }
+
 }
+
 var html5QrcodeScanner = new Html5QrcodeScanner(
 	"qr-reader", { fps: 10, qrbox: 250 });
 html5QrcodeScanner.render(onScanSuccess);
 
 </script>
+
 
 </body>
 </html>

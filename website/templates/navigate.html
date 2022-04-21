@@ -34,6 +34,11 @@
                   placeholder="enter current location"
             />
       <br><br>
+      <script>
+            qrValue = sessionStorage.getItem("qr-value")
+            document.getElementById("home").value = qrValue;
+      </script>
+      <button type="submit" name="scanQR-submit" value="scanQR-submit" id="scanQR-submit">Scan QR</button>
       </div>
       <center>
       <div class="nav-form">
@@ -41,29 +46,6 @@
       </div>
       </center>
       <br>
-      <div>   <input type="file" id="fileinput" accept = "image/*">  </div>
-      <canvas id= "canvas"></canvas>
-      <script>
-            let fileInput = document.getElementById('fileinput');
-            fileInput.addEventListener('change', function(ev)
-            {   if(ev.target.files) { 
-                  let file = ev.target.files[0];      
-                  var reader  = new FileReader();      
-                  reader.readAsDataURL(file);      
-                  reader.onloadend = function (e) {          
-                  var image = new Image();          
-                  image.src = e.target.result;          
-                  image.onload = function(ev) {             
-                        var canvas = document.getElementById('canvas');             
-                        canvas.width = image.width;             
-                        canvas.height = image.height;             
-                        var ctx = canvas.getContext('2d');             
-                        ctx.drawImage(image,0,0);
-                        let data_url = document.getElementById("canvas").toDataURL();
-                        document.getElementById("qr-URL").value = data_url;
-                        console.log(data_url)}
-                  }      }   });
-        </script>
       <br><br>
       <div class="nav-form">
             <label for="destination">Destination</label>
@@ -79,16 +61,7 @@
       <div id="result_nav">
             <p> {{route}} </p>
 
-      </div>
-</form>
-
-<!-- <script>
-      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-            document.getElementById.visibility("video") = 'visible';
-            document.getElementById.visibility("myCanvas") = 'visible';
-            document.getElementById.visibility("startWebcamButtom") = 'visible';
-}
-</script>-->
+      </div> </form>
 
   
 

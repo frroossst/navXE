@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from algorithms import Path
 from graph import Graphs
+from methods import method
 
 views = Blueprint('views',__name__)
 
@@ -10,6 +11,7 @@ def home():
 
 @views.route("/navigate",methods=["GET","POST"])
 def navigate():
+
     print("[LOG] redirect to /navigate")
     print(request.form)
 
@@ -17,36 +19,19 @@ def navigate():
         print("[LOG] POST method on /navigate")
 
         if request.form.get("path-submit"):
+            print(request.form.get("path-submit"))
             qr_url = request.form.get("qr-URL")
             print(f"[LOG] qr_url : {qr_url}")
-
-            if qr_url != None or qr_url != "None":
-
-                try:
-                    from base64 import b64decode
-
-                    data_uri = qr_url
-                    _, encoded = data_uri.split(",", 1)
-                    data = b64decode(encoded)
-
-                    with open("qrCode.png", "wb") as f:
-                        f.write(data)
-                        print("[LOG] writing qr code to PNG")
-                    
-                except Exception as e:
-                    print(f"[ERROR] {e}")
 
             home_node = request.form.get("home")
             print(f"[LOG] {home_node}, {type(home_node)}")
             destn_node = request.form.get("destination")
-
-            if home_node == "" or home_node is None or  home_node == "None" or len(home_node) == 0:
-                print("[LOG] reading QR code to home_node")
-                import camera
-                home_node = camera.decodeAndCaptureQR()
-                print(f"[LOG] home_node : {home_node}")
+            print(f"[LOG] {destn_node}, {type(destn_node)}")
 
             print(f"home : {home_node} | destination : {destn_node}")
+
+            if len(home_node) == 0:
+                return render_template("navigate.html",route="Missing home node, scan a QR code or enter value")
 
             if len(destn_node) != 0:
 
@@ -56,10 +41,13 @@ def navigate():
                 print(f"[LOG] BFS from {home_node} to {destn_node}")
                 route_result = P.BFS_SP(G.graphDB,home_node,destn_node) 
                 print(f"[LOG] BFS route = {route_result}")
-                return render_template("navigate.html",route=route_result)
+                return render_template("navigate.html",route=route_result,qrDecoded="")
 
             else:
                 return render_template("navigate.html",route="Missing home or destination location")
+
+        elif request.form.get("scanQR-submit"):
+            return redirect(url_for("views.qr_scan"))
 
 
     return render_template("navigate.html")
@@ -84,6 +72,13 @@ def login():
 def docs():
     return "Documentation"
 
-@views.route("/qr")
-def qr_test():
-    return render_template("qr_front.html")
+@views.route("/qr",methods=["GET","POST"])
+def qr_scan():
+
+    if request.method == "POST":
+        scanned_value = request.form.get("qr-scan-value")
+        print(f"[LOG] qr read as {scanned_value}")
+        return redirect(url_for("views.navigate"))
+
+    else:
+        return render_template("qr_front.html")

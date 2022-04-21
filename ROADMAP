@@ -10,9 +10,23 @@ Abilities
     3. Find a path from home node to destination node
     4. Display the shortest path to the user
     5. Store data in a JSON database
+    6. HTTPS
+    7. Read QR on the frontend
 
 Achievements 
 
     a. Python backend
     b. Basic Flask website
     c. Web Hosting test
+
+
+Version 1 ()
+
+Description
+
+
+Abilities
+
+    1. Allow for multiple graphs
+
+Achievements
