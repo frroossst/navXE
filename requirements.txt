@@ -8,6 +8,4 @@ Jinja2==2.11.3
 MarkupSafe==2.0.1
 Werkzeug==1.0.1
 wincertstore==0.2
-opencv-python==4.5.5.64
-opencv-contrib-python-headless==4.5.5.64
 WTForms==3.0.1
