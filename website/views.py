@@ -72,9 +72,17 @@ def login():
 def docs():
     return "Documentation"
 
-@views.route("/report")
-def report():
+@views.route("/reports")
+def reports():
     return "Cannot submit reports as of now!"
+
+@views.route("/share")
+def share():
+    return "Share this QR code with your friends"
+
+@views.route("/settings")
+def settings():
+    return "Configure your settings"
 
 @views.route("/qr",methods=["GET","POST"])
 def qr_scan():
