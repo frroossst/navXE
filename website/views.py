@@ -62,7 +62,7 @@ def create():
 
 @views.route("/code")
 def code():
-    return "GitHub link"
+    return "<a href='https://github.com/frroossst/navXE'>GitHub Link</a>"
 
 @views.route("/login")
 def login():
