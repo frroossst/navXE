@@ -78,7 +78,7 @@ def reports():
 
 @views.route("/share")
 def share():
-    return "Share this QR code with your friends"
+    return render_template("share.html")
 
 @views.route("/settings")
 def settings():
