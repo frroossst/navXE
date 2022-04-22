@@ -52,8 +52,8 @@ def navigate():
 
     return render_template("navigate.html")
 
-@views.route("/maps")
-def maps():
+@views.route("/graphs")
+def graphs():
     return "Look at all the user generated maps"
 
 @views.route("/create")
@@ -71,6 +71,10 @@ def login():
 @views.route("/docs")
 def docs():
     return "Documentation"
+
+@views.route("/report")
+def report():
+    return "Cannot submit reports as of now!"
 
 @views.route("/qr",methods=["GET","POST"])
 def qr_scan():

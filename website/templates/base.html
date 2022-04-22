@@ -15,43 +15,74 @@
              href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
              crossorigin="anonymous"
             />
+          <style>
+                body {
+                    background-image: url('navXE_home.png');
+                    background-repeat: no-repeat;
+                    background-attachment: fixed;
+                    background-position: center;
+                    background-size: 1920px auto;
+                        }
+                .button {
+                    display: inline-block;
+                    width: 155px;
+                    height: 45px;
+                    background: #4E9CAF;
+                    padding: 10px;
+                    text-align: center;
+                    border-radius: 5px;
+                    color: white;
+                    font-weight: bold;
+                    line-height: 25px;
+                    margin-left: 25px;
+                    margin-right: 25px;
+                    margin-top: 25px;
+                    margin-bottom: 15px;
+                } 
+          </style>
 
         <title> navXE - a local campus navigation app</title>
 
     </head>
-    <body>
-        {% with messages = get_flashed_messages(with_categories=true) %} {% if
-        messages %} {% for category, message in messages %} {% if category ==
-        'error' %}
 
-        <div class="alert alert-danger alter-dismissable fade show" role="alert">
-          {{ message }}
-          <button type="button" class="close" data-dismiss="alert">
-            <span aria-hidden="true">&times;</span>
-          </button>
+   <body>
+
+    <center> 
+
+        <font color="white">
+        <br><br>
+        <h4>Find your place on campus!</h4>
+        </font>
+        <font color="#1561F0">
+        <br> 
+        <div id="nav-bar" class="menu-buttons">
+
+                <a class="button" href="{{url_for('views.code')}}">Code</a>
+                
+                <a class="button" href="">navXE</a>
+
+                <a class="button" href="{{url_for('views.report')}}">Report</a> 
+
+                <br>
+
+                <a class="button" href="{{url_for('views.share')}}">Share</a> 
+
+                <a class="button" href="{{url_for('views.navigate')}}">Navigate</a> 
+                
+                <a class="button" href="{{url_for('views.create')}}">Create</a>
+
+                <br>
+
+                <a class="button" href="{{url_for('views.docs')}}">Docuementation</a> 
+
+                <a class="button" href="{{url_for('views.graphs')}}">Graphs</a> 
+                
+                <a class="button" href="{{url_for('views.settings')}}">Settings</a>
+
+                <br>
+                
         </div>
-
-        {% else %}
-
-        <div class="alert alert-success alter-dismissable fade show" role="alert">
-          {{ message }}
-          <button type="button" class="close" data-dismiss="alert">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        {% endif %} {% endfor %} {% endif %} {% endwith %}
-    
-        <h1> "Hello World!" </h1>
-
-        <div id="nav-bar">
-            <ul>
-                <a href="" style="text-decoration: none"></a> 
-                <li><a href="{{url_for('views.navigate')}}">Navigate</a></li>
-                <li><a href="{{url_for('views.create')}}">Create</a></li>
-                <li><a href="{{url_for('views.code')}}">Source Code</a></li>
-            </ul>
-        </div>
+        </font>
 
     </body>
 
