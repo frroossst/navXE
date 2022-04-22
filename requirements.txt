@@ -2,6 +2,7 @@ certifi==2021.5.30
 click==7.1.2
 Flask==1.1.4
 Flask_WTF==1.0.1
+Flask-SQLAlchemy==2.5.1
 gunicorn==20.1.0
 itsdangerous==1.1.0
 Jinja2==2.11.3
