@@ -1,6 +1,7 @@
 # To generate and create a graph
 
 from methods import method
+import secrets
 import copy
 
 class Graphs():
@@ -124,3 +125,11 @@ class Graphs():
             undirected_graph[key] = val_copy
 
         return undirected_graph
+
+    @classmethod
+    def generateToken(self, id : str):
+        
+        token_16 = secrets.token_hex(16)
+        token_8 = secrets.token_hex(8)
+
+        return token_8 + id + token_16

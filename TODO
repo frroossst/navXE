@@ -1,2 +1,10 @@
 1. integrate DB
 2. user login
+3. Backend graph editor
+
+DB Schema
+
+userID : str | graph : JSON(str) | graphID : str
+
+Every user has a unique ID
+Every graph has unique ID corelating to user ID so only a certain user can edit those graphs

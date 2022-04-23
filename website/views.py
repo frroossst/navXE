@@ -44,7 +44,7 @@ def navigate():
                 return render_template("navigate.html",route=route_result,qrDecoded="")
 
             else:
-                return render_template("navigate.html",route="Missing home or destination location")
+                return render_template("navigate.html",route="Missing destination location")
 
         elif request.form.get("scanQR-submit"):
             return redirect(url_for("views.qr_scan"))
