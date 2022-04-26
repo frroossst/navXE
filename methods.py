@@ -70,8 +70,10 @@ class method():
         method.dumpJSON(graph,file)
 
     @classmethod
-    def drawNetwork(self,file):
-        content = method.loadJSON(file)
+    def drawNetwork(self,graph : dict):
+        
+        # content = method.loadJSON(file)
+        content = graph
         li = []
         for i in content:
             for j in content[i]:
