@@ -85,3 +85,15 @@ class method():
         pos = nx.spring_layout(GD,k=0.3,iterations=20)
         nx.draw(GD,pos=pos,connectionstyle='arc3, rad = 0.1',with_labels=True)
         plt.show()
+
+    @classmethod
+    def check_undirected(self,graph : dict):
+
+        if graph == {}:
+            return None
+
+        for k, v in graph.items():
+            if k not in v:
+                return False
+        else:
+            return True
