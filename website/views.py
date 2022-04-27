@@ -24,11 +24,12 @@ def navigate():
             print(f"[LOG] qr_url : {qr_url}")
 
             home_node = request.form.get("home")
-            print(f"[LOG] {home_node}, {type(home_node)}")
             destn_node = request.form.get("destination")
-            print(f"[LOG] {destn_node}, {type(destn_node)}")
+            home_orientation = request.form.get("qr-orientation")
+            home_graph = request.form.get("qr-graph")
 
             print(f"home : {home_node} | destination : {destn_node}")
+            print(f"orientatiopn : {home_orientation} | graph : {home_graph}")
 
             if len(home_node) == 0:
                 return render_template("navigate.html",route="Missing home node, scan a QR code or enter value")

@@ -39,9 +39,12 @@ function onScanSuccess(decodedText, decodedResult) {
     console.log(`Code scanned = ${decodedText}`, decodedResult);
 
     if (decodedText != ""){
-        document.getElementById("qr-scan-value").value = decodedText;
+        let decodedText_split = decodedText.split(",");
+        let decodedObj = {"nodeName" : decodedText_split[0], "orientation" : decodedText_split[1], "graph" : decodedText_split[2]};
+        document.getElementById("qr-scan-value").value = JSON.stringify(decodedObj);
+        sessionStorage.setItem("qr-value",JSON.stringify(decodedObj));
+        console.log("item set to sessions storage",decodedObj)
         document.getElementById("qr-form").submit();
-        sessionStorage.setItem("qr-value",decodedText);
         }
 
 }

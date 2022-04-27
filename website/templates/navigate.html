@@ -19,6 +19,10 @@
 
 <body>
 
+      <script>
+            console.log(sessionStorage.getItem("qr-value"))
+      </script>
+
 <font color="white">
 <center>
 
@@ -43,10 +47,15 @@
                   name = "home"
                   placeholder="enter current location"
             />
+            <input type="hidden" id="qr-orientation" name="qr-orientation" value=""/>
+            <input type="hidden" id="qr-graph" name="qr-graph" value=""/>
       <br><br>
       <script>
-            qrValue = sessionStorage.getItem("qr-value")
-            document.getElementById("home").value = qrValue;
+            qrValue = JSON.parse(sessionStorage.getItem("qr-value"));
+            console.log("item get from session storage".qrValue)
+            document.getElementById("home").value = qrValue["nodeName"];
+            document.getElementById("qr-orientation").value = qrValue["orientation"]; 
+            document.getElementById("qr-graph").value = qrValue["graph"]; 
       </script>
       <button type="submit" name="scanQR-submit" value="scanQR-submit" id="scanQR-submit">Scan QR</button>
       </div>
