@@ -1,12 +1,30 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from wsgiref.util import request_uri
+from flask import Blueprint, render_template, request, redirect, url_for
 from algorithms import Path
 from graph import Graphs
 from methods import method
 
 views = Blueprint('views',__name__)
 
+'''@app.before_request
+def before_request():
+    if not request.is_secure:
+        url = request.url.replace('http://', 'https://', 1)
+        code = 301
+        return redirect(url, code=code)'''
+
+# Checking for https
+def check_https():
+    print(f"[LOG] {request.url}")
+    if request.url[0:8:1] != "https://":
+        print("[LOG] insecure connection redirecting")
+        url_new = request.url.replace("http://","https://",1)
+        code = 301
+        return(redirect(url_new,code=code))
+
 @views.route('/')
 def home():
+    check_https()
     return render_template("base.html")
 
 @views.route("/navigate",methods=["GET","POST"])
