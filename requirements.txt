@@ -16,3 +16,4 @@ Werkzeug==1.0.1
 wincertstore==0.2
 WTForms==3.0.1
 matplotlib==3.5.1
+networkx==2.7.1
