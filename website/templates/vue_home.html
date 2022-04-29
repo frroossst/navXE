@@ -2,24 +2,34 @@
 
   <head>
     <title> Vue Test</title>
+    <style>
+          .box {
+            background-color: purple;
+            height: 200px;
+            width: 200px;
+          }
+          [v-cloak] {
+            display: none;
+          }
+    </style>
   </head>
   <body>
-    <div id="app">
+    <div id="app" v-cloak>
       Hello World! <br>
       {{greeting}}
+      <input v-model="greeting"/>
+
+      <hr />
+      <div v-if="isVisible" class="box"></div> 
+       
+
+
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>
-    <script>
-      let app = Vue.createApp({
-        data : function(){
-          return {
-            greeting : "Hello Vue 3"
-          }
-        }
-      })
-      app.mount('#app')
-    </script>
+    <script src="app.js"></script>
+
+
   </body>
 
 </html> 
