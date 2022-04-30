@@ -37,12 +37,19 @@
 
     <script>
 
-        const PATH = "https://navxe.herokuapp.com/api"
+        const PATH = 'https://navxe.herokuapp.com/api' 
 
         axios.get(PATH)
             .then(function(response) {
                 console.log(response);
             })
+            .catch(function (error) {
+              // handle error
+              console.log(error);
+            })
+            .then(function () {
+              // always executed
+            });
 
     </script>
 
