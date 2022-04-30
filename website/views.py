@@ -113,3 +113,7 @@ def qr_scan():
 
     else:
         return render_template("qr_front.html")
+
+@views.route("/api",methods=["GET","POST"])
+def API():
+    return '{"message" : "Hello World! from the API"}'
