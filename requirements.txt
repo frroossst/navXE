@@ -5,6 +5,7 @@ Flask-RESTful==0.3.8
 Flask==1.1.4
 Flask_WTF==1.0.1
 Flask-SQLAlchemy==2.5.1
+Flask-Cors==3.0.10
 pytz==2020.1
 six==1.15.0
 gunicorn==20.1.0
