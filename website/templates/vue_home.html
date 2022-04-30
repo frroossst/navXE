@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title> Vue Test</title>
+
+    <style>
+          .box {
+            background-color: purple;
+            height: 200px;
+            width: 200px;
+          }
+          [v-cloak] {
+            display: none;
+          }
+          input {
+            margin: 10px;
+            display: block;
+          }
+    </style>
+
+  </head>
+
+  <body>
+
+    <div id="app" v-cloak>
+
+      
+
+    </div>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <script>
+
+        const PATH = 'https://navxe.herokuapp.com/api' 
+
+        axios.get(PATH)
+            .then(function(response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+              // handle error
+              console.log(error);
+            })
+            .then(function () {
+              // always executed
+            });
+
+    </script>
+
+
+
+  </body>
+
+</html> 
