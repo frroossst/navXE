@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
+from flask_cors import CORS
 from algorithms import Path
 from graph import Graphs
 from methods import method
@@ -8,6 +9,28 @@ views = Blueprint('views',__name__)
 @views.route('/')
 def home():
     return render_template("vue_home.html")
+
+@views.route('/test',methods=["GET","POST"])
+def test():
+
+    response_object = {
+            'status' : 'success',
+            'source' : '/test',
+            'message' : "Hello World! I am sending this from the backend!"
+        }
+    if request.method == "POST":
+
+        post_data = request.get_json()
+        print("[LOG] post data : ",post_data)
+
+        msg0 = post_data.get("msg")
+
+        response_object["message"] = msg0
+
+    return jsonify(response_object)
+
+
+
 
 @views.route("/navigate",methods=["GET","POST"])
 def navigate():

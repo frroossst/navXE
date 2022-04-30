@@ -66,7 +66,11 @@ https and ssl on flask
 https://www.youtube.com/watch?v=Gdys9qPjuKs
 
 
+
+
+
 Flask w/ Vue frontend
+
 
 https://testdriven.io/blog/developing-a-single-page-app-with-flask-and-vuejs/
 
@@ -85,3 +89,5 @@ https://www.youtube.com/watch?v=iwhuPxJ0dig
 https://www.reddit.com/r/flask/comments/ude4wn/flask_allowed_me_to_implement_my_startup_for_only/i6ic9c5/?context=3
 
 https://techformist.com/use-vue-from-url-simple-app/
+
+https://stackoverflow.com/questions/53134246/heroku-deployment-confusion-vue-js-frontend-with-flask-backend#53134587

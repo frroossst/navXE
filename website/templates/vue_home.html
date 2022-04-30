@@ -30,11 +30,33 @@
 
     </div>
 
+
     <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 
     <script>
 
-          console.log("Hello World!")
+          export default {
+                data(){
+                    return {
+                        dataentry:{company:"",designation:"",review:"",}
+                    ,};
+                },
+                methods:{
+                    submit:function(){
+                          const path = 'http://127.0.0.1:5000/test'
+                          axios.post(path, {
+                                  strTest : "Strings work",
+                                  boolTest : true,
+                                  numTest : 420
+                                }).then(response => {console.log(response);}).catch(err =>{console.log(err);});},}}
+
+    </script>
+
+
+
+<!--    <script>
 
           let app = Vue.createApp({
               delimiters : ['$V{','}'],
@@ -74,7 +96,7 @@
             app.mount('#app')
 
     </script>
-
+  -->
 
   </body>
 
