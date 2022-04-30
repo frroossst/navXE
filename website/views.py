@@ -1,5 +1,6 @@
 from wsgiref.util import request_uri
 from flask import Blueprint, render_template, request, redirect, url_for
+from flask_cors import cross_origin
 from algorithms import Path
 from graph import Graphs
 from methods import method
@@ -115,5 +116,6 @@ def qr_scan():
         return render_template("qr_front.html")
 
 @views.route("/api",methods=["GET","POST"])
+@cross_origin()
 def API():
     return {"message" : "Hello World! from the API"}
