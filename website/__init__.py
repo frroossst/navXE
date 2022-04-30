@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
+from flask_cors import CORS
 import secrets
 
 db = SQLAlchemy()
@@ -11,7 +12,9 @@ def create_app():
     app.config['SECRET_KEY'] = secrets.token_hex(16)
     app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_NAME}"
     db.init_app(app)
-
+    
+    CORS(app,resources={r'/*' : {'origins' : '*'}})
+    
     from .views import views
 
     app.register_blueprint(views,url_prefix="/")
