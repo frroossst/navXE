@@ -1,4 +1,3 @@
-from wsgiref.util import request_uri
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_cors import cross_origin
 from algorithms import Path

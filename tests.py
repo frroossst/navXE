@@ -1,4 +1,4 @@
-from algorithms import Path
+'''from algorithms import Path
 from methods import method
 from graph import Graphs
 
@@ -28,4 +28,13 @@ P = Path(Graphs.graphDB)
 
 print(G.graphDB)
 print(P.BFS_SP(G.graphDB,"a","i"))
-print(P.BFS_SP(G.graphDB,"j","i"))
+print(P.BFS_SP(G.graphDB,"j","i"))'''
+
+import requests
+
+BASE = 'http://127.0.0.1:5000/'
+
+#response = requests.post(BASE + "helloworld")
+#print(response.json())
+response = requests.get(BASE + "route/a/d")
+print(response.json())
