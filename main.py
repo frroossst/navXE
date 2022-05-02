@@ -3,6 +3,7 @@ from website import create_app
 from algorithms import Path
 from graph import Graphs
 import secrets
+import os
 
 
 app = create_app()
@@ -55,4 +56,5 @@ api.add_resource(token,"/api/token/<string:base>")
 
 if __name__ == "__main__":
     print("[LOG] App __init__")
+    print(os.environ.get('DATABASE_URL'))
     app.run()

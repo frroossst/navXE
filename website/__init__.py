@@ -25,4 +25,6 @@ def create_app():
 
     app.register_blueprint(views,url_prefix="/")
 
+    from .models import Map
+
     return app
