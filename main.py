@@ -16,19 +16,18 @@ db.init_app(app=app)
 
 class Map(db.Model):
 
-    name = db.Column(db.String, primary_key=True, nullable=False)
-    token = db.Column(db.String, unique=True, nullable=False)
-    graphData = db.Column(db.String)
-    charData = db.Column(db.String)
-    undirData = db.Column(db.String)
+    name = db.Column(db.String(), primary_key=True, nullable=False)
+    token = db.Column(db.String(), unique=True, nullable=False)
+    graphData = db.Column(db.String())
 
-    def __init__(self,graphName,token,graphData,charData,undirData):
+    def __init__(self,graphName,token,graphData):
 
         self.graphName = graphName 
         self.token = token 
         self.graphData = graphData
-        self.charData = charData
-        self.undirData = undirData
+
+    def __repr__(self):
+        return "<__repr__ response not ready yet>"
 
 
 
@@ -72,7 +71,9 @@ class database(Resource):
         return {"err" : name}
 
     def post(self,name,tok,data):
-        data = Map(name,tok,data,"{}","{}")
+
+        data = Map(name=name,token=tok,graphData=data)
+
         db.session.add(data)
         db.session.commit()
 
