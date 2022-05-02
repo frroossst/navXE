@@ -38,3 +38,10 @@ BASE = 'http://127.0.0.1:5000/'
 #print(response.json())
 response = requests.get(BASE + "api/route/graphDB/a/d/front")
 print(response.json())
+
+response = requests.get(BASE + "/api/token/abc")
+print(response.json())
+
+response = requests.get(BASE + "/api/token/ThisIsTheBaseToken")
+print(response.json())
+
