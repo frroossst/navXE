@@ -12,9 +12,15 @@ api = Api(app)
 
 
 db = SQLAlchemy()
-db.init_app(app)
+db.init_app(app=app)
 
 class Map(db.Model):
+
+    name = db.Column(db.String, primary_key=True, nullable=False)
+    token = db.Column(db.String, unique=True, nullable=False)
+    graphData = db.Column(db.String)
+    charData = db.Column(db.String)
+    undirData = db.Column(db.String)
 
     def __init__(self,graphName,token,graphData,charData,undirData):
 
@@ -24,15 +30,6 @@ class Map(db.Model):
         self.charData = charData
         self.undirData = undirData
 
-    name = db.Column(db.String, primary_key=True, nullable=False)
-
-    token = db.Column(db.String, unique=True, nullable=False)
-
-    graphData = db.Column(db.String)
-
-    charData = db.Column(db.String)
-
-    undirData = db.Column(db.String)
 
 
 class route(Resource):
@@ -77,7 +74,7 @@ class database(Resource):
     def post(self,name,tok,data):
         data = Map(name,tok,data,"{}","{}")
         db.session.add(data)
-        db.commit()
+        db.session.commit()
 
         return {"graph name" : name, "token" : tok, "data" : data}
 
