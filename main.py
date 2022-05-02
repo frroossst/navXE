@@ -9,6 +9,7 @@ import os
 app = create_app()
 api = Api(app)
 
+print(os.environ.get('DATABASE_URL'))
 
 
 class route(Resource):
@@ -56,5 +57,4 @@ api.add_resource(token,"/api/token/<string:base>")
 
 if __name__ == "__main__":
     print("[LOG] App __init__")
-    print(os.environ.get('DATABASE_URL'))
     app.run()
