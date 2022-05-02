@@ -1,4 +1,3 @@
-from enum import unique
 from . import db
 
 class Map(db.Model):

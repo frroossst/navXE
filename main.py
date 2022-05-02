@@ -1,4 +1,3 @@
-from urllib import response
 from flask_restful import Api, Resource
 from website import create_app
 from algorithms import Path
@@ -8,6 +7,8 @@ import secrets
 
 app = create_app()
 api = Api(app)
+
+
 
 class route(Resource):
 
@@ -24,6 +25,8 @@ class route(Resource):
 
     def post(self):
         return {"message" : "POSTED to API"}
+
+
 
 class token(Resource):
 
@@ -44,8 +47,10 @@ class token(Resource):
         return {"message" : "this API endpoint does not support POST request"}
 
 
+
 api.add_resource(route,"/api/route/<string:graph>/<string:home>/<string:destn>/<string:orientation>")
 api.add_resource(token,"/api/token/<string:base>")
+
 
 
 if __name__ == "__main__":
