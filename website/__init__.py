@@ -5,7 +5,6 @@ import secrets
 import os
 
 
-db = SQLAlchemy()
 
 def create_app():
 
@@ -15,18 +14,14 @@ def create_app():
   
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 
-    print(f"[DEBUG] {os.environ.get('DATABASE_URL')}")
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     DB_NAME = "graphs.db"
 
-    db.init_app(app)
-    
     CORS(app,resources={r'/*' : {'origins' : '*'}})
     
     from .views import views
 
     app.register_blueprint(views,url_prefix="/")
-
-    from .models import Map
 
     return app

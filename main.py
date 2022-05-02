@@ -1,4 +1,5 @@
 from flask_restful import Api, Resource
+from flask_sqlalchemy import SQLAlchemy
 from website import create_app
 from algorithms import Path
 from graph import Graphs
@@ -10,6 +11,7 @@ app = create_app()
 api = Api(app)
 
 
+db = SQLAlchemy()
 
 class route(Resource):
 
@@ -54,6 +56,24 @@ api.add_resource(token,"/api/token/<string:base>")
 
 
 
+class Map(db.Model):
+    
+    name = db.Column(db.String, primary_key=True, nullable=False)
+
+    token = db.Column(db.String, unique=True, nullable=False)
+
+    graphData = db.Column(db.String)
+
+    charData = db.Column(db.String)
+
+    undirData = db.Column(db.String)
+
+    updated = db.Column(db.Integer, nullable=False)
+
+
+
+
 if __name__ == "__main__":
     print("[LOG] App __init__")
+    db.create_all()
     app.run()
