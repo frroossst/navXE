@@ -45,3 +45,5 @@ print(response.json())
 response = requests.get(BASE + "/api/token/ThisIsTheBaseToken")
 print(response.json())
 
+response = requests.post(BASE + "/api/token/ThisIsTheBaseToken")
+print(response.json())

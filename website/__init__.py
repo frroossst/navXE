@@ -1,11 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask
 from flask_cors import CORS
+from flask import Flask
 import secrets
 import os
 
+
 db = SQLAlchemy()
-DB_NAME = "graphs.db"
 
 def create_app():
 
@@ -14,6 +14,8 @@ def create_app():
     app.config['SECRET_KEY'] = secrets.token_hex(16)
   
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+
+    DB_NAME = "graphs.db"
 
     db.init_app(app)
     

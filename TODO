@@ -1,10 +1,18 @@
+TODO 
+
+a. terminal CURSES graph creator/editor
+b. token authentication
+c. JSON graph I/O
+d. QR generation
+
+
 1. integrate DB
 2. user login
 3. Backend graph editor
 
 DB Schema
 
-userID : str | graph : JSON(str) | graphID : str
+userID : str | graph : JSON(str) | graphID : str | updated : int | undir graph : str | characteristic graph : str
 
 Every user has a unique ID
 Every graph has unique ID corelating to user ID so only a certain user can edit those graphs

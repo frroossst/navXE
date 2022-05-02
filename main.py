@@ -40,7 +40,7 @@ class token(Resource):
             return response_json
         
 
-    def post(self):
+    def post(self,base):
         return {"message" : "this API endpoint does not support POST request"}
 
 
