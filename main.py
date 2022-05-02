@@ -72,7 +72,7 @@ class database(Resource):
 
     def post(self,name,tok,data):
 
-        data = Map(name=name,token=tok,graphData=data)
+        data = Map(name,tok,data)
 
         db.session.add(data)
         db.session.commit()
