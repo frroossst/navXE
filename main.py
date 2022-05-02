@@ -64,23 +64,22 @@ class token(Resource):
 
 class database(Resource):
 
-    def get(self):
-        pass
-
-    def post(self,graphName,graphToken,graphData,charData,undirData):
-        data = Map(graphName,graphToken,graphData,"{}","{}")
-        db.session.add(data)
-        db.commit()
+    def get(self,name):
         return {}
+
+    def post(self,name):
+        print(name) 
+        # data = Map(graphName,graphToken,graphData,"{}","{}")
+        # db.session.add(data)
+        # db.commit()
+
+        return {"graph name" : name}
 
 
 
 api.add_resource(route,"/api/route/<string:graph>/<string:home>/<string:destn>/<string:orientation>")
 api.add_resource(token,"/api/token/<string:base>")
-api.add_resource(database,"/api/database/<string:graphName>/<string:graphToken>/<string:graphData>/<string:charData>/<string:undirData>")
-
-
-
+api.add_resource(database,"/api/database/<string:name>")
 
 
 
