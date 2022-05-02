@@ -16,6 +16,7 @@ db.init_app(app=app)
 
 class Map(db.Model):
 
+    __tablename__ = "map"
     name = db.Column(db.String(), primary_key=True, nullable=False)
     token = db.Column(db.String(), unique=True, nullable=False)
     graphData = db.Column(db.String())
