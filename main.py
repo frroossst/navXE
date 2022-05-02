@@ -14,6 +14,20 @@ api = Api(app)
 db = SQLAlchemy()
 db.init_app(app)
 
+class Map(db.Model):
+    
+    name = db.Column(db.String, primary_key=True, nullable=False)
+
+    token = db.Column(db.String, unique=True, nullable=False)
+
+    graphData = db.Column(db.String)
+
+    charData = db.Column(db.String)
+
+    undirData = db.Column(db.String)
+
+    updated = db.Column(db.Integer, nullable=False)
+
 class route(Resource):
 
     def get(self,graph,home,destn,orientation):
@@ -29,8 +43,6 @@ class route(Resource):
 
     def post(self):
         return {"message" : "POSTED to API"}
-
-
 
 class token(Resource):
 
@@ -50,26 +62,25 @@ class token(Resource):
     def post(self,base):
         return {"message" : "this API endpoint does not support POST request"}
 
+class database(Resource):
+
+    def get(self):
+        pass
+
+    def post(self,graphName,graphToken,graphData,charData,undirData):
+        data = Map(graphName,graphToken,graphData,"{}","{}")
+        db.session.add(data)
+        db.commit()
+        return {}
+
 
 
 api.add_resource(route,"/api/route/<string:graph>/<string:home>/<string:destn>/<string:orientation>")
 api.add_resource(token,"/api/token/<string:base>")
+api.add_resource(database,"/api/database/<string:graphName>/<string:graphToken>/<string:graphData>/<string:charData>/<string:undirData>")
 
 
 
-class Map(db.Model):
-    
-    name = db.Column(db.String, primary_key=True, nullable=False)
-
-    token = db.Column(db.String, unique=True, nullable=False)
-
-    graphData = db.Column(db.String)
-
-    charData = db.Column(db.String)
-
-    undirData = db.Column(db.String)
-
-    updated = db.Column(db.Integer, nullable=False)
 
 
 

@@ -1,35 +1,4 @@
-'''from algorithms import Path
-from methods import method
-from graph import Graphs
-
-
-# Testing BFS for basic dataset
-
-method.clearFileData("graphDB.json")
-
-G = Graphs()
-
-G.addNode("a",["b","c"])
-G.addNode("b",["g"])
-G.addNode("c",["d","f"])
-G.addNode("d",["e"])
-G.addNode("e",["f"])
-G.addNode("f")
-G.addNode("g",["h"])
-G.addNode("h",["i","j"])
-G.addNode("i")
-G.addNode("j",["k"])
-G.addNode("k",["l"])
-G.addNode("l",["i"])
-
-Graphs.graphDB = G.undirectGraph(Graphs.graphDB)
-
-P = Path(Graphs.graphDB)
-
-print(G.graphDB)
-print(P.BFS_SP(G.graphDB,"a","i"))
-print(P.BFS_SP(G.graphDB,"j","i"))'''
-
+import json
 import requests
 
 BASE = 'http://127.0.0.1:5000/'
@@ -46,4 +15,20 @@ response = requests.get(BASE + "/api/token/ThisIsTheBaseToken")
 print(response.json())
 
 response = requests.post(BASE + "/api/token/ThisIsTheBaseToken")
+print(response.json())
+
+with open("graphDB.json","r") as fobj:
+    content = json.load(fobj)
+    fobj.close()
+
+BASE = 'https://navxe.herokuapp.com/'
+name = "test"
+token = "fcf1e23002330334ThisIsTheBaseToken5acfcc887086729c3919ee97d31fffba"
+data = str(content)
+
+print(name)
+print(token)
+print(data)
+
+response = requests.post(BASE + f"api/database/{name}/{token}/{data}")
 print(response.json())
