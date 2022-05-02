@@ -12,6 +12,7 @@ api = Api(app)
 
 
 db = SQLAlchemy()
+db.init_app(app)
 
 class route(Resource):
 
@@ -75,5 +76,4 @@ class Map(db.Model):
 
 if __name__ == "__main__":
     print("[LOG] App __init__")
-    db.create_all()
     app.run()
