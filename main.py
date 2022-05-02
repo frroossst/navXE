@@ -9,7 +9,6 @@ import os
 app = create_app()
 api = Api(app)
 
-print(os.environ.get('DATABASE_URL'))
 
 
 class route(Resource):

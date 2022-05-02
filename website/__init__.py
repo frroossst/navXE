@@ -15,6 +15,8 @@ def create_app():
   
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 
+    print(f"[DEBUG] {os.environ.get('DATABASE_URL')}")
+
     DB_NAME = "graphs.db"
 
     db.init_app(app)
