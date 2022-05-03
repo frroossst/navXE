@@ -67,12 +67,27 @@ class token(Resource):
     def post(self,base):
         return {"message" : "this API endpoint does not support POST request"}
 
-class database(Resource):
+
+class create_database(Resource):
+
+    """
+    func args : CRUD
+        create : add a row into the database
+        read : fetch a graph from the database
+        update : update a row in the database
+        delete : remove a row from the database
+    """
+
+    def get(self):
+        pass
+
+    def post(self):
+        pass
+
+
+class read_database(Resource):
 
     def get(self,name):
-        return {"err" : name}
-
-    def post(self,name,tok,data):
 
         DATABASE_URL = os.environ.get("DATABASE_URL")
 
@@ -82,22 +97,23 @@ class database(Resource):
 
         curr = conn.cursor()
 
-        curr.execute("select * from map")
+        query = "select graphdata from map where graphname = %s"
 
-        rows = curr.fetchall()
+        curr.execute(query,name)
 
-        print(rows)
+        result = result.fetchall()
 
         conn.close()
 
-        return {"graph name" : name, "token" : tok, "data" : data}
+        return {"result" : result}
+
 
 
 
 api.add_resource(route,"/api/route/<string:graph>/<string:home>/<string:destn>/<string:orientation>")
 api.add_resource(token,"/api/token/<string:base>")
-api.add_resource(database,"/api/database/<string:name>/<string:tok>/<string:data>")
-
+api.add_resource(create_database,"/api/database/create/<string:name>/<string:tok>/<string:data>")
+api.add_resource(read_database,"/api/database/read/<string:name>")
 
 
 if __name__ == "__main__":
