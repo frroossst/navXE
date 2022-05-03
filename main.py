@@ -113,9 +113,11 @@ class read_database(Resource):
 
         curr = conn.cursor()
 
-        query = "select graphdata from map where graphname = '%s';"
+        print(f"[DEBUG] {name}")
 
-        curr.execute(query,name)
+        query = f"select graphdata from map where graphname = '{str(name)}';"
+
+        curr.execute(query)
 
         result = result.fetchall()
 
