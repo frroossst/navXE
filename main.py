@@ -119,7 +119,7 @@ class read_database(Resource):
 
         curr.execute(query)
 
-        result = result.fetchall()
+        result = curr.fetchall()
 
         conn.close()
 

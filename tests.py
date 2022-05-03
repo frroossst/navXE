@@ -18,8 +18,5 @@ print(response.json())
 response = requests.get(BASE + "/api/token/ThisIsTheBaseToken")
 print(response.json())
 
-response = requests.post(BASE + "/api/token/ThisIsTheBaseToken")
-print(response.json())
-
 response = requests.get(BASE + "/api/database/read/test1")
 print(response.json())
