@@ -1,5 +1,6 @@
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
+from numpy import empty
 from website import create_app
 from algorithms import Path
 from graph import Graphs
@@ -81,8 +82,23 @@ class create_database(Resource):
     def get(self):
         pass
 
-    def post(self):
-        pass
+    def post(self,name, token, data):
+
+        DATABASE_URL = os.environ.get("DATABASE_URL")
+
+        conn = psycopg2.connect(
+            DATABASE_URL,sslmode="require"
+        )
+
+        curr = conn.cursor()
+
+        empty_dict = str({})
+
+        insert_query = f"INSERT INTO map(graphname,token,graphdata,chardata,undirdata) VALUES('{name}','{token}','{data}','{empty_dict}','{empty_dict}');"
+
+        curr.execute(insert_query)
+
+        return {"message" : "inserted record"}
 
 
 class read_database(Resource):
@@ -97,7 +113,7 @@ class read_database(Resource):
 
         curr = conn.cursor()
 
-        query = "select graphdata from map where graphname = %s"
+        query = "select graphdata from map where graphname = '%s';"
 
         curr.execute(query,name)
 
@@ -107,6 +123,16 @@ class read_database(Resource):
 
         return {"result" : result}
 
+class update_database(Resource):
+
+    def post(self):
+        pass
+
+class delete_database(Resource):
+
+    def post(self):
+        pass
+
 
 
 
@@ -114,6 +140,9 @@ api.add_resource(route,"/api/route/<string:graph>/<string:home>/<string:destn>/<
 api.add_resource(token,"/api/token/<string:base>")
 api.add_resource(create_database,"/api/database/create/<string:name>/<string:tok>/<string:data>")
 api.add_resource(read_database,"/api/database/read/<string:name>")
+api.add_resource(update_database,"/api/database/update/<string:token>/<string:old_graph>/<string:new_graph>")
+api.add_resource(delete_database,"/api/database/delete/<string:token>/<string:graph_name>")
+
 
 
 if __name__ == "__main__":
