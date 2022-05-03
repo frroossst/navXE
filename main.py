@@ -98,6 +98,8 @@ class create_database(Resource):
 
         curr.execute(insert_query)
 
+        conn.commit()
+
         return {"message" : "inserted record"}
 
 

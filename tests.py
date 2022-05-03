@@ -24,5 +24,5 @@ print(response.json())
 d = {"a" : ["b","c","d"],"b" : ["a"], "c" : ["a"], "d" : ["a"]}
 dj = json.dumps(d)
 
-response = requests.post(BASE + f"/api/database/create/{test2}/123token321/{dj}")
+response = requests.post(BASE + f"/api/database/create/test2/123token321/{dj}")
 print(response.json())
