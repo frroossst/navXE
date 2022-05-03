@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from website import create_app
 from algorithms import Path
 from graph import Graphs
+import psycopg2
 import secrets
 import os
 
@@ -73,10 +74,21 @@ class database(Resource):
 
     def post(self,name,tok,data):
 
-        data = Map(name,tok,data)
+        DATABASE_URL = os.environ.get("DATABASE_URL")
 
-        db.session.add(data)
-        db.session.commit()
+        conn = psycopg2.connect(
+            DATABASE_URL,sslmode="require"
+        )
+
+        curr = conn.cursor()
+
+        curr.execute("select * from map")
+
+        rows = curr.fetchall()
+
+        print(rows)
+
+        conn.close()
 
         return {"graph name" : name, "token" : tok, "data" : data}
 
