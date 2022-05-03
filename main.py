@@ -82,7 +82,7 @@ class create_database(Resource):
     def get(self):
         pass
 
-    def post(self,name, token, data):
+    def post(self,name, tok, data):
 
         DATABASE_URL = os.environ.get("DATABASE_URL")
 
@@ -94,7 +94,7 @@ class create_database(Resource):
 
         empty_dict = str({})
 
-        insert_query = f"INSERT INTO map(graphname,token,graphdata,chardata,undirdata) VALUES('{name}','{token}','{data}','{empty_dict}','{empty_dict}');"
+        insert_query = f"INSERT INTO map(graphname,token,graphdata,chardata,undirdata) VALUES('{name}','{tok}','{data}','{empty_dict}','{empty_dict}');"
 
         curr.execute(insert_query)
 
