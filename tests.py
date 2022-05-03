@@ -2,12 +2,12 @@ import json
 import requests
 
 
-BASE = 'http://127.0.0.1:5000'
+# BASE = 'http://127.0.0.1:5000'
 
 #response = requests.post(BASE + "helloworld")
 #print(response.json())
 
-# BASE = "https://navxe.herokuapp.com"
+BASE = "https://navxe.herokuapp.com"
 
 response = requests.get(BASE + "/api/route/graphDB/a/d/front")
 print(response.json())
