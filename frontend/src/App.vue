@@ -12,6 +12,8 @@ export default {
     HelloWorld
   }
 }
+
+console.log("I am currently working on the frontend, Appreciate your patience!")
 </script>
 
 <style>
