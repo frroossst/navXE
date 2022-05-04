@@ -33,3 +33,9 @@ print(response.json())
 
 response = requests.get(BASE + "/api/database/read/test9")
 print(response.json())
+
+response = requests.post(BASE + f"/api/database/delete/123token321U/test9")
+print(response.json())
+
+response = requests.get(BASE + "/api/database/read/test9")
+print(response.json())

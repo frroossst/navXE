@@ -166,7 +166,7 @@ class delete_database(Resource):
 
         curr = conn.cursor()
 
-        del_query = f"drop from map where token = '{tok}' and graphname = '{graph_name}';"
+        del_query = f"delete from map where token = '{tok}' and graphname = '{graph_name}';"
 
         curr.execute(del_query)
 
