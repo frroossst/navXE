@@ -174,6 +174,8 @@ class delete_database(Resource):
 
         conn.close()
 
+        return {"message" : "deleted record"}
+
 api.add_resource(route,"/api/route/<string:graph>/<string:home>/<string:destn>/<string:orientation>")
 api.add_resource(token,"/api/token/<string:base>")
 api.add_resource(create_database,"/api/database/create/<string:name>/<string:tok>/<string:data>")
