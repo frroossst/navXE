@@ -156,18 +156,30 @@ class update_database(Resource):
 
 class delete_database(Resource):
 
-    def post(self):
-        pass
+    def post(self,tok,graph_name):
 
+        DATABASE_URL = os.environ.get("DATABASE_URL")
 
+        conn = psycopg2.connect(
+            DATABASE_URL,sslmode="require"
+        )
 
+        curr = conn.cursor()
+
+        del_query = f"drop from map where token = '{tok}' and graphname = '{graph_name}';"
+
+        curr.execute(del_query)
+
+        conn.commit()
+
+        conn.close()
 
 api.add_resource(route,"/api/route/<string:graph>/<string:home>/<string:destn>/<string:orientation>")
 api.add_resource(token,"/api/token/<string:base>")
 api.add_resource(create_database,"/api/database/create/<string:name>/<string:tok>/<string:data>")
 api.add_resource(read_database,"/api/database/read/<string:name>")
 api.add_resource(update_database,"/api/database/update/<string:tok>/<string:name>/<string:new_graph>")
-api.add_resource(delete_database,"/api/database/delete/<string:token>/<string:graph_name>")
+api.add_resource(delete_database,"/api/database/delete/<string:tok>/<string:graph_name>")
 
 
 

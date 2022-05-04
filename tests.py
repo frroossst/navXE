@@ -12,10 +12,7 @@ BASE = "https://navxe.herokuapp.com"
 response = requests.get(BASE + "/api/route/graphDB/a/d/front")
 print(response.json())
 
-response = requests.get(BASE + "/api/token/abc")
-print(response.json())
-
-response = requests.get(BASE + "/api/token/ThisIsTheBaseToken")
+response = requests.get(BASE + "/api/token/abchdfjkhasdj")
 print(response.json())
 
 response = requests.get(BASE + "/api/database/read/test1")
@@ -24,14 +21,14 @@ print(response.json())
 d = {"a" : ["b","c","d"],"b" : ["a"], "c" : ["a"], "d" : ["a"]}
 dj = json.dumps(d)
 
-response = requests.post(BASE + f"/api/database/create/test9/123token321/{dj}")
+response = requests.post(BASE + f"/api/database/create/test9/123token321U/{dj}")
 print(response.json())
 
 response = requests.get(BASE + "/api/database/read/test9")
 print(response.json())
 
-newD = {"msg" : "updated"}
-response = requests.post(BASE + f"/api/database/update/123token321/test9/{str(newD)}")
+newD = '{"msg" : "updated"}'
+response = requests.post(BASE + f"/api/database/update/123token321U/test9/{str(newD)}")
 print(response.json())
 
 response = requests.get(BASE + "/api/database/read/test9")
