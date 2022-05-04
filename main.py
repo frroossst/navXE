@@ -100,6 +100,8 @@ class create_database(Resource):
 
         conn.commit()
 
+        conn.close()
+
         return {"message" : "inserted record"}
 
 
@@ -129,8 +131,28 @@ class read_database(Resource):
 
 class update_database(Resource):
 
-    def post(self):
-        pass
+    def post(self,tok,name,new_graph):
+
+        DATABASE_URL = os.environ.get("DATABASE_URL")
+
+        conn = psycopg2.connect(
+            DATABASE_URL,sslmode="require"
+        )
+
+        curr = conn.cursor()
+
+        update_query = f"update map set graphdata = '{str(new_graph)}' where token = '{tok}' and graphname = '{name}';"
+
+        # ! Add a method to return invalid response for invalid operations
+
+        curr.execute(update_query)
+
+        conn.commit()
+
+        conn.close()
+
+        return {"message" : "updated record"}
+
 
 class delete_database(Resource):
 
@@ -144,7 +166,7 @@ api.add_resource(route,"/api/route/<string:graph>/<string:home>/<string:destn>/<
 api.add_resource(token,"/api/token/<string:base>")
 api.add_resource(create_database,"/api/database/create/<string:name>/<string:tok>/<string:data>")
 api.add_resource(read_database,"/api/database/read/<string:name>")
-api.add_resource(update_database,"/api/database/update/<string:token>/<string:old_graph>/<string:new_graph>")
+api.add_resource(update_database,"/api/database/update/<string:tok>/<string:name>/<string:new_graph>")
 api.add_resource(delete_database,"/api/database/delete/<string:token>/<string:graph_name>")
 
 
