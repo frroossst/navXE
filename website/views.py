@@ -25,10 +25,12 @@ def check_https():
 @views.route('/')
 def home():
     check_https()
-    return render_template("base.html")
+    return render_template("deprecated.html")
 
 @views.route("/navigate",methods=["GET","POST"])
 def navigate():
+
+    return render_template("deprecated.html")
 
     print("[LOG] redirect to /navigate")
     print(request.form)
@@ -69,43 +71,51 @@ def navigate():
             return redirect(url_for("views.qr_scan"))
 
 
-    return render_template("navigate.html")
 
 @views.route("/graphs")
 def graphs():
+    return render_template("deprecated.html")
     return "Look at all the user generated maps"
 
 @views.route("/create")
 def create():
+    return render_template("deprecated.html")
     return "This is where you create a new graph"
 
 @views.route("/code")
 def code():
+    return render_template("deprecated.html")
     return "<a href='https://github.com/frroossst/navXE'>GitHub Link</a>"
 
 @views.route("/login")
 def login():
+    return render_template("deprecated.html")
     return "Login Page"
 
 @views.route("/docs")
 def docs():
+    return render_template("deprecated.html")
     return "Documentation"
 
 @views.route("/reports")
 def reports():
+    return render_template("deprecated.html")
     return "Cannot submit reports as of now!"
 
 @views.route("/share")
 def share():
+    return render_template("deprecated.html")
     return render_template("share.html")
 
 @views.route("/settings")
 def settings():
+    return render_template("deprecated.html")
     return "Configure your settings"
 
 @views.route("/qr",methods=["GET","POST"])
 def qr_scan():
 
+    return render_template("deprecated.html")
     if request.method == "POST":
         scanned_value = request.form.get("qr-scan-value")
         print(f"[LOG] qr read as {scanned_value}")
