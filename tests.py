@@ -35,7 +35,19 @@ response = requests.post(BASE + f"/api/database/delete/123token321U/test9")
 print(response.json())
 
 response = requests.get(BASE + "/api/database/read/test9")
-print(response.json())'''
+print(response.json())
 
 response = requests.get(BASE + "/api/database/read/*")
+print(response.json())'''
+
+
+test_dict = json.dumps({"z" : []})
+
+response = requests.post(BASE + f"/api/database/update/graphdata/T0K3N/test1/{test_dict}")
+print(response.json())
+
+response = requests.post(BASE + f"/api/database/update/chardata/T0K3N/test1/{test_dict}")
+print(response.json())
+
+response = requests.post(BASE + f"/api/database/update/undirdata/T0K3N/test1/{test_dict}")
 print(response.json())
