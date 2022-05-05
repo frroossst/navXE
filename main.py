@@ -132,7 +132,7 @@ class read_database(Resource):
 
 class update_database(Resource):
 
-    def post(self,tok,name,new_graph):
+    def post(self,type,tok,name,new_graph):
 
         DATABASE_URL = os.environ.get("DATABASE_URL")
 
@@ -142,17 +142,48 @@ class update_database(Resource):
 
         curr = conn.cursor()
 
-        update_query = f"update map set graphdata = '{str(new_graph)}' where token = '{tok}' and graphname = '{name}';"
+        if type == "graphdata":
 
-        # ! Add a method to return invalid response for invalid operations
+            update_query = f"update map set graphdata = '{str(new_graph)}' where token = '{tok}' and graphname = '{name}';"
 
-        curr.execute(update_query)
+            # ! Add a method to return invalid response for invalid operations
 
-        conn.commit()
+            curr.execute(update_query)
 
-        conn.close()
+            conn.commit()
+    
+            conn.close()
+    
+            return {"message" : "updated record"}
 
-        return {"message" : "updated record"}
+        elif type == "chardata":
+
+            update_query = f"update map set chardata = '{str(new_graph)}' where token = '{tok}' and graphname = '{name}';"
+
+            # ! Add a method to return invalid response for invalid operations
+
+            curr.execute(update_query)
+
+            conn.commit()
+    
+            conn.close()
+    
+            return {"message" : "updated record"}
+
+        elif type == "undirdata":
+
+            update_query = f"update map set undirdata = '{str(new_graph)}' where token = '{tok}' and graphname = '{name}';"
+
+            # ! Add a method to return invalid response for invalid operations
+
+            curr.execute(update_query)
+
+            conn.commit()
+    
+            conn.close()
+    
+            return {"message" : "updated record"}
+
 
 
 class delete_database(Resource):
@@ -183,7 +214,7 @@ api.add_resource(route,"/api/route/<string:graph>/<string:home>/<string:destn>/<
 api.add_resource(token,"/api/token/<string:base>")
 api.add_resource(create_database,"/api/database/create/<string:name>/<string:tok>/<string:data>")
 api.add_resource(read_database,"/api/database/read/<string:name>")
-api.add_resource(update_database,"/api/database/update/<string:tok>/<string:name>/<string:new_graph>")
+api.add_resource(update_database,"/api/database/update/<string:type>/<string:tok>/<string:name>/<string:new_graph>")
 api.add_resource(delete_database,"/api/database/delete/<string:tok>/<string:graph_name>")
 
 
