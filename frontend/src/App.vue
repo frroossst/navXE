@@ -13,7 +13,7 @@ export default {
   }
 }
 
-console.log("I am currently working on the frontend, Appreciate your patience!")
+//console.log("I am currently working on the frontend, Appreciate your patience!")
 
 </script>
 
