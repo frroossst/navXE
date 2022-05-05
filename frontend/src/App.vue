@@ -1,19 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Forms />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import Forms from './components/Forms.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components: { 
+    Forms
   }
 }
 
 console.log("I am currently working on the frontend, Appreciate your patience!")
+
 </script>
 
 <style>
@@ -25,4 +26,9 @@ console.log("I am currently working on the frontend, Appreciate your patience!")
   color: #2c3e50;
   margin-top: 60px;
 }
+body {
+  margin: 0;
+  background: #eee;
+}
 </style>
+

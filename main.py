@@ -117,9 +117,10 @@ class read_database(Resource):
 
         curr = conn.cursor()
 
-        print(f"[DEBUG] {name}")
-
-        query = f"select graphdata from map where graphname = '{str(name)}';"
+        if name == "*":
+            query = "select graphname from map;" 
+        else:
+            query = f"select graphdata from map where graphname = '{str(name)}';"
 
         curr.execute(query)
 
@@ -175,6 +176,8 @@ class delete_database(Resource):
         conn.close()
 
         return {"message" : "deleted record"}
+
+
 
 api.add_resource(route,"/api/route/<string:graph>/<string:home>/<string:destn>/<string:orientation>")
 api.add_resource(token,"/api/token/<string:base>")
