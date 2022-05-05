@@ -75,5 +75,4 @@ export default {
         padding: 10px 15px;
         border: none;
     }
-        box-sizing: border-box;
 </style>
