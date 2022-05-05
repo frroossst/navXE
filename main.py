@@ -1,6 +1,5 @@
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
-from numpy import empty
 from website import create_app
 from algorithms import Path
 from graph import Graphs
