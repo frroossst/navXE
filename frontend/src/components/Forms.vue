@@ -1,24 +1,44 @@
 <template>
+
     <form>
         <label>Home</label>
         <input type="text" v-model="home">
         <label>Destination</label>
         <input type="text" v-model="destn">
+        <label>Graph</label><br>
+        <div id="all-maps">
+            <select>
+                <option v-for="i in this.maps" :key="i"> {{i[0]}} </option>
+            </select>
+        </div>
     </form>
-
-    <p>
-       Calculating route from {{home}} to {{destn}} 
-    </p>
     
 </template>
 
 <script>
+
 export default {
     data(){
         return {
             home : '',
-            destn : ''
+            destn : '',
+            graph : '',
+            maps : []
         }
+    },
+    methods:{
+        fetchAllMaps(){
+            const URL = "https://navxe.herokuapp.com/api/database/read/*"
+            this.axios
+                .get(URL)
+                .then((response) => {
+                    this.maps = response.data.result
+                    console.log(this.maps)
+                })
+            }
+        },
+    mounted(){
+        this.fetchAllMaps()
     }
 }
 </script>
@@ -50,4 +70,10 @@ export default {
         border-bottom: 1px solid #ddd;
         color: #555;
     }
+    select{
+        width: 100%;
+        padding: 10px 15px;
+        border: none;
+    }
+        box-sizing: border-box;
 </style>

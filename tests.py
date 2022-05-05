@@ -8,7 +8,7 @@ import requests
 #print(response.json())
 
 BASE = "https://navxe.herokuapp.com"
-
+'''
 response = requests.get(BASE + "/api/route/graphDB/a/d/front")
 print(response.json())
 
@@ -35,4 +35,7 @@ response = requests.post(BASE + f"/api/database/delete/123token321U/test9")
 print(response.json())
 
 response = requests.get(BASE + "/api/database/read/test9")
+print(response.json())'''
+
+response = requests.get(BASE + "/api/database/read/*")
 print(response.json())
