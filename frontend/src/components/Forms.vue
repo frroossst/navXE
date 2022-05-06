@@ -12,7 +12,7 @@
             </select>
         </div>
         <br><br>
-        <div v-if="pressedScan" ref="qrBlock" class="stream">
+        <div v-if="pressedScan" class="stream">
             <qr-stream @decode="onDecode" class="qrStream">
                 <div style="color: red;" class="frame"></div>
             </qr-stream>
@@ -88,13 +88,16 @@ export default {
                 })
         },
         onDecode(decodeStr) {
-            console.log(decodeStr)
-            this.home = decodeStr
+			const decodeStrObj = JSON.parse(decodeStr)
+			this.home = decodeStrObj
+			console.log(decodeStrObj)
+            this.home = decodeStrObj.nodeName
+			this.graph = decodeStrObj.graph
+			this.orientation = decodeStrObj.orientation
             this.scanButtonPress()
         },
         scanButtonPress(){
             this.pressedScan = !this.pressedScan
-			this.$refs.qrBlock.focus()
         },
         setDefaultGraph(){
             this.graph = localStorage.getItem("defaultGraph")
@@ -164,7 +167,6 @@ export default {
     .qrStream{
         margin-top: 20px;
         padding-top: 20px;
-        display: inline-block;
         margin: 0px;
         align-self: center;
         padding: 0px;

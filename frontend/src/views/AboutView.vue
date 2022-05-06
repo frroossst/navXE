@@ -14,7 +14,7 @@
 
       This website can be used as a website or an app on your phone (PWA) 
       <br><br>
-      <b>Version : 6.4.22.16.48</b>
+      <b>Version : 6.4.22.17.33</b>
     </p>
     <p class="link-route">
       <center>
