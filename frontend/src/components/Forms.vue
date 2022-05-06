@@ -94,10 +94,15 @@ export default {
         },
         scanButtonPress(){
             this.pressedScan = !this.pressedScan
+        },
+        setDefaultGraph(){
+            this.graph = localStorage.getItem("defaultGraph")
+            document.getElementById("selected-graph").value = this.graph
         }
         },
     mounted(){
         this.fetchAllMaps()
+        this.setDefaultGraph()
     }
 }
 
