@@ -24,9 +24,17 @@
             <button type="button" @click="handleSubmit">Submit</button>
         </div>
         <br>
+
         <label>Route</label>
         <div v-if="this.route != null" class="route">
-            {{this.route}}
+            <div v-for="j in this.route" :key="j">
+                <div class="toDoLabel">
+                    <p>{{j[0]}}</p>
+                </div>
+                <div class="toDo">
+                    <input type="checkbox"/>
+                </div>
+            </div>
         </div>
 
     </form>
@@ -144,5 +152,15 @@ export default {
         margin: 0px;
         align-self: center;
         padding: 0px;
+    }
+    .toDo{
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+    }
+    .toDoLabel{
+        display: inline-block;
+        position: relative;
+        top: 0px; 
     }
 </style>
