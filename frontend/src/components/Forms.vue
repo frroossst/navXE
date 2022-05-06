@@ -20,7 +20,7 @@
         <div class="submit">
             <button type="button" @click="scanButtonPress">QR Scanner</button>
         </div>
-        <div class="submit">
+        <div class="qrBtn">
             <button type="button" @click="handleSubmit">Submit</button>
         </div>
         <br>
@@ -90,6 +90,7 @@ export default {
         onDecode(decodeStr) {
             console.log(decodeStr)
             this.home = decodeStr
+            this.scanButtonPress()
         },
         scanButtonPress(){
             this.pressedScan = !this.pressedScan
@@ -138,12 +139,21 @@ export default {
     .submit{
         text-align: center;
         align-self: center;
-        border: 1px;
-        margin: 15%;
+        margin: 15px;
         color: #aaa;
-        display: inline-block;
         font-size: 16px;
         text-decoration: none;
+        display: block;
+    }
+    .qrBtn{
+        text-align: center;
+        display: block;
+        align-self: center;
+        border: none;
+        color: #aaa;
+        font-size: 16px;
+        text-decoration: none;
+        margin: 10px;
     }
     .qrStream{
         margin-top: 20px;
