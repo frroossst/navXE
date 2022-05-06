@@ -9,7 +9,11 @@
    </div>
    <br><br>
    <div class="submit">
-      <button type="button" @click="saveSettings">Save Settings</button>
+      <button type="button" @click="resetSettings">Reset</button>
+   </div>
+   <br><br>
+   <div class="submit">
+      <button type="button" @click="saveSettings">Save</button>
    </div>
 
    </div>
@@ -45,6 +49,9 @@ export default  {
       saveSettings(){
             let saveGraph = document.getElementById("selected-graph").value
             localStorage.setItem("defaultGraph",saveGraph) 
+      },
+      resetSettings(){
+            localStorage.removeItem("defaultGraph")
       },
    },
    created(){

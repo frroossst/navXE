@@ -1,6 +1,6 @@
 <template>
 
-    <form @submit="handleSubmit">
+    <form @submit="handleSubmit" id="main-form">
         <label>Home</label>
         <input type="text" v-model="home">
         <label>Destination</label>
@@ -42,8 +42,10 @@
 </template>
 
 <script>
+import Popup from './Popup.vue'
 
 export default {
+  components: { Popup },
     data(){
         return {
             home : '',
@@ -178,4 +180,5 @@ export default {
         position: relative;
         top: 0px; 
     }
+	
 </style>
