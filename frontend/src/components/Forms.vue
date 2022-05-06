@@ -7,7 +7,7 @@
         <input type="text" v-model="destn">
         <label>Graph</label><br>
         <div id="all-maps">
-            <select v-model="graph">
+            <select id="selected-graph" v-model="graph">
                 <option v-for="i in this.maps" :key="i"> {{i[0]}} </option>
             </select>
         </div>
