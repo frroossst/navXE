@@ -11,9 +11,24 @@
                 <option v-for="i in this.maps" :key="i"> {{i[0]}} </option>
             </select>
         </div>
-        <div class="submit">
-            <button>Submit</button>
+        <br><br>
+        <div v-if="pressedScan" class="stream">
+            <qr-stream @decode="onDecode" class="qrStream">
+                <div style="color: red;" class="frame"></div>
+            </qr-stream>
         </div>
+        <div class="submit">
+            <button type="button" @click="scanButtonPress">QR Scanner</button>
+        </div>
+        <div class="submit">
+            <button type="button" @click="handleSubmit">Submit</button>
+        </div>
+        <br>
+        <label>Route</label>
+        <div v-if="this.route != null" class="route">
+            {{this.route}}
+        </div>
+
     </form>
     
 </template>
@@ -26,7 +41,10 @@ export default {
             home : '',
             destn : '',
             graph : '',
-            maps : []
+            orientation : 'front',
+            maps : [],
+            route : null,
+            pressedScan : false
         }
     },
     methods:{
@@ -39,11 +57,34 @@ export default {
                     console.log(this.maps)
                 })
             },
+        getLastUsedGraph(){
+            let lastGraph = localStorage.getItem("lastUsedGraph")
+            this.graph = lastGraph
+        },
         handleSubmit(){
             console.log("form submitted")
             console.log("Home : ",this.home)
             console.log("destination : ",this.destn)
             console.log("graph : ",this.graph)
+
+            localStorage.setItem("lastUsedGraph",this.graph)
+
+            // API call for calculating route
+            const URL = "https://navxe.herokuapp.com/api/route/" + this.graph + "/" +  this.home + "/"+ this.destn + "/" + this.orientation 
+            console.log(URL)
+            this.axios
+                .get(URL)
+                .then((response) => {
+                    console.log(response.data.route)
+                    this.route = response.data.route
+                })
+        },
+        onDecode(decodeStr) {
+            console.log(decodeStr)
+            this.home = decodeStr
+        },
+        scanButtonPress(){
+            this.pressedScan = !this.pressedScan
         }
         },
     mounted(){
@@ -61,6 +102,7 @@ export default {
         text-align: left;
         padding: 40px;
         border-radius: 10px;
+        align-items: center;
     }
     label {
         color: #aaa;
@@ -86,13 +128,21 @@ export default {
         border: none;
     }
     .submit{
-        margin: 20px;
         text-align: center;
+        align-self: center;
         border: 1px;
+        margin: 15%;
         color: #aaa;
-        padding: 15px 30px;
-        display: block;
+        display: inline-block;
         font-size: 16px;
         text-decoration: none;
+    }
+    .qrStream{
+        margin-top: 20px;
+        padding-top: 20px;
+        display: inline-block;
+        margin: 0px;
+        align-self: center;
+        padding: 0px;
     }
 </style>
