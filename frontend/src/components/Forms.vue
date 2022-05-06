@@ -12,7 +12,7 @@
             </select>
         </div>
         <br><br>
-        <div v-if="pressedScan" class="stream">
+        <div v-if="pressedScan" ref="qrBlock" class="stream">
             <qr-stream @decode="onDecode" class="qrStream">
                 <div style="color: red;" class="frame"></div>
             </qr-stream>
@@ -42,10 +42,8 @@
 </template>
 
 <script>
-import Popup from './Popup.vue'
 
 export default {
-  components: { Popup },
     data(){
         return {
             home : '',
@@ -96,6 +94,7 @@ export default {
         },
         scanButtonPress(){
             this.pressedScan = !this.pressedScan
+			this.$refs.qrBlock.focus()
         },
         setDefaultGraph(){
             this.graph = localStorage.getItem("defaultGraph")
