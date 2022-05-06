@@ -13,6 +13,8 @@
       and lead them to their destination. This is a great add on university campuses, office buildings etc. <br> <br>
 
       This website can be used as a website or an app on your phone (PWA) 
+      <br><br>
+      <b>Version : 6.4.22.16.41</b>
     </p>
     <p class="link-route">
       <center>
@@ -28,7 +30,7 @@
 <style scoped>
 
   .link-route {
-      margin: 20px 20px;
+      margin: 10px 20px;
       text-align: center;
       padding: 10px 10px;
       font-size: 16px;
