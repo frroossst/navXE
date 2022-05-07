@@ -58,13 +58,6 @@ class route(Resource):
 
         conn.close()
 
-        try:
-            print(result,type(result))
-            print(result[0],type(result[0]))
-            print(result[0][0],type(result[0][0]))
-        except:
-            pass 
-
         graphObj = ast.literal_eval(result[0][0])
         print(graphObj,type(graphObj))
 
