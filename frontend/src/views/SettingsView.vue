@@ -76,11 +76,26 @@ export default  {
             this.recentReset = true
       },
       getVersion(){
+
             let version = localStorage.getItem("version")
+            const URL = "https://navxe.herokuapp.com/api/update"
+            this.axios
+                .get(URL)
+                .then((response) => {
+                     console.log("version from API : ",response)
+                     api_version = response.version
+            })
+
             if (version == null || version == "null"){
-               let version = "null"
+               version = "0.0.0.0.0"
+               localStorage.setItem("version",api_version)
+               window.location.reload(true)
             }
-            document.getElementById("app-version").firstChild.data = version
+            else if (version != api_version){
+               localStorage.setItem("version",api_version)
+               window.location.reload(true)
+            }
+            document.getElementById("app-version").firstChild.data = localStorage.getItem("version")
       },
    },
    created(){
