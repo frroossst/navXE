@@ -56,6 +56,7 @@ class route(Resource):
 
         conn.close()
 
+        print("[LOG[")
         print(result)
 
         G = Graphs()
