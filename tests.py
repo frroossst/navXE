@@ -47,8 +47,8 @@ with open("graphDB.json","r") as fobj:
     fobj.close()
 
 content = str(content)
+content = content.replace("'",'"')
 
-print(content,type(content))
 
 response = requests.post(BASE + f"/api/database/create/testDB/{tokenID}/{content}")
 print(response.json())

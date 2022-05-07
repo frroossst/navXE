@@ -97,3 +97,11 @@ class method():
                 return False
         else:
             return True
+
+    @classmethod
+    def dict_toURL(self,graph : dict):
+
+        content = str(graph)
+        content = content.replace("'",'"')
+
+        return content
