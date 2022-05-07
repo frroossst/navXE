@@ -217,19 +217,6 @@ class appUpdate(Resource):
             content = json.load(fobj)
             fobj.close()
 
-        content = json.dumps(content)
-
-        print(content,type(content))
-
-        return content
-
-    def post(self):
-        with open("update.json","r") as fobj:
-            content = json.load(fobj)
-            fobj.close()
-
-        content = json.dumps(content)
-
         print(content,type(content))
 
         return content
