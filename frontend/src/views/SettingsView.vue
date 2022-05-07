@@ -19,6 +19,20 @@
    <div class="submit">
       <button type="button" @click="saveSettings">Save</button>
    </div>
+   <p v-if="recentSave" id="save-status" class="formBG">
+      <center>
+         <font color="#42b983">
+         <b>Saved!</b>
+         </font>
+      </center>
+   </p>
+   <p v-if="recentReset" id="reset-status" class="formBG">
+      <center>
+         <font color="#42b983">
+         <b>Restored to default</b>
+         </font>
+      </center>
+   </p>
 
    </div>
 
@@ -30,7 +44,9 @@ export default  {
    data() {
       return {
          graph : '',
-         maps : []
+         maps : [],
+         recentSave : false,
+         recentReset : false,
       }
    },
    methods:{
@@ -53,9 +69,11 @@ export default  {
       saveSettings(){
             let saveGraph = document.getElementById("selected-graph").value
             localStorage.setItem("defaultGraph",saveGraph) 
+            this.recentSave = true
       },
       resetSettings(){
             localStorage.removeItem("defaultGraph")
+            this.recentReset = true
       },
       getVersion(){
             let version = localStorage.getItem("version")

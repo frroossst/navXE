@@ -13,25 +13,8 @@ import os
 app = create_app()
 api = Api(app)
 
-
 db = SQLAlchemy()
 db.init_app(app=app)
-
-class Map(db.Model):
-
-    __tablename__ = "map"
-    name = db.Column(db.String(), primary_key=True, nullable=False)
-    token = db.Column(db.String(), unique=True, nullable=False)
-    graphData = db.Column(db.String())
-
-    def __init__(self,graphName,token,graphData):
-
-        self.graphName = graphName 
-        self.token = token 
-        self.graphData = graphData
-
-    def __repr__(self):
-        return "<__repr__ response not ready yet>"
 
 
 
@@ -70,8 +53,6 @@ class route(Resource):
         print(f"[LOG] BFS route = {route_result}")
         return {"home" : home, "destination" : destn, "route" : route_result}                
 
-    def post(self):
-        return {"message" : "POSTED to API"}
 
 class token(Resource):
 
@@ -88,10 +69,6 @@ class token(Resource):
             return response_json
         
 
-    def post(self,base):
-        return {"message" : "this API endpoint does not support POST request"}
-
-
 class create_database(Resource):
 
     """
@@ -101,9 +78,6 @@ class create_database(Resource):
         update : update a row in the database
         delete : remove a row from the database
     """
-
-    def get(self):
-        pass
 
     def post(self,name, tok, data):
 
@@ -206,7 +180,6 @@ class update_database(Resource):
             conn.close()
     
             return {"message" : "updated record"}
-
 
 
 class delete_database(Resource):
