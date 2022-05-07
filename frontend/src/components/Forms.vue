@@ -102,11 +102,26 @@ export default {
         setDefaultGraph(){
             this.graph = localStorage.getItem("defaultGraph")
             document.getElementById("selected-graph").value = this.graph
-        }
+        },
+        isUpdate(){
+            const URL = "https://navxe.herokuapp.com/api/update"
+            this.axios
+                .get(URL)
+                .then((response) => {
+                    let updateAvail = response.data.hasNewUpdate
+                    if (updateAvail == true || updateAvail == "true"){
+                        location.reload();
+                    }
+                })
+            
+        },
         },
     mounted(){
         this.fetchAllMaps()
         this.setDefaultGraph()
+    },
+    created(){
+        isUpdate()
     }
 }
 
