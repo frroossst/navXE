@@ -8,6 +8,10 @@
        </select>
    </div>
    <br><br>
+   <label>Version</label> <br>
+   <p id="app-version">
+      Unable to view version
+   </p>
    <div class="submit">
       <button type="button" @click="resetSettings">Reset</button>
    </div>
@@ -53,9 +57,19 @@ export default  {
       resetSettings(){
             localStorage.removeItem("defaultGraph")
       },
+      getVersion(){
+            let version = localStorage.getItem("version")
+            if (version == null || version == "null"){
+               let version = "null"
+            }
+            document.getElementById("app-version").firstChild.data = version
+      },
    },
    created(){
       this.fetchAllMaps()
+   },
+   mounted(){
+      this.getVersion()
    }
 }
 </script>
