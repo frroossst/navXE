@@ -108,10 +108,15 @@ export default {
             this.axios
                 .get(URL)
                 .then((response) => {
+                    console.log(response)
                     let updateAvail = response.data.hasNewUpdate
                     if (updateAvail == true || updateAvail == "true"){
                         console.log("There is an update available");
-                        location.reload();
+                        let currVer = localStorage.getItem("version")
+                        if (currVer != response.data.version) {
+                            window.location.reload();
+                            localStorage.setItem("version",response.data.version)
+                        }
                     }
                 })
             
@@ -122,7 +127,7 @@ export default {
         this.setDefaultGraph()
     },
     created(){
-        isUpdate()
+        //this.isUpdate()
     }
 }
 
