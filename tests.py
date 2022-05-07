@@ -52,5 +52,5 @@ content = method.dict_toURL(content)
 response = requests.post(BASE + f"/api/database/create/testDB/{tokenID}/{content}")
 print(response.json())'''
 
-response = requests.get(BASE + "/api/route/graphDB/a/d/front")
+response = requests.get(BASE + "/api/route/testDB/a/d/front")
 print(response.json())
