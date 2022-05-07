@@ -56,8 +56,7 @@ class route(Resource):
 
         conn.close()
 
-        print("[LOG[")
-        print(result)
+        print(result[0][0], type(result[0][0]))
 
         G = Graphs()
         Graphs.graphDB = G.undirectGraph(Graphs.graphDB)
