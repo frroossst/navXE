@@ -82,16 +82,18 @@ export default  {
             this.axios
                 .get(URL)
                 .then((response) => {
-                     console.log("version from API : ",response)
-                     api_version = response.version
+                     api_version = response.data.version
+                     console.log("API version : ",api_version)
             })
 
             if (version == null || version == "null"){
+               console.log("version is null")
                version = "0.0.0.0.0"
                localStorage.setItem("version",api_version)
                window.location.reload(true)
             }
             else if (version != api_version){
+               console.log("updating current version")
                localStorage.setItem("version",api_version)
                window.location.reload(true)
             }
