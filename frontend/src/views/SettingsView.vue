@@ -62,9 +62,6 @@ export default  {
                  this.maps = response.data.result
                  console.log(this.maps)
              })
-         
-         //document.getElementById("selected-graph").value = localStorage.getItem("defaultGraph")
-
          },
       saveSettings(){
             let saveGraph = document.getElementById("selected-graph").value
@@ -75,38 +72,36 @@ export default  {
             localStorage.removeItem("defaultGraph")
             this.recentReset = true
       },
-      getVersion(){
+      async getVersion() {
 
-            let version = localStorage.getItem("version")
-            const URL = "https://navxe.herokuapp.com/api/update"
-            this.axios
-                .get(URL)
-                .then((response) => {
-                     api_version = response.data.version
-                     console.log("API version : ",api_version)
-            })
-
-            if (version == null || version == "null"){
-               console.log("version is null")
-               version = "0.0.0.0.0"
-               localStorage.setItem("version",api_version)
-               window.location.reload(true)
-            }
-            else if (version != api_version){
-               console.log("updating current version")
-               localStorage.setItem("version",api_version)
-               window.location.reload(true)
-            }
             document.getElementById("app-version").firstChild.data = localStorage.getItem("version")
+
+            const URL = "https://navxe.herokuapp.com/api/update"
+
+            const request = await this.axios.get(URL)
+
+            const responseData = request.data.version
+
+            const localVersion = localStorage.getItem("version")
+
+            console.log("version from API",responseData)
+            console.log("local version",localVersion)
+
+            if (localVersion != responseData){
+               localStorage.setItem("version",responseData)
+               window.location.reload(true)
+               document.getElementById("app-version").firstChild.data = responseData
+            }
       },
    },
    created(){
       this.fetchAllMaps()
    },
-   mounted(){
+   async mounted(){
       this.getVersion()
    }
 }
+
 </script>
 
 <style scoped>
