@@ -38,6 +38,26 @@ class route(Resource):
 
     def get(self,graph,home,destn,orientation):
 
+        DATABASE_URL = os.environ.get("DATABASE_URL")
+
+        conn = psycopg2.connect(
+            DATABASE_URL,sslmode="require"
+        )
+
+        curr = conn.cursor()
+
+        empty_dict = str({})
+
+        query = f"select graphdata from map where name = '{graph}';"
+
+        curr.execute(query)
+
+        result = curr.fetchall()
+
+        conn.close()
+
+        print(result)
+
         G = Graphs()
         Graphs.graphDB = G.undirectGraph(Graphs.graphDB)
         P = Path(Graphs.graphDB)
