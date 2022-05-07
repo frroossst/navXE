@@ -1,5 +1,6 @@
 import json
 import requests
+from methods import method
 
 
 # BASE = 'http://127.0.0.1:5000'
@@ -38,7 +39,7 @@ response = requests.get(BASE + "/api/database/read/test9")
 print(response.json())
 
 response = requests.get(BASE + "/api/database/read/*")
-print(response.json())'''
+print(response.json())
 
 tokenID =  "S61ec9d21a698a477855453567e2b7b90"
 
@@ -46,10 +47,10 @@ with open("graphDB.json","r") as fobj:
     content = json.load(fobj)
     fobj.close()
 
-content = str(content)
-content = content.replace("'",'"')
-
+content = method.dict_toURL(content)
 
 response = requests.post(BASE + f"/api/database/create/testDB/{tokenID}/{content}")
-print(response.json())
+print(response.json())'''
 
+response = requests.get(BASE + "/api/route/graphDB/a/d/front")
+print(response.json())

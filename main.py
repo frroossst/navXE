@@ -57,7 +57,14 @@ class route(Resource):
 
         conn.close()
 
-        graphObj = ast.literal_eval(result[0][0])
+        try:
+            print(result,type(result))
+            print(result[0],type(result[0]))
+            print(result[0][0],type(result[0][0]))
+        except:
+            pass 
+        # graphObj = ast.literal_eval(result[0][0])
+        graphObj = result[0]
 
         G = Graphs()
         Graphs.graphDB = G.undirectGraph(graphObj)
@@ -116,7 +123,6 @@ class create_database(Resource):
         empty_dict = str({})
 
         insert_query = f"INSERT INTO map(graphname,token,graphdata,chardata,undirdata) VALUES('{name}','{tok}','{data}','{empty_dict}','{empty_dict}');"
-        print(insert_query)
 
         curr.execute(insert_query)
 
