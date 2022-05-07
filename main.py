@@ -48,7 +48,7 @@ class route(Resource):
 
         empty_dict = str({})
 
-        query = f"select graphdata from map where name = '{graph}';"
+        query = f"select graphdata from map where graphname = '{graph}';"
 
         curr.execute(query)
 
