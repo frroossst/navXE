@@ -110,6 +110,7 @@ export default {
                 .then((response) => {
                     let updateAvail = response.data.hasNewUpdate
                     if (updateAvail == true || updateAvail == "true"){
+                        console.log("There is an update available");
                         location.reload();
                     }
                 })
