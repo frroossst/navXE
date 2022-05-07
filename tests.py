@@ -40,14 +40,16 @@ print(response.json())
 response = requests.get(BASE + "/api/database/read/*")
 print(response.json())'''
 
+tokenID =  "S61ec9d21a698a477855453567e2b7b90"
 
-test_dict = json.dumps({"z" : []})
+with open("graphDB.json","r") as fobj:
+    content = json.load(fobj)
+    fobj.close()
 
-response = requests.post(BASE + f"/api/database/update/graphdata/T0K3N/test1/{test_dict}")
+content = str(content)
+
+print(content,type(content))
+
+response = requests.post(BASE + f"/api/database/create/testDB/{tokenID}/{content}")
 print(response.json())
 
-response = requests.post(BASE + f"/api/database/update/chardata/T0K3N/test1/{test_dict}")
-print(response.json())
-
-response = requests.post(BASE + f"/api/database/update/undirdata/T0K3N/test1/{test_dict}")
-print(response.json())

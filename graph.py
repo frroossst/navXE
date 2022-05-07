@@ -12,10 +12,8 @@ class Graphs():
     desc2key = {}
 
     def __init__(self):
-            Graphs.graphDB = method.loadJSON("graphDB.json")
-            Graphs.propertiesDB = method.loadJSON("propertiesDB.json")
-
-
+            Graphs.graphDB = None
+            Graphs.propertiesDB = None 
 
     def addNode(self,name : str,children=[],weight=0.0,isMajor=False):
         """

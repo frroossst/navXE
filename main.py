@@ -6,6 +6,7 @@ from graph import Graphs
 import psycopg2
 import secrets
 import json
+import ast
 import os
 
 
@@ -56,10 +57,10 @@ class route(Resource):
 
         conn.close()
 
-        print(result[0][0], type(result[0][0]))
+        graphObj = ast.literal_eval(result[0][0])
 
         G = Graphs()
-        Graphs.graphDB = G.undirectGraph(Graphs.graphDB)
+        Graphs.graphDB = G.undirectGraph(graphObj)
         P = Path(Graphs.graphDB)
         print(f"[LOG] BFS from {home} to {destn}")
         print(f"[LOG] graph : {graph} | orientation : {orientation}")
@@ -80,7 +81,7 @@ class token(Resource):
             return response_json
         
         else:
-            tokenGen = secrets.token_hex(8) + base + secrets.token_hex(16)
+            tokenGen = base + secrets.token_hex(16)
             response_json["tokenID"] = tokenGen
             return response_json
         
@@ -115,6 +116,7 @@ class create_database(Resource):
         empty_dict = str({})
 
         insert_query = f"INSERT INTO map(graphname,token,graphdata,chardata,undirdata) VALUES('{name}','{tok}','{data}','{empty_dict}','{empty_dict}');"
+        print(insert_query)
 
         curr.execute(insert_query)
 
