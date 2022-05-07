@@ -5,6 +5,7 @@ from algorithms import Path
 from graph import Graphs
 import psycopg2
 import secrets
+import json
 import os
 
 
@@ -209,13 +210,39 @@ class delete_database(Resource):
 
 
 
+class appUpdate(Resource):
+
+    def get(self):
+        with open("update.json","r") as fobj:
+            content = json.load(fobj)
+            fobj.close()
+
+        content = json.dumps(content)
+
+        print(content,type(content))
+
+        return content
+
+    def post(self):
+        with open("update.json","r") as fobj:
+            content = json.load(fobj)
+            fobj.close()
+
+        content = json.dumps(content)
+
+        print(content,type(content))
+
+        return content
+
+
+
 api.add_resource(route,"/api/route/<string:graph>/<string:home>/<string:destn>/<string:orientation>")
 api.add_resource(token,"/api/token/<string:base>")
 api.add_resource(create_database,"/api/database/create/<string:name>/<string:tok>/<string:data>")
 api.add_resource(read_database,"/api/database/read/<string:name>")
 api.add_resource(update_database,"/api/database/update/<string:type>/<string:tok>/<string:name>/<string:new_graph>")
 api.add_resource(delete_database,"/api/database/delete/<string:tok>/<string:graph_name>")
-
+api.add_resource(appUpdate,"/api/update")
 
 
 if __name__ == "__main__":
