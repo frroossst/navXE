@@ -114,6 +114,7 @@ export default {
                         console.log("There is an update available");
                         let currVer = localStorage.getItem("version")
                         if (currVer != response.data.version) {
+                            console.log(response.data.version)
                             window.location.reload();
                             localStorage.setItem("version",response.data.version)
                         }
@@ -127,7 +128,7 @@ export default {
         this.setDefaultGraph()
     },
     created(){
-        //this.isUpdate()
+        this.isUpdate()
     }
 }
 
