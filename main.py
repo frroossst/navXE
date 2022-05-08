@@ -6,6 +6,7 @@ from algorithms import Path
 from graph import Graphs
 import psycopg2
 import secrets
+import pytz
 import json
 import ast
 import os
@@ -222,7 +223,8 @@ class appUpdate(Resource):
 
         updateDict= {"version" : ""}
 
-        now = datetime.now()
+        reginaSK = pytz.timezone("America/Regina")
+        now = datetime.now(reginaSK)
         dateStr = now.strftime("%-d.%-m.%y.%-H.%-M")
 
         updateDict["version"] = dateStr
