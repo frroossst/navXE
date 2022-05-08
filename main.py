@@ -1,6 +1,7 @@
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
 from website import create_app
+from datetime import date, datetime
 from algorithms import Path
 from graph import Graphs
 import psycopg2
@@ -216,6 +217,19 @@ class appUpdate(Resource):
         print(content,type(content))
 
         return content
+
+    def post(self):
+
+        updateDict= {"version" : ""}
+
+        now = datetime.now()
+        dateStr = now.strftime("%-d.%-m.%y.%-H.%-M")
+
+        updateDict["version"] = dateStr
+
+        with open("update.json","w") as fobj:
+            json.dump(updateDict)
+            fobj.close()
 
 
 
