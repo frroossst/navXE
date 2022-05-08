@@ -44,6 +44,7 @@
 <script>
 
 export default {
+    inject:['currentPage','pagesArray'], //For adding swipe gestures
     data(){
         return {
             home : '',
@@ -78,7 +79,7 @@ export default {
             localStorage.setItem("lastUsedGraph",this.graph)
 
             // API call for calculating route
-            const URL = "https://navxe.herokuapp.com/api/route/" + this.graph + "/" +  this.home + "/"+ this.destn + "/" + this.orientation 
+            const URL = "https://navxe.herokuapp.com/api/route/" + this.graph + "/" +  this.home.toLowerCase() + "/"+ this.destn.toLowerCase() + "/" + this.orientation 
             console.log(URL)
             this.axios
                 .get(URL)
@@ -89,9 +90,8 @@ export default {
         },
         onDecode(decodeStr) {
 			const decodeStrObj = JSON.parse(decodeStr)
-			this.home = decodeStrObj
 			console.log(decodeStrObj)
-            this.home = decodeStrObj.nodeName
+            this.home = decodeStrObj.nodeName.toLowerCase()
 			this.graph = decodeStrObj.graph
 			this.orientation = decodeStrObj.orientation
             this.scanButtonPress()
@@ -126,6 +126,7 @@ export default {
     mounted(){
         this.fetchAllMaps()
         this.setDefaultGraph()
+        console.log(this.currentPage,this.pagesArray)
     },
     created(){
         this.isUpdate()
@@ -203,5 +204,4 @@ export default {
         position: relative;
         top: 0px; 
     }
-	
 </style>

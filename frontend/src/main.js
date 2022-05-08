@@ -11,4 +11,6 @@ const app = createApp(App).use(router)
 app.use(VueAxios,axios)
 app.use(QrReader)
 app.provide('axios', app.config.globalProperties.axios)  // provide 'axios'
+app.provide('currentPage',0)
+app.provide('pagesArray',{0:"home",1:"about",2:"settings"})
 app.mount('#app')
