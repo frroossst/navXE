@@ -39,22 +39,6 @@ class Graphs():
         method.dumpJSON(Graphs.propertiesDB,"propertiesDB.json")
 
 
-
-    @classmethod
-    def generateGraphNodeNames(self,name) -> str:
-
-        count = 0
-        new_name = name[0:3:1] + str(count)
-
-        while True:
-            if new_name in Graphs.graphDB:
-                new_name = name[0:3:1] + str(count)
-                count += 1
-            else:
-                return new_name
-
-
-
     def removeNode(self,name : str):
 
         nodeName = Graphs.desc2key[name]

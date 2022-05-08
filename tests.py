@@ -57,5 +57,3 @@ print(response.json())'''
 
 response = requests.post(BASE + "/api/update")
 print(response.json())
-
-

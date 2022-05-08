@@ -1,7 +1,7 @@
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
 from website import create_app
-from datetime import date, datetime
+from datetime import datetime
 from algorithms import Path
 from graph import Graphs
 import psycopg2
@@ -145,8 +145,6 @@ class update_database(Resource):
 
             update_query = f"update map set graphdata = '{str(new_graph)}' where token = '{tok}' and graphname = '{name}';"
 
-            # ! Add a method to return invalid response for invalid operations
-
             curr.execute(update_query)
 
             conn.commit()
@@ -158,8 +156,6 @@ class update_database(Resource):
         elif type == "chardata":
 
             update_query = f"update map set chardata = '{str(new_graph)}' where token = '{tok}' and graphname = '{name}';"
-
-            # ! Add a method to return invalid response for invalid operations
 
             curr.execute(update_query)
 
@@ -173,8 +169,6 @@ class update_database(Resource):
 
             update_query = f"update map set undirdata = '{str(new_graph)}' where token = '{tok}' and graphname = '{name}';"
 
-            # ! Add a method to return invalid response for invalid operations
-
             curr.execute(update_query)
 
             conn.commit()
@@ -182,6 +176,10 @@ class update_database(Resource):
             conn.close()
     
             return {"message" : "updated record"}
+        
+        else:
+
+            return {"message" : "unable to complete database operation"}
 
 
 class delete_database(Resource):
