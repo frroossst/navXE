@@ -228,8 +228,10 @@ class appUpdate(Resource):
         updateDict["version"] = dateStr
 
         with open("update.json","w") as fobj:
-            json.dump(updateDict)
+            json.dump(updateDict,fobj)
             fobj.close()
+
+        return updateDict
 
 
 

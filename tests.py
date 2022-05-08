@@ -50,7 +50,12 @@ with open("graphDB.json","r") as fobj:
 content = method.dict_toURL(content)
 
 response = requests.post(BASE + f"/api/database/create/testDB/{tokenID}/{content}")
-print(response.json())'''
+print(response.json())
 
 response = requests.get(BASE + "/api/route/testDB/a/d/front")
+print(response.json())'''
+
+response = requests.post(BASE + "/api/update")
 print(response.json())
+
+
