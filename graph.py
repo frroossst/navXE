@@ -8,8 +8,6 @@ class Graphs():
 
     graphDB = {}
     propertiesDB = {}
-    key2desc = {}
-    desc2key = {}
 
     def __init__(self):
             Graphs.graphDB = None
