@@ -196,10 +196,12 @@ export default {
             }
         },
         setUniqueDestn(prx){
-            const destnLi = JSON.parse(JSON.stringify(prx)).destnNodes;
+            let destnLi = JSON.parse(JSON.stringify(prx)).destnNodes;
+            destnLi.push.apply(destnLi,this.searchThrough.homeNodes)
             const trackLi = [].concat(...destnLi);
             const trackLiUnique = [...new Set(trackLi)];
-            this.uniqueDestn = trackLiUnique
+            this.uniqueDestn = trackLiUnique.sort()
+            console.log(this.uniqueDestn)
         },
         defocusAll(){
             console.log("detected click outside")
