@@ -16,8 +16,8 @@
         <label>Destination</label>
         <input @keypress="searchFuncDestn" type="text">
         <div id="searchDropdownDestn" class="dropdownSearchText">
-            <ul v-for="h in JSON.parse(JSON.stringify(this.searchThrough)).destnNodes" :key="h">
-                <li @click="clickList">{{h}}</li>
+            <ul v-for="h in this.uniqueDestn" :key="h">
+                <li @click="clickList(h)">{{h}}</li>
             </ul>
         </div>
 
@@ -76,6 +76,7 @@ export default {
             pressedScan : false,
             currGraphData : '',
             searchThrough : Object(),
+            uniqueDestn : null,
         }
     },
     methods:{
@@ -166,9 +167,11 @@ export default {
                         [INFO] Data is stored as proxy convert it into relevant key, values when needed
                     */
 
-                    const searchObj = {"homeNodes" : JSON.parse(JSON.stringify(searchThroughHomeProxy)), "destnNodes" : JSON.parse(JSON.stringify(searchThroughDestnProxy))}
+                    const searchObj = {"homeNodes" : JSON.parse(JSON.stringify(searchThroughHomeProxy)), "destnNodes" : JSON.parse(JSON.stringify(searchThroughDestnProxy))};
 
-                    this.searchThrough = searchObj
+                    this.searchThrough = searchObj;
+
+                    this.setUniqueDestn(this.searchThrough);
 
                 })
         },
@@ -181,8 +184,14 @@ export default {
             document.getElementById("searchDropdownDestn").style.display = "block";
         },
         clickList(a){
-            console.log("you selected : ",a)
+            console.log("you selected : ",a);
         },
+        setUniqueDestn(prx){
+            const destnLi = JSON.parse(JSON.stringify(prx)).destnNodes;
+            const trackLi = [].concat(...destnLi);
+            const trackLiUnique = [...new Set(trackLi)];
+            this.uniqueDestn = trackLiUnique
+        }
         },
     mounted(){
         this.fetchAllMaps()
@@ -237,6 +246,9 @@ export default {
     }
     li{
         background-color: #555;
+        align-content: center;
+        align-items: center;
+        align-self: center;
     }
     li:nth-child(odd){
         background-color: #aaa;
