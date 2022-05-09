@@ -1,23 +1,22 @@
 <template>
 
     <form @submit="handleSubmit" id="main-form">
-
         <label>Home</label>
-        <input @keypress="searchFuncHome" type="text">
+        <input @keypress="searchFuncHome" type="text" id="home-text-main">
         <div id="searchDropdownHome" class="dropdownSearchText">
 
             <ul v-for="h in JSON.parse(JSON.stringify(this.searchThrough)).homeNodes" :key="h">
-                <li @click="clickList(h)">{{h}}</li>
+                <li @click="clickList(h,'home')">{{h}}</li>
             </ul>
 
         </div>
 
 
         <label>Destination</label>
-        <input @keypress="searchFuncDestn" type="text">
+        <input @keypress="searchFuncDestn" type="text" id="destn-text-main">
         <div id="searchDropdownDestn" class="dropdownSearchText">
             <ul v-for="h in this.uniqueDestn" :key="h">
-                <li @click="clickList(h)">{{h}}</li>
+                <li @click="clickList(h,'destn')">{{h}}</li>
             </ul>
         </div>
 
@@ -53,7 +52,6 @@
                 </div>
             </div>
         </div>
-
     </form>
     
 </template>
@@ -183,14 +181,28 @@ export default {
             document.getElementById("searchDropdownHome").style.display = "none";
             document.getElementById("searchDropdownDestn").style.display = "block";
         },
-        clickList(a){
+        clickList(a,li){
             console.log("you selected : ",a);
+
+            if (li == "home"){
+                document.getElementById("searchDropdownHome").style.display = "none";
+                document.getElementById("home-text-main").value = a
+                this.home = a
+            }
+            else if (li == "destn"){
+                document.getElementById("searchDropdownDestn").style.display = "none";
+                document.getElementById("destn-text-main").value = a
+                this.destn = a
+            }
         },
         setUniqueDestn(prx){
             const destnLi = JSON.parse(JSON.stringify(prx)).destnNodes;
             const trackLi = [].concat(...destnLi);
             const trackLiUnique = [...new Set(trackLi)];
             this.uniqueDestn = trackLiUnique
+        },
+        defocusAll(){
+            console.log("detected click outside")
         }
         },
     mounted(){
@@ -245,14 +257,11 @@ export default {
         align-content: center;
     }
     li{
-        background-color: #555;
         align-content: center;
         align-items: center;
         align-self: center;
-    }
-    li:nth-child(odd){
-        background-color: #aaa;
-        width:auto;
+        margin: 10px;
+        padding: 5px;
     }
     .submit{
         text-align: center;
@@ -295,5 +304,10 @@ export default {
         display: none;
         max-height: 200px;
         overflow: auto;
+    }
+    .dropdownSearchText{
+        align-items: center;
+        text-align: left;
+
     }
 </style>
