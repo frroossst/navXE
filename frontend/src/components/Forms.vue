@@ -1,16 +1,22 @@
 <template>
 
     <form @submit="handleSubmit" id="main-form">
+
         <label>Home</label>
-        <input type="text" v-model="home">
-        <!--<div class="dropdownText">
-            <ul v-for="h in this.searchThroughHome" :key="h">
+        <input @keypress="searchFuncHome" type="text">
+        <div id="searchDropdownHome" class="dropdownSearchText">
+            <ul v-for="h in JSON.parse(JSON.stringify(this.searchThrough)).destnNodes" :key="h">
                 <li>{{h}}</li>
             </ul>
-        </div>-->
+        </div>
 
         <label>Destination</label>
-        <input type="text" v-model="destn">
+        <input @keypress="searchFuncDestn" type="text">
+        <div id="searchDropdownDestn" class="dropdownSearchText">
+            <ul v-for="h in JSON.parse(JSON.stringify(this.searchThrough)).destnNodes" :key="h">
+                <li>{{h}}</li>
+            </ul>
+        </div>
 
         <label>Graph</label><br>
         <div id="all-maps">
@@ -18,6 +24,7 @@
                 <option v-for="i in this.maps" :key="i"> {{i[0]}} </option>
             </select>
         </div>
+
         <br><br>
         <div v-if="pressedScan" class="stream">
             <qr-stream @decode="onDecode" class="qrStream">
@@ -162,6 +169,14 @@ export default {
 
                 })
         },
+        searchFuncHome(){
+            document.getElementById("searchDropdownDestn").style.display = "none";
+            document.getElementById("searchDropdownHome").style.display = "block";
+        },
+        searchFuncDestn(){
+            document.getElementById("searchDropdownHome").style.display = "none";
+            document.getElementById("searchDropdownDestn").style.display = "block";
+        },
         },
     mounted(){
         this.fetchAllMaps()
@@ -244,5 +259,11 @@ export default {
         display: inline-block;
         position: relative;
         top: 0px; 
+    }
+    .dropdownSearchText{
+        visibility: visible;
+        display: none;
+        list-style-type: none;
+        list-style: none;
     }
 </style>
