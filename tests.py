@@ -53,7 +53,7 @@ response = requests.get(BASE + "/api/route/testDB/a/d/front")
 print(response.json())
 
 response = requests.post(BASE + "/api/update")
-print(response.json())'''
+print(response.json())
 
 response = requests.get(BASE + "/api/database/read/*")
-print(response.json())
+print(response.json())'''

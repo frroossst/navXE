@@ -65,8 +65,7 @@ export default {
             route : null,
             pressedScan : false,
             currGraphData : '',
-            searchThroughHome : [],
-            searchThroughDestn : [],
+            searchThrough : Object(),
         }
     },
     methods:{
@@ -143,24 +142,25 @@ export default {
                 this.curr_graph = localStorage.getItem("lastUsedGraph")
             }
 
-            console.log(this.curr_graph)
-
             const URL = "https://navxe.herokuapp.com/api/database/read/" + this.curr_graph
             this.axios
                 .get(URL)
                 .then((response) => {
                     this.currGraphData = response.data.result[0][0]
                     this.currGraphData = JSON.parse(this.currGraphData)
-                    console.log(this.currGraphData)
 
-                    this.searchThroughHome = Object.keys(this.currGraphData)
-                    this.searchThroughDestn = Object.values(this.currGraphData)
+                    const searchThroughHomeProxy= Object.keys(this.currGraphData)
+                    const searchThroughDestnProxy = Object.values(this.currGraphData)
                     
-                    //[BUG] [ERROR] searchThroughHome and searchThroughDestn are proxies have them be arrays!  
-                    // Use for loop otherwise to parse through keys and values into separate arrays
+                    /*
+                        [INFO] Data is stored as proxy convert it into relevant key, values when needed
+                    */
+
+                    const searchObj = {"homeNodes" : JSON.parse(JSON.stringify(searchThroughHomeProxy)), "destnNodes" : JSON.parse(JSON.stringify(searchThroughDestnProxy))}
+
+                    this.searchThrough = searchObj
+
                 })
-
-
         },
         },
     mounted(){
