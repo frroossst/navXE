@@ -3,8 +3,15 @@
     <form @submit="handleSubmit" id="main-form">
         <label>Home</label>
         <input type="text" v-model="home">
+        <!--<div class="dropdownText">
+            <ul v-for="h in this.searchThroughHome" :key="h">
+                <li>{{h}}</li>
+            </ul>
+        </div>-->
+
         <label>Destination</label>
         <input type="text" v-model="destn">
+
         <label>Graph</label><br>
         <div id="all-maps">
             <select id="selected-graph" v-model="graph">
@@ -45,6 +52,9 @@
 
 export default {
     inject:['currentPage','pagesArray'], //For adding swipe gestures
+    setup(){
+
+    },
     data(){
         return {
             home : '',
@@ -53,7 +63,10 @@ export default {
             orientation : 'front',
             maps : [],
             route : null,
-            pressedScan : false
+            pressedScan : false,
+            currGraphData : '',
+            searchThroughHome : [],
+            searchThroughDestn : [],
         }
     },
     methods:{
@@ -122,9 +135,37 @@ export default {
                 })
             
         },
+        setHomeAndDestnNodes(){
+
+            const curr_graph = document.getElementById("selected-graph").value 
+
+            if (this.curr_graph == "" || this.curr_graph === undefined){
+                this.curr_graph = localStorage.getItem("lastUsedGraph")
+            }
+
+            console.log(this.curr_graph)
+
+            const URL = "https://navxe.herokuapp.com/api/database/read/" + this.curr_graph
+            this.axios
+                .get(URL)
+                .then((response) => {
+                    this.currGraphData = response.data.result[0][0]
+                    this.currGraphData = JSON.parse(this.currGraphData)
+                    console.log(this.currGraphData)
+
+                    this.searchThroughHome = Object.keys(this.currGraphData)
+                    this.searchThroughDestn = Object.values(this.currGraphData)
+                    
+                    //[BUG] [ERROR] searchThroughHome and searchThroughDestn are proxies have them be arrays!  
+                    // Use for loop otherwise to parse through keys and values into separate arrays
+                })
+
+
+        },
         },
     mounted(){
         this.fetchAllMaps()
+        this.setHomeAndDestnNodes()
         this.setDefaultGraph()
         console.log(this.currentPage,this.pagesArray)
     },

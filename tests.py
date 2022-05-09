@@ -38,9 +38,6 @@ print(response.json())
 response = requests.get(BASE + "/api/database/read/test9")
 print(response.json())
 
-response = requests.get(BASE + "/api/database/read/*")
-print(response.json())
-
 tokenID =  "S61ec9d21a698a477855453567e2b7b90"
 
 with open("graphDB.json","r") as fobj:
@@ -53,7 +50,10 @@ response = requests.post(BASE + f"/api/database/create/testDB/{tokenID}/{content
 print(response.json())
 
 response = requests.get(BASE + "/api/route/testDB/a/d/front")
-print(response.json())'''
+print(response.json())
 
 response = requests.post(BASE + "/api/update")
+print(response.json())'''
+
+response = requests.get(BASE + "/api/database/read/*")
 print(response.json())

@@ -14,12 +14,11 @@
 
       This website can be used as a website or an app on your phone (PWA) 
       <br><br>
-      <!--<b>Version : <i> 6.5.22.18.59 </i> </b>-->
     </p>
     <p class="link-route">
       <center>
       <font color="red">
-          Disclaimer!
+          <b>Disclaimer!</b><br><br>
           Please do NOT use this app for navigation in cases of emergency, follow the EXIT signs or call for help!
       </font>
       </center>
