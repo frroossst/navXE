@@ -5,16 +5,19 @@
         <label>Home</label>
         <input @keypress="searchFuncHome" type="text">
         <div id="searchDropdownHome" class="dropdownSearchText">
-            <ul v-for="h in JSON.parse(JSON.stringify(this.searchThrough)).destnNodes" :key="h">
-                <li>{{h}}</li>
+
+            <ul v-for="h in JSON.parse(JSON.stringify(this.searchThrough)).homeNodes" :key="h">
+                <li @click="clickList(h)">{{h}}</li>
             </ul>
+
         </div>
+
 
         <label>Destination</label>
         <input @keypress="searchFuncDestn" type="text">
         <div id="searchDropdownDestn" class="dropdownSearchText">
             <ul v-for="h in JSON.parse(JSON.stringify(this.searchThrough)).destnNodes" :key="h">
-                <li>{{h}}</li>
+                <li @click="clickList">{{h}}</li>
             </ul>
         </div>
 
@@ -177,6 +180,9 @@ export default {
             document.getElementById("searchDropdownHome").style.display = "none";
             document.getElementById("searchDropdownDestn").style.display = "block";
         },
+        clickList(a){
+            console.log("you selected : ",a)
+        },
         },
     mounted(){
         this.fetchAllMaps()
@@ -224,6 +230,18 @@ export default {
         padding: 10px 15px;
         border: none;
     }
+    ul{
+        list-style-type: none;
+        align-items: center;
+        align-content: center;
+    }
+    li{
+        background-color: #555;
+    }
+    li:nth-child(odd){
+        background-color: #aaa;
+        width:auto;
+    }
     .submit{
         text-align: center;
         align-self: center;
@@ -263,7 +281,7 @@ export default {
     .dropdownSearchText{
         visibility: visible;
         display: none;
-        list-style-type: none;
-        list-style: none;
+        max-height: 200px;
+        overflow: auto;
     }
 </style>
