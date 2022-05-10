@@ -104,7 +104,7 @@ export default {
             localStorage.setItem("lastUsedGraph",this.graph)
 
             // API call for calculating route
-            const URL = "https://navxe.herokuapp.com/api/route/" + this.graph + "/" +  this.home.toLowerCase() + "/"+ this.destn.toLowerCase() + "/" + this.orientation 
+            const URL = "https://navxe.herokuapp.com/api/route/" + this.graph + "/" +  document.getElementById("home-text-main").value.toLowerCase() + "/"+ document.getElementById("destn-text-main").value.toLowerCase() + "/" + this.orientation 
             console.log(URL)
             this.axios
                 .get(URL)
@@ -183,7 +183,7 @@ export default {
         searchFuncHome(){
             document.getElementById("searchDropdownDestn").style.display = "none";
             document.getElementById("searchDropdownHome").style.display = "block";
-            let searchQueryTyped = document.getElementById("home-text-main").value
+            let searchQueryTyped = document.getElementById("home-text-main").value.toLowerCase()
             this.SQ_obj_h = JSON.parse(JSON.stringify(this.searchThrough)).homeNodes
             let result_array = []
 
@@ -201,7 +201,7 @@ export default {
         searchFuncDestn(){
             document.getElementById("searchDropdownHome").style.display = "none";
             document.getElementById("searchDropdownDestn").style.display = "block";
-            keys_pressed = document.getElementById("destn-text-main").value
+            let keys_pressed = document.getElementById("destn-text-main").value
         },
         clickList(a,li){
             console.log("you selected : ",a);
@@ -210,11 +210,13 @@ export default {
                 document.getElementById("searchDropdownHome").style.display = "none";
                 document.getElementById("home-text-main").value = a
                 this.home = a
+                document.getElementById("searchDropdownDestn").style.display = "none";
             }
             else if (li == "destn"){
                 document.getElementById("searchDropdownDestn").style.display = "none";
                 document.getElementById("destn-text-main").value = a
                 this.destn = a
+                document.getElementById("searchDropdownHome").style.display = "none";
             }
         },
         setUniqueDestn(prx){
