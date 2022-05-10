@@ -5,12 +5,12 @@
         <input @keypress="searchFuncHome" type="text" id="home-text-main">
         <div id="searchDropdownHome" class="dropdownSearchText">
 
-            <ul v-for="h in JSON.parse(JSON.stringify(this.searchThrough)).homeNodes" :key="h">
+            <!--<ul v-for="h in JSON.parse(JSON.stringify(this.searchThrough)).homeNodes" :key="h">-->
+            <ul v-for="h in this.result_array_home" :key="h">
                 <li @click="clickList(h,'home')">{{h}}</li>
             </ul>
 
         </div>
-
 
         <label>Destination</label>
         <input @keypress="searchFuncDestn" type="text" id="destn-text-main">
@@ -74,6 +74,10 @@ export default {
             pressedScan : false,
             currGraphData : '',
             searchThrough : Object(),
+            SQ_obj_h : null,
+            SQ_obj_d : null,
+            result_array_home : [],
+            result_array_destn : [],
             uniqueDestn : null,
         }
     },
@@ -169,6 +173,9 @@ export default {
 
                     this.searchThrough = searchObj;
 
+                    this.result_array_home = JSON.parse(JSON.stringify(this.searchThrough)).homeNodes
+                    this.result_array_destn = JSON.parse(JSON.stringify(this.searchThrough)).destnNodes
+
                     this.setUniqueDestn(this.searchThrough);
 
                 })
@@ -176,10 +183,25 @@ export default {
         searchFuncHome(){
             document.getElementById("searchDropdownDestn").style.display = "none";
             document.getElementById("searchDropdownHome").style.display = "block";
+            let searchQueryTyped = document.getElementById("home-text-main").value
+            this.SQ_obj_h = JSON.parse(JSON.stringify(this.searchThrough)).homeNodes
+            let result_array = []
+
+            for (let iter = 0; iter < this.SQ_obj_h.length; iter++){
+                if (this.SQ_obj_h[iter].includes(searchQueryTyped)){
+                    result_array.push(this.SQ_obj_h[iter])
+                }
+            }
+            console.log(result_array)
+
+            this.result_array_home = result_array
+            //JSON.parse(JSON.stringify(this.searchThrough)).homeNodes = result_array
+
         },
         searchFuncDestn(){
             document.getElementById("searchDropdownHome").style.display = "none";
             document.getElementById("searchDropdownDestn").style.display = "block";
+            keys_pressed = document.getElementById("destn-text-main").value
         },
         clickList(a,li){
             console.log("you selected : ",a);
