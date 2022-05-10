@@ -117,6 +117,7 @@ export default {
 			const decodeStrObj = JSON.parse(decodeStr)
 			console.log(decodeStrObj)
             this.home = decodeStrObj.nodeName.toLowerCase()
+            document.getElementById("home-text-main").value = this.home
 			this.graph = decodeStrObj.graph
 			this.orientation = decodeStrObj.orientation
             this.scanButtonPress()
