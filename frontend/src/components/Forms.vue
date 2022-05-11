@@ -1,11 +1,11 @@
 <template>
 
     <form @submit="handleSubmit" id="main-form">
+
         <label>Home</label>
-        <input @keypress="searchFuncHome" type="text" id="home-text-main">
+        <input @keyup="searchFuncHome" type="text" id="home-text-main">
         <div id="searchDropdownHome" class="dropdownSearchText">
 
-            <!--<ul v-for="h in JSON.parse(JSON.stringify(this.searchThrough)).homeNodes" :key="h">-->
             <ul v-for="h in this.result_array_home" :key="h">
                 <li @click="clickList(h,'home')">{{h}}</li>
             </ul>
@@ -13,11 +13,13 @@
         </div>
 
         <label>Destination</label>
-        <input @keypress="searchFuncDestn" type="text" id="destn-text-main">
+        <input @keyup="searchFuncDestn" type="text" id="destn-text-main">
         <div id="searchDropdownDestn" class="dropdownSearchText">
-            <ul v-for="h in this.uniqueDestn" :key="h">
-                <li @click="clickList(h,'destn')">{{h}}</li>
+
+            <ul v-for="h in this.result_array_destn" :key="h">
+               <li @click="clickList(h,'destn')">{{h}}</li>
             </ul>
+
         </div>
 
         <label>Graph</label><br>
@@ -202,7 +204,19 @@ export default {
         searchFuncDestn(){
             document.getElementById("searchDropdownHome").style.display = "none";
             document.getElementById("searchDropdownDestn").style.display = "block";
-            let keys_pressed = document.getElementById("destn-text-main").value
+            let destnQ = document.getElementById("destn-text-main").value.toLowerCase()
+            //this.SQ_obj_d = JSON.parse(JSON.stringify(this.searchThrough)).destnNodes
+            let result_arrayD = []
+
+            for (let iter = 0; iter < this.uniqueDestn.length; iter++){
+                if (this.uniqueDestn[iter].includes(destnQ)){
+                    result_arrayD.push(this.uniqueDestn[iter])
+                }
+            }
+            console.log(result_arrayD)
+
+            this.result_array_destn = result_arrayD
+
         },
         clickList(a,li){
             console.log("you selected : ",a);
@@ -230,7 +244,15 @@ export default {
         },
         defocusAll(){
             console.log("detected click outside")
-        }
+        },
+        textInputEventListener(){
+            document.getElementsByTagName("button").forEach((btn) => {
+                btn.addEventListener("oninput",(e) => {
+                    console.log(e)
+                    console.log("pressed")
+                })
+            })
+        },
         },
     mounted(){
         this.fetchAllMaps()
