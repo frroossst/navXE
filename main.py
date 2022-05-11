@@ -210,13 +210,10 @@ class delete_database(Resource):
 class appUpdate(Resource):
 
     def get(self):
-        with open("update.json","r") as fobj:
-            content = json.load(fobj)
-            fobj.close()
 
-        print(content,type(content))
+        version = os.environ.get("vueVersion")
 
-        return content
+        return {"version" : version}
 
     def post(self):
 
@@ -228,9 +225,7 @@ class appUpdate(Resource):
 
         updateDict["version"] = dateStr
 
-        with open("update.json","w") as fobj:
-            json.dump(updateDict,fobj)
-            fobj.close()
+        os.environ["vueVersion"] = dateStr
 
         return updateDict
 
