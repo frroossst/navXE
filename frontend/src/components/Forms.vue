@@ -1,6 +1,6 @@
 <template>
 
-    <div id="list-element-parent" class="listElemP">
+    <div @click="hideLiNavPopup" id="list-element-parent" class="listElemP">
         <p> Can be viewed z-index</p>
     </div>
 
@@ -8,6 +8,7 @@
 
         <label>Home</label>
         <input @keyup="searchFuncHome" type="text" id="home-text-main">
+
         <div id="searchDropdownHome" class="dropdownSearchText">
 
             <ul v-for="h in this.result_array_home" :key="h">
@@ -49,13 +50,14 @@
 
         <label>Route</label>
         <div v-if="this.route != null" class="route">
-            <div v-for="j in this.route" :key="j">
+            <div @click="viewLiNavPopup" v-for="j in this.route" :key="j">
                 <div class="toDoLabel">
                     <p>{{j[0]}}</p>
                 </div>
                 <div class="toDo">
                     <input type="checkbox"/>
                 </div>
+                <button type="button" @click="viewLiNavPopup">View Details</button>
             </div>
         </div>
     </form>
@@ -237,11 +239,6 @@ export default {
                 this.destn = a
                 document.getElementById("searchDropdownHome").style.display = "none";
             }
-
-            document.getElementById("list-element-parent").style.visibility = "block";
-            document.getElementById("list-element-parent").style.zIndex = 10;
-
-
         },
         setUniqueDestn(prx){
             let destnLi = JSON.parse(JSON.stringify(prx)).destnNodes;
@@ -262,6 +259,15 @@ export default {
                 })
             })
         },
+        hideLiNavPopup(){
+            document.getElementById("list-element-parent").style.zIndex = -1;
+            document.getElementById("list-element-parent").style.display = "hidden"
+        },
+        viewLiNavPopup(){
+            console.log("view li nav popup called")
+            document.getElementById("list-element-parent").style.display = "block";
+            document.getElementById("list-element-parent").style.zIndex = 10;
+        }
         },
     mounted(){
         this.fetchAllMaps()
@@ -371,14 +377,18 @@ export default {
     .listElemP{
         z-index: -1;
         display: none;
-        background-color: aqua;
+        background-color: #adadad;
         position: fixed;
-        top: 40%;
-        left: 35%;
+        top: 15%;
+        left: 0;
         right: 0;
         bottom: 0;
         width: 40%;
         height: 40%;
-
+        max-width: 420px;
+        margin: 30px auto;
+        padding: 40px;
+        border-radius: 10px;
+        align-items: center;
     }
 </style>
