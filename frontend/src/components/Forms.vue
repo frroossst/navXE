@@ -1,5 +1,9 @@
 <template>
 
+    <div id="list-element-parent" class="listElemP">
+        <p> Can be viewed z-index</p>
+    </div>
+
     <form @submit="handleSubmit" id="main-form">
 
         <label>Home</label>
@@ -17,7 +21,7 @@
         <div id="searchDropdownDestn" class="dropdownSearchText">
 
             <ul v-for="h in this.result_array_destn" :key="h">
-               <li @click="clickList(h,'destn')">{{h}}</li>
+                    <li @click="clickList(h,'destn')">{{h}}</li>
             </ul>
 
         </div>
@@ -233,6 +237,11 @@ export default {
                 this.destn = a
                 document.getElementById("searchDropdownHome").style.display = "none";
             }
+
+            document.getElementById("list-element-parent").style.visibility = "block";
+            document.getElementById("list-element-parent").style.zIndex = 10;
+
+
         },
         setUniqueDestn(prx){
             let destnLi = JSON.parse(JSON.stringify(prx)).destnNodes;
@@ -357,6 +366,19 @@ export default {
     .dropdownSearchText{
         align-items: center;
         text-align: left;
+
+    }
+    .listElemP{
+        z-index: -1;
+        display: none;
+        background-color: aqua;
+        position: fixed;
+        top: 40%;
+        left: 35%;
+        right: 0;
+        bottom: 0;
+        width: 40%;
+        height: 40%;
 
     }
 </style>
