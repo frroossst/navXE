@@ -50,14 +50,15 @@
 
         <label>Route</label>
         <div v-if="this.route != null" class="route">
-            <div @click="viewLiNavPopup" v-for="j in this.route" :key="j">
+            <div @click="viewLiNavPopup(j[0])" v-for="j in this.route" :key="j">
                 <div class="toDoLabel">
                     <p>{{j[0]}}</p>
                 </div>
                 <div class="toDo">
                     <input type="checkbox"/>
                 </div>
-                <button type="button" @click="viewLiNavPopup">View Details</button>
+                <!--<button type="button" @click="viewLiNavPopup" class="toDoBtn">View Details</button>-->
+                <hr>
             </div>
         </div>
     </form>
@@ -263,10 +264,12 @@ export default {
             document.getElementById("list-element-parent").style.zIndex = -1;
             document.getElementById("list-element-parent").style.display = "hidden"
         },
-        viewLiNavPopup(){
+        viewLiNavPopup(liNode){
             console.log("view li nav popup called")
+            console.log(liNode,"<=")
             document.getElementById("list-element-parent").style.display = "block";
             document.getElementById("list-element-parent").style.zIndex = 10;
+            document.getElementById("list-element-parent").textContent = liNode
         }
         },
     mounted(){
@@ -320,6 +323,15 @@ export default {
         align-items: center;
         align-content: center;
     }
+    hr {
+        display: block;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        margin-left: auto;
+        margin-right: auto;
+        border-style: inset;
+        border-width: 1px;
+    } 
     li{
         align-content: center;
         align-items: center;
@@ -357,11 +369,22 @@ export default {
         display: inline-block;
         position: relative;
         vertical-align: middle;
+        margin-right: 20px;
     }
     .toDoLabel{
         display: inline-block;
         position: relative;
         top: 0px; 
+        margin-right: 20px;
+    }
+    .toDoBtn{
+        display: inline-block;
+        text-align: center;
+        position: relative;
+        align-self: right;
+        margin: 15px;
+        text-decoration: none;
+        margin-right: 20px;
     }
     .dropdownSearchText{
         visibility: visible;
