@@ -7,7 +7,6 @@ from graph import Graphs
 import psycopg2
 import secrets
 import pytz
-import json
 import ast
 import os
 

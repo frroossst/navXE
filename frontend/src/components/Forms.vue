@@ -50,7 +50,7 @@
 
         <label>Route</label>
         <div v-if="this.route != null" class="route">
-            <div @click="viewLiNavPopup(j[0])" v-for="j in this.route" :key="j">
+            <div @click.self="viewLiNavPopup(j[0])" v-for="j in this.route" :key="j">
                 <div class="toDoLabel">
                     <p>{{j[0]}}</p>
                 </div>
@@ -91,6 +91,9 @@ export default {
         }
     },
     methods:{
+        bogus(){
+            return null
+        },
         fetchAllMaps(){
             const URL = "https://navxe.herokuapp.com/api/database/read/*"
             this.axios
