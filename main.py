@@ -53,6 +53,7 @@ class route(Resource):
         print(f"[LOG] graph : {graph} | orientation : {orientation}")
         route_result = P.BFS_SP(G.graphDB,home,destn)
         print(f"[LOG] BFS route = {route_result}")
+
         return {"home" : home, "destination" : destn, "route" : route_result}                
 
 

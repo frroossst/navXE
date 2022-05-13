@@ -107,6 +107,24 @@ class Graphs():
         return undirected_graph
 
     @classmethod
+    def invertGraph(self, graph : dict):
+        
+        inver = {}
+
+        for k,v in graph.items():
+            for i in v:
+                if i not in inver:
+                    inver[i] = []
+        
+        for k, v in graph.items():
+            for i in v:
+                inver[i].append(k)
+
+        print(inver)
+
+
+
+    @classmethod
     def generateToken(self, id : str):
         
         token_16 = secrets.token_hex(16)

@@ -72,6 +72,7 @@ export default  {
       resetSettings(){
             localStorage.removeItem("defaultGraph")
             this.recentReset = true
+            //window.location.reload(true)
       },
       async getVersion() {
 

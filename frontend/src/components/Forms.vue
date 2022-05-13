@@ -52,10 +52,10 @@
         <div v-if="this.route != null" class="route">
             <div @click.self="viewLiNavPopup(j[0])" v-for="j in this.route" :key="j">
                 <div class="toDoLabel">
-                    <p>{{j[0]}}</p>
+                    <p v-bind:id="j[0] + '-label'"> {{j[0]}}</p>
                 </div>
                 <div class="toDo">
-                    <input type="checkbox"/>
+                    <input v-bind:id="j[0] + '-checkbox'" @click="checkboxClick" type="checkbox"/>
                 </div>
                 <!--<button type="button" @click="viewLiNavPopup" class="toDoBtn">View Details</button>-->
                 <hr>
@@ -80,6 +80,7 @@ export default {
             orientation : 'front',
             maps : [],
             route : null,
+            route_queue : null,
             pressedScan : false,
             currGraphData : '',
             searchThrough : Object(),
@@ -273,7 +274,10 @@ export default {
             document.getElementById("list-element-parent").style.display = "block";
             document.getElementById("list-element-parent").style.zIndex = 10;
             document.getElementById("list-element-parent").textContent = liNode
-        }
+        },
+        checkboxClick(){
+            
+        },
         },
     mounted(){
         this.fetchAllMaps()
