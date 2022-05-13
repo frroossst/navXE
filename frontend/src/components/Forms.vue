@@ -55,7 +55,7 @@
                     <p v-bind:id="j[0] + '-label'"> {{j[0]}}</p>
                 </div>
                 <div class="toDo">
-                    <input v-bind:id="j[0] + '-checkbox'" @click="checkboxClick" type="checkbox"/>
+                    <input v-bind:id="j[0] + '-checkbox'" @click="checkboxClick(j[0])" type="checkbox"/>
                 </div>
                 <!--<button type="button" @click="viewLiNavPopup" class="toDoBtn">View Details</button>-->
                 <hr>
@@ -80,7 +80,7 @@ export default {
             orientation : 'front',
             maps : [],
             route : null,
-            route_queue : null,
+            route_traversed : null,
             pressedScan : false,
             currGraphData : '',
             searchThrough : Object(),
@@ -275,8 +275,15 @@ export default {
             document.getElementById("list-element-parent").style.zIndex = 10;
             document.getElementById("list-element-parent").textContent = liNode
         },
-        checkboxClick(){
-            
+        checkboxClick(id_arg){
+            if (document.getElementById(id_arg + "-checkbox").checked == true){
+                document.getElementById(id_arg + "-label").style.setProperty("text-decoration","line-through");
+                document.getElementById(id_arg + "-label").style.fontStyle = "italic";       
+            }   
+            else{
+                document.getElementById(id_arg + "-label").style.setProperty("text-decoration","none")       
+                document.getElementById(id_arg + "-label").style.fontStyle = "";       
+            }
         },
         },
     mounted(){
