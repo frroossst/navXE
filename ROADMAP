@@ -1,34 +1,45 @@
-Version 0 (Boilerplate)
+Version 0 - Boilerplate
 
-Description
-    A basic functional MVP
+    Tentative release : 26 May 2022
 
-Abilities 
+    Desc 
+        Proof of concept
+
+    Features
+        Most of API endpoints
+        Minimum useable app
+
+Version 1 - Alpha 
+
+    Tentative release : 15 June 2022
+
+    Desc
+        UX improvement(s)
+
+    Features 
+        txt and img nav
+        internode txt nav
+
+Version 2 
     
-    1. Create a graph and add node characteristics
-    2. Store the graph and node characteristics in a file that can be loaded later
-    3. Find a path from home node to destination node
-    4. Display the shortest path to the user
-    5. Store data in a JSON database
-    6. HTTPS
-    7. Read QR on the frontend
-    8. Impliment DB
-    9. User login
+    Tentative release : 4 July 2022
 
-Achievements 
+    Desc
+        Quality of life improvements
 
-    a. Python backend
-    b. Basic Flask web app
-    c. Web Hosting
+    Features
+        pwa offline screen
+        maps API integration
+        swipe gestures
 
+Version 3
+    
+    Tentative release : 1 August 2022
 
-Version 1 (Alpha)
+    Desc
+        Platform improvements
 
-Description
-
-
-Abilities
-
-    1. Allow for multiple graphs
-
-Achievements
+    Features
+        terminal graph editor
+        more pathfinding algorithms
+        accesibility features
