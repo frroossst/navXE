@@ -82,6 +82,7 @@ export default {
             route : null,
             preserved_route : [],
             preserved_route_object : {},
+            inverted_preserved_route_object : {},
             pressedScan : false,
             currGraphData : '',
             searchThrough : Object(),
@@ -110,7 +111,6 @@ export default {
             this.graph = lastGraph
         },
         handleSubmit(){
-            console.log("form submitted")
             console.log("Home : ",this.home)
             console.log("destination : ",this.destn)
             console.log("graph : ",this.graph)
@@ -209,7 +209,7 @@ export default {
                     result_array.push(this.SQ_obj_h[iter])
                 }
             }
-            console.log(result_array)
+            //console.log(result_array)
 
             this.result_array_home = result_array
             //JSON.parse(JSON.stringify(this.searchThrough)).homeNodes = result_array
@@ -227,7 +227,7 @@ export default {
                     result_arrayD.push(this.uniqueDestn[iter])
                 }
             }
-            console.log(result_arrayD)
+            //console.log(result_arrayD)
 
             this.result_array_destn = result_arrayD
 
@@ -272,8 +272,8 @@ export default {
             document.getElementById("list-element-parent").style.display = "hidden"
         },
         viewLiNavPopup(liNode){
-            console.log("view li nav popup called")
-            console.log(liNode,"<=")
+            //console.log("view li nav popup called")
+            //console.log(liNode,"<=")
             document.getElementById("list-element-parent").style.display = "block";
             document.getElementById("list-element-parent").style.zIndex = 10;
             document.getElementById("list-element-parent").textContent = liNode
@@ -284,23 +284,80 @@ export default {
                 document.getElementById(id_arg + "-label").style.setProperty("text-decoration","line-through");
                 document.getElementById(id_arg + "-label").style.fontStyle = "italic";   
                 let indx = this.route.indexOf(id_arg);
+                /*
+                    Do NOT delete the below methods they actually perform in-place operations
+                */
+
+                console.log("---click operations---")
                 console.log(indx)
                 console.log(this.route.push(this.route[indx]))
                 console.log(this.route.splice(indx,1))
+                console.log("---end click operations---")
             }   
             else{
                 document.getElementById(id_arg + "-label").style.setProperty("text-decoration","none")       
                 document.getElementById(id_arg + "-label").style.fontStyle = "";       
-                console.log("unchecking",id_arg)
+                //console.log("unchecking",id_arg)
                 document.getElementById(id_arg + "-label").style.setProperty("text-decoration","none");
                 document.getElementById(id_arg + "-label").style.fontStyle = "none";   
 
-                let indx = this.route.indexOf(id_arg);
+                let arr_checked = [];
+                let arr_checked_num = [];
+                let arr_checked_sorted = [];
+                let arr_unchecked = [];
+                let arr_unchecked_num = [];
+                let arr_unchecked_sorted = [];
+
+                // Splitting this.route into checked and unchecked array(s)
+                for (let i = 0; i < this.route.length; i++){
+                    if (document.getElementById(this.route[i]+"-checkbox").checked == true){
+                        arr_checked.push(this.route[i])
+                    }
+                    else{
+                        arr_unchecked.push(this.route[i])
+                    }
+                }
+
+                console.log(arr_checked)
+                console.log(arr_unchecked)
+
+                console.log("DEBUG")
+                // Constructing array(s) with corrosponding numerical values
+                for (let i = 0; i < arr_checked.length; i ++){
+                    console.log(this.preserved_route_object[arr_checked[i]])
+                    arr_checked_num.push(this.preserved_route_object[arr_checked[i]])
+                }
+                for (let i = 0; i < arr_unchecked.length; i ++){
+                    console.log(this.preserved_route_object[arr_unchecked[i]])
+                    arr_unchecked_num.push(this.preserved_route_object[arr_unchecked[i]])
+                }
+
+                console.log(arr_checked_num)
+                console.log(arr_unchecked_num)
+
+                // Applying in-place sort
+                arr_checked_num.sort()
+                arr_unchecked_num.sort()
+
+                // Constructing sorted arrays from numerical values
+                for (let i = 0; i < arr_checked_num.length; i ++){
+                    arr_checked_sorted.push(this.inverted_preserved_route_object[arr_checked_num[i]])
+                }
+                for (let i = 0; i < arr_unchecked_num.length; i ++){
+                    arr_unchecked_sorted.push(this.inverted_preserved_route_object[arr_unchecked_num[i]])
+                }
+                console.log(arr_checked_sorted)
+                console.log(arr_unchecked_sorted)
+
+                this.route = arr_unchecked_sorted.concat(arr_checked_sorted)
+                console.log(this.route,"ROUTE")
+
+                /*let indx = this.route.indexOf(id_arg);
                 this.route.splice(indx,1) 
                 let push_indx = this.preserved_route_object[id_arg]
                 console.log(push_indx)
                 this.route.splice(push_indx,0,id_arg)
-                console.log(this.route)
+                console.log(this.route)*/
             }
         },
         enumerateRouteObject(){
@@ -309,6 +366,15 @@ export default {
                 this.preserved_route_object[this.preserved_route[i]] = i;
             } 
             console.log(JSON.parse(JSON.stringify(this.preserved_route_object)))
+
+            // Inverting object
+            let ks = Object.keys(this.preserved_route_object)
+            let vs = Object.values(this.preserved_route_object)
+
+            for (let i= 0; i < ks.length; i++){
+                this.inverted_preserved_route_object[vs[i]] = ks[i]
+            }
+            console.log("inverted : ",this.inverted_preserved_route_object)
         },
         },
     mounted(){
