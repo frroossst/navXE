@@ -60,6 +60,9 @@
 <script>
 
 export default  {
+   setup(){
+         //document.getElementById("selected-graph").value = this.graph
+   },
    data() {
       return {
          graph : '',
@@ -67,6 +70,7 @@ export default  {
          recentSave : false,
          recentReset : false,
          wakeUpCall : false,
+         defaultGraph : localStorage.getItem("defaultGraph")
       }
    },
    methods:{

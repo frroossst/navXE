@@ -33,7 +33,6 @@
                 <option v-for="i in this.maps" :key="i"> {{i[0]}} </option>
             </select>
         </div>
-
         <br><br>
         <div v-if="pressedScan" class="stream">
             <qr-stream @decode="onDecode" class="qrStream">
@@ -48,7 +47,7 @@
         </div>
         <br>
 
-        <label>Route</label>
+        <label v-if="this.route != null">Route</label>
         <div v-if="this.route != null" class="route">
             <div @click.self="viewLiNavPopup(j[0])" v-for="j in this.route" :key="j">
                 <div class="toDoLabel">
@@ -61,6 +60,7 @@
                 <hr>
             </div>
         </div>
+
     </form>
     
 </template>
@@ -80,7 +80,7 @@ export default {
             orientation : 'front',
             maps : [],
             route : null,
-            route_traversed : null,
+            route_traversed : [],
             pressedScan : false,
             currGraphData : '',
             searchThrough : Object(),
@@ -277,8 +277,15 @@ export default {
         },
         checkboxClick(id_arg){
             if (document.getElementById(id_arg + "-checkbox").checked == true){
+                console.log(this.route)
                 document.getElementById(id_arg + "-label").style.setProperty("text-decoration","line-through");
-                document.getElementById(id_arg + "-label").style.fontStyle = "italic";       
+                document.getElementById(id_arg + "-label").style.fontStyle = "italic";   
+                let indx = this.route.indexOf(id_arg);
+                //this.route = this.route.splice(indx,1);
+                console.log(this.route)
+                console.log(indx)
+                console.log(this.route.splice(indx,1))
+                //this.route.push(this.route[indx])
             }   
             else{
                 document.getElementById(id_arg + "-label").style.setProperty("text-decoration","none")       
