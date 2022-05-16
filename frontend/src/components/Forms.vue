@@ -80,7 +80,8 @@ export default {
             orientation : 'front',
             maps : [],
             route : null,
-            route_traversed : [],
+            preserved_route : [],
+            preserved_route_object : {},
             pressedScan : false,
             currGraphData : '',
             searchThrough : Object(),
@@ -124,6 +125,8 @@ export default {
                 .then((response) => {
                     console.log(response.data.route)
                     this.route = response.data.route
+                    this.preserved_route = this.route
+                    this.enumerateRouteObject()
                 })
         },
         onDecode(decodeStr) {
@@ -284,13 +287,28 @@ export default {
                 console.log(indx)
                 console.log(this.route.push(this.route[indx]))
                 console.log(this.route.splice(indx,1))
-            //    this.route.push(this.route[indx])
-            //    this.route = this.route.splice(indx,1);
             }   
             else{
                 document.getElementById(id_arg + "-label").style.setProperty("text-decoration","none")       
                 document.getElementById(id_arg + "-label").style.fontStyle = "";       
+                console.log("unchecking",id_arg)
+                document.getElementById(id_arg + "-label").style.setProperty("text-decoration","none");
+                document.getElementById(id_arg + "-label").style.fontStyle = "none";   
+
+                let indx = this.route.indexOf(id_arg);
+                this.route.splice(indx,1) 
+                let push_indx = this.preserved_route_object[id_arg]
+                console.log(push_indx)
+                this.route.splice(push_indx,0,id_arg)
+                console.log(this.route)
             }
+        },
+        enumerateRouteObject(){
+            console.log("enumerting...")
+            for (let i = 0; i < this.preserved_route.length; i++){
+                this.preserved_route_object[this.preserved_route[i]] = i;
+            } 
+            console.log(JSON.parse(JSON.stringify(this.preserved_route_object)))
         },
         },
     mounted(){
