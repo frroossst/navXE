@@ -15,10 +15,29 @@
    <div class="submit">
       <button type="button" @click="resetSettings">Reset</button>
    </div>
-   <br><br>
+   <br>
    <div class="submit">
       <button type="button" @click="saveSettings">Save</button>
    </div>
+   <br>
+   <div class="submit">
+      <button type="button" @click="wakeUpAPI">Wake Up</button>
+   </div>
+   <br><br>
+   <p v-if="wakeUpCall" id="wakeUp-status" class="formBG">
+      <center>
+         <font color="#42b983">
+         <b>API is awake!</b>
+         </font>
+      </center>
+   </p>
+   <p v-if="!wakeUpCall" id="wakeUp-status" class="formBG">
+      <center>
+         <font color="#ff0000">
+         <b>API is asleep!</b>
+         </font>
+      </center>
+   </p>
    <p v-if="recentSave" id="save-status" class="formBG">
       <center>
          <font color="#42b983">
@@ -47,7 +66,7 @@ export default  {
          maps : [],
          recentSave : false,
          recentReset : false,
-         recentUpdate : false,
+         wakeUpCall : false,
       }
    },
    methods:{
@@ -98,12 +117,29 @@ export default  {
             }
             }
       },
+      async wakeUpAPI(){
+
+            const URL = "https://navxe.herokuapp.com/api"
+
+            const request = await this.axios.get(URL)
+
+            const responseData = request.data.message
+
+            console.log(responseData)
+
+            if (responseData == "Hello World! from the API"){
+                  this.wakeUpCall = true
+            }
+
+
+      },
    },
    created(){
       this.fetchAllMaps()
    },
    async mounted(){
-      this.getVersion()
+      //this.getVersion()
+      this.wakeUpAPI()
    }
 }
 
