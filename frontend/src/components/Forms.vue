@@ -281,11 +281,11 @@ export default {
                 document.getElementById(id_arg + "-label").style.setProperty("text-decoration","line-through");
                 document.getElementById(id_arg + "-label").style.fontStyle = "italic";   
                 let indx = this.route.indexOf(id_arg);
-                //this.route = this.route.splice(indx,1);
-                console.log(this.route)
                 console.log(indx)
+                console.log(this.route.push(this.route[indx]))
                 console.log(this.route.splice(indx,1))
-                //this.route.push(this.route[indx])
+            //    this.route.push(this.route[indx])
+            //    this.route = this.route.splice(indx,1);
             }   
             else{
                 document.getElementById(id_arg + "-label").style.setProperty("text-decoration","none")       
