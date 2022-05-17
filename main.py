@@ -227,7 +227,7 @@ class appUpdate(Resource):
 
         conn.close()
 
-        return {"version" : result}
+        return {"version" : str(result[0][0])}
 
     def post(self):
 
