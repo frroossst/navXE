@@ -99,27 +99,25 @@ export default  {
       },
       async getVersion() {
 
-            document.getElementById("app-version").firstChild.data = localStorage.getItem("version")
-
             const URL = "https://navxe.herokuapp.com/api/update"
 
             const request = await this.axios.get(URL)
 
             const responseData = request.data.version
 
-            const localVersion = localStorage.getItem("version")
+            document.getElementById("app-version").firstChild.data = responseData
 
             console.log("version from API",responseData)
-            console.log("local version",localVersion)
+            //console.log("local version",localVersion)
 
-            if (localVersion != responseData){
+            /*if (localVersion != responseData){
                if (this.recentUpdate == false){
                localStorage.setItem("version",responseData)
                window.location.reload(true)
                this.recentUpdate = true
                document.getElementById("app-version").firstChild.data = responseData
             }
-            }
+            }*/
       },
       async wakeUpAPI(){
 
@@ -142,7 +140,7 @@ export default  {
       this.fetchAllMaps()
    },
    async mounted(){
-      //this.getVersion()
+      this.getVersion()
       this.wakeUpAPI()
    }
 }
