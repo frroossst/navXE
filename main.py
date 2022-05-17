@@ -211,23 +211,47 @@ class appUpdate(Resource):
 
     def get(self):
 
-        version = os.environ.get("vueVersion")
+        DATABASE_URL = os.environ.get("DATABASE_URL")
 
-        return {"version" : version}
+        conn = psycopg2.connect(
+            DATABASE_URL,sslmode="require"
+        )
+
+        curr = conn.cursor()
+
+        query = "select version from updates;"
+
+        curr.execute(query)
+
+        result = curr.fetchall()
+
+        conn.close()
+
+        return {"version" : result}
 
     def post(self):
 
-        updateDict= {"version" : ""}
+        DATABASE_URL = os.environ.get("DATABASE_URL")
+
+        conn = psycopg2.connect(
+            DATABASE_URL,sslmode="require"
+        )
+
+        curr = conn.cursor()
 
         reginaSK = pytz.timezone("America/Regina")
         now = datetime.now(reginaSK)
         dateStr = now.strftime("%-d.%-m.%y.%-H.%-M")
 
-        updateDict["version"] = dateStr
+        query = f"update updates set version = '{dateStr}' where pointer = 1;"
 
-        os.environ["vueVersion"] = dateStr
+        curr.execute(query)
 
-        return updateDict
+        conn.commit()
+
+        conn.close()
+
+        return {"newVersion" : dateStr}
 
 
 
