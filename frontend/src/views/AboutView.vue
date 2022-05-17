@@ -5,21 +5,20 @@
        <a class="link-route" href="https://github.com/frroossst/navXE">GitHub</a>  
       <br>
        <a class="link-route" href="https://github.com/frroossst/navXE/issues">Report</a> 
-<!--  </div>
-  <div class="about">
--->
+
     <p class="link-route">
-      navXE is a local navigation app that relies on locally placed QR codes to get current location of the users 
-      and lead them to their destination. This is a great add on university campuses, office buildings etc. <br> <br>
+      navXE is a local navigation app that relies on locally placed QR codes to get current location of the user
+      and guides them to their destination. This is a great add on to university campuses, office buildings etc. <br> <br>
 
       This website can be used as a website or an app on your phone (PWA) 
+      Click on the 'Add to homescreen' or 'Install' option from your browser's menu.
       <br><br>
     </p>
     <p class="link-route">
       <center>
       <font color="red">
           <b>Disclaimer!</b><br><br>
-          Please do NOT use this app for navigation in cases of emergency, follow the EXIT signs or call for help!
+          Please do NOT use this app for navigation in cases of emergency, follow the EXIT signs or call for help via official means!
       </font>
       </center>
     </p><br><br>

@@ -48,7 +48,7 @@
         <br>
 
         <label v-if="this.route != null">Route</label>
-        <div v-if="this.route != null" class="route">
+        <div v-if="this.route != null && this.route!='None' && this.route!='Empty'" class="route">
             <div @click.self="viewLiNavPopup(j[0])" v-for="j in this.route" :key="j">
                 <div class="toDoLabel">
                     <p v-bind:id="j[0] + '-label'"> {{j[0]}}</p>
@@ -59,6 +59,20 @@
                 <!--<button type="button" @click="viewLiNavPopup" class="toDoBtn">View Details</button>-->
                 <hr>
             </div>
+        </div>
+        <div v-if="this.route == 'None'" class="route">
+            <p>
+                <font color="red">
+                    <b>Route NOT found.</b>
+                </font>
+            </p>
+        </div>
+        <div v-if="this.route == 'Empty'" class="route">
+            <p>
+                <font color="red">
+                    <b>Home, Destination or Graph cannot be empty</b>
+                </font>
+            </p>
         </div>
 
     </form>
@@ -111,12 +125,22 @@ export default {
             this.graph = lastGraph
         },
         handleSubmit(){
+            
+            this.home = document.getElementById("home-text-main").value.toLowerCase() 
+            this.destn = document.getElementById("destn-text-main").value.toLowerCase() 
+
             console.log("Home : ",this.home)
             console.log("destination : ",this.destn)
             console.log("graph : ",this.graph)
 
             localStorage.setItem("lastUsedGraph",this.graph)
 
+            // ULR pre-send checks
+            if (this.home == "" || this.destn == "" || this.graph == ""){
+                console.log("home, destn, graph cannot be empty");
+                this.route = "Empty";
+            }
+            else{
             // API call for calculating route
             const URL = "https://navxe.herokuapp.com/api/route/" + this.graph + "/" +  document.getElementById("home-text-main").value.toLowerCase() + "/"+ document.getElementById("destn-text-main").value.toLowerCase() + "/" + this.orientation 
             console.log(URL)
@@ -128,6 +152,7 @@ export default {
                     this.preserved_route = this.route
                     this.enumerateRouteObject()
                 })
+                }
         },
         onDecode(decodeStr) {
 			const decodeStrObj = JSON.parse(decodeStr)
