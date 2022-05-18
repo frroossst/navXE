@@ -409,7 +409,7 @@ export default {
         console.log(this.currentPage,this.pagesArray)
     },
     created(){
-        this.isUpdate()
+        //this.isUpdate()
     }
 }
 

@@ -209,7 +209,7 @@ class delete_database(Resource):
 
 class appUpdate(Resource):
 
-    def get(self):
+    def get(self,dev_tok):
 
         DATABASE_URL = os.environ.get("DATABASE_URL")
 
@@ -229,7 +229,7 @@ class appUpdate(Resource):
 
         return {"version" : str(result[0][0])}
 
-    def post(self):
+    def post(self,dev_tok):
 
         DATABASE_URL = os.environ.get("DATABASE_URL")
 
@@ -243,7 +243,7 @@ class appUpdate(Resource):
         now = datetime.now(reginaSK)
         dateStr = now.strftime("%-d.%-m.%y.%-H.%-M")
 
-        query = f"update updates set version = '{dateStr}' where pointer = 1;"
+        query = f"update updates set version = '{dateStr}' where dev_token = '{dev_tok}';"
 
         curr.execute(query)
 
@@ -261,7 +261,7 @@ api.add_resource(create_database,"/api/database/create/<string:name>/<string:tok
 api.add_resource(read_database,"/api/database/read/<string:name>")
 api.add_resource(update_database,"/api/database/update/<string:type>/<string:tok>/<string:name>/<string:new_graph>")
 api.add_resource(delete_database,"/api/database/delete/<string:tok>/<string:graph_name>")
-api.add_resource(appUpdate,"/api/update")
+api.add_resource(appUpdate,"/api/update/<string:dev_tok>")
 
 
 if __name__ == "__main__":
