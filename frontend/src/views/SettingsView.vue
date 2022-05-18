@@ -99,7 +99,7 @@ export default  {
       },
       async getVersion() {
 
-            const URL = "https://navxe.herokuapp.com/api/update"
+            const URL = "https://navxe.herokuapp.com/api/update/dummy"
 
             const request = await this.axios.get(URL)
 
