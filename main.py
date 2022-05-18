@@ -254,6 +254,29 @@ class appUpdate(Resource):
         return {"newVersion" : dateStr}
 
 
+class fetchImage(Resource):
+
+    def get(self,header):
+
+        DATABASE_URL = os.environ.get("DATABASE_URL")
+
+        conn = psycopg2.connect(
+            DATABASE_URL,sslmode="require"
+        )
+
+        curr = conn.cursor()
+
+        query = f"select uri from images where header = '{header}';"
+
+        curr.execute(query)
+
+        result = curr.fetchall()
+
+        conn.close()
+
+        return {"URI" : str(result[0][0])}
+
+
 
 api.add_resource(route,"/api/route/<string:graph>/<string:home>/<string:destn>/<string:orientation>")
 api.add_resource(token,"/api/token/<string:base>")
@@ -262,6 +285,7 @@ api.add_resource(read_database,"/api/database/read/<string:name>")
 api.add_resource(update_database,"/api/database/update/<string:type>/<string:tok>/<string:name>/<string:new_graph>")
 api.add_resource(delete_database,"/api/database/delete/<string:tok>/<string:graph_name>")
 api.add_resource(appUpdate,"/api/update/<string:dev_tok>")
+api.add_resource(fetchImage,"/api/image/<string:header>")
 
 
 if __name__ == "__main__":
