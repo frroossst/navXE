@@ -65,5 +65,5 @@ response = requests.get(BASE + f"/api/image/{header}")
 print(response.json())
 '''
 
-response = requests.post(BASE + f"/api/image/hd test image<br>https://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg<br>testDB")
+response = requests.post(BASE + f"/api/image/hdtestimageSEPhttps://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpegSEPtestDB")
 print(response.json())

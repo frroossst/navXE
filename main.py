@@ -282,7 +282,7 @@ class fetchImage(Resource):
             fmt => header<br>url<br>graph
             eg : placeA<br>https://www.images.com/placeAimg<br>testDB
         """
-
+        print("[LOG] POSTED header")
         sep_li = header.split("SEP")
         head = sep_li[0]
         uri = sep_li[1]
