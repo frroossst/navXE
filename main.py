@@ -276,6 +276,38 @@ class fetchImage(Resource):
 
         return {"URI" : str(result[0][0])}
 
+    def post(self,header):
+        """
+            A POST header is passed separated by an underscore (_), the first part is the header while the second part is the GitHub URL
+            fmt => header<br>url<br>graph
+            eg : placeA<br>https://www.images.com/placeAimg<br>testDB
+        """
+
+        sep_li = header.split("<br>")
+        head = sep_li[0]
+        uri = sep_li[1]
+        graph = sep_li[2]
+
+        DATABASE_URL = os.environ.get("DATABASE_URL")
+
+        conn = psycopg2.connect(
+            DATABASE_URL,sslmode="require"
+        )
+
+        curr = conn.cursor()
+
+        query = f"insert into images (header, uri, graph) values ('{head}','{uri}','{graph}');"
+
+        curr.execute(query)
+
+        conn.commit()
+
+        conn.close()
+
+        return {"message" : "added image", "data" : {"header" : head, "URI" : uri, "graph" : graph}}
+
+
+
 
 
 api.add_resource(route,"/api/route/<string:graph>/<string:home>/<string:destn>/<string:orientation>")

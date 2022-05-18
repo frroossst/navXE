@@ -9,6 +9,7 @@ from methods import method
 #print(response.json())
 
 BASE = "https://navxe.herokuapp.com"
+
 '''
 response = requests.get(BASE + "/api/route/graphDB/a/d/front")
 print(response.json())
@@ -56,4 +57,10 @@ response = requests.post(BASE + "/api/update")
 print(response.json())
 
 response = requests.get(BASE + "/api/database/read/*")
-print(response.json())'''
+print(response.json())
+
+header = "hd test image"
+
+response = requests.get(BASE + f"/api/image/{header}")
+print(response.json())
+'''
