@@ -288,6 +288,8 @@ class fetchImage(Resource):
         uri = sep_li[1]
         graph = sep_li[2]
 
+        print(sep_li)
+
         DATABASE_URL = os.environ.get("DATABASE_URL")
 
         conn = psycopg2.connect(
