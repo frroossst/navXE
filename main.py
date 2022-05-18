@@ -283,7 +283,7 @@ class fetchImage(Resource):
             eg : placeA<br>https://www.images.com/placeAimg<br>testDB
         """
 
-        sep_li = header.split("<br>")
+        sep_li = header.split("SEP")
         head = sep_li[0]
         uri = sep_li[1]
         graph = sep_li[2]
