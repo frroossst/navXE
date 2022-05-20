@@ -70,10 +70,10 @@ import urllib.parse
 header = "hd test image"
 graph = "testDB"
 uri = "https://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg"
-uriEnc = urllib.parse.quote_plis(uri,safe="")
+uriEnc = urllib.parse.quote_plus(uri,safe="")
 
 response = requests.get(BASE + f"/api/image/{header}/{graph}")
 print(response.json())
 
-response = requests.post(BASE + f"/api/image/")
+response = requests.post(BASE + f"/api/image/{header}/{uriEnc}/{graph}")
 print(response)
