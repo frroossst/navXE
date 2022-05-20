@@ -274,7 +274,7 @@ class fetchImage(Resource):
 
         conn.close()
 
-        return {"URI" : str(result[0][0])}
+        return {"URI" : str(result)}
 
     def post(self,header):
         """
