@@ -64,7 +64,7 @@ header = "hd test image"
 response = requests.get(BASE + f"/api/image/{header}")
 print(response.json())
 '''
-header = "hdtestimage"
+header = "hd test image"
 
 response = requests.get(BASE + f"/api/image/{header}")
 print(response.json())

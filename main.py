@@ -256,7 +256,7 @@ class appUpdate(Resource):
 
 class fetchImage(Resource):
 
-    def get(self,header):
+    def get(self,header,uri,graph):
 
         DATABASE_URL = os.environ.get("DATABASE_URL")
 
@@ -274,21 +274,20 @@ class fetchImage(Resource):
 
         conn.close()
 
-        return {"URI" : str(result)}
+        try:
+            return {"URI" : str(result[0][0])}
+        except IndexError:
+            return {"error" : "unable to unpack values", "code" : 54}
 
-    def post(self,header):
+class AddImage(Resource):
+
+    def post(self,head,uri,graph):
         """
             A POST header is passed separated by an underscore (_), the first part is the header while the second part is the GitHub URL
             fmt => header<br>url<br>graph
             eg : placeA<br>https://www.images.com/placeAimg<br>testDB
         """
         print("[LOG] POSTED header")
-        sep_li = header.split("SEP")
-        head = sep_li[0]
-        uri = sep_li[1]
-        graph = sep_li[2]
-
-        print(sep_li)
 
         DATABASE_URL = os.environ.get("DATABASE_URL")
 
@@ -320,6 +319,8 @@ api.add_resource(update_database,"/api/database/update/<string:type>/<string:tok
 api.add_resource(delete_database,"/api/database/delete/<string:tok>/<string:graph_name>")
 api.add_resource(appUpdate,"/api/update/<string:dev_tok>")
 api.add_resource(fetchImage,"/api/image/<string:header>")
+api.add_resource(AddImage,"/api/image/<string:header>/<string:uri>/<string:graph>")
+
 
 
 if __name__ == "__main__":
