@@ -69,5 +69,5 @@ header = "hd test image"
 response = requests.get(BASE + f"/api/image/{header}")
 print(response.json())
 
-response = requests.post(BASE + f"/api/image/hdtestimageSEPhttps://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpegSEPtestDB")
+response = requests.post(BASE + f"/api/image/hdtestimage_%_'raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg'_%_testDB")
 print(response)

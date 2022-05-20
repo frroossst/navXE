@@ -281,13 +281,15 @@ class fetchImage(Resource):
 
 class AddImage(Resource):
 
-    def post(self,head,uri,graph):
+    def post(self,header):
         """
             A POST header is passed separated by an underscore (_), the first part is the header while the second part is the GitHub URL
             fmt => header<br>url<br>graph
             eg : placeA<br>https://www.images.com/placeAimg<br>testDB
         """
         print("[LOG] POSTED header")
+        
+        sep_li = header.split("_%_")
 
         DATABASE_URL = os.environ.get("DATABASE_URL")
 
@@ -296,6 +298,10 @@ class AddImage(Resource):
         )
 
         curr = conn.cursor()
+
+        head = sep_li[0]
+        uri = sep_li[1]
+        graph = sep_li[2]
 
         query = f"insert into images (header, uri, graph) values ('{head}','{uri}','{graph}');"
 
@@ -319,7 +325,7 @@ api.add_resource(update_database,"/api/database/update/<string:type>/<string:tok
 api.add_resource(delete_database,"/api/database/delete/<string:tok>/<string:graph_name>")
 api.add_resource(appUpdate,"/api/update/<string:dev_tok>")
 api.add_resource(fetchImage,"/api/image/<string:header>")
-api.add_resource(AddImage,"/api/image/<string:header>/<string:uri>/<string:graph>")
+api.add_resource(AddImage,"/api/image/<string:header>")
 
 
 
