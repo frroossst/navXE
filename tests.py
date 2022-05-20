@@ -64,10 +64,16 @@ header = "hd test image"
 response = requests.get(BASE + f"/api/image/{header}")
 print(response.json())
 '''
-header = "hd test image"
 
-response = requests.get(BASE + f"/api/image/{header}")
+import urllib.parse
+
+header = "hd test image"
+graph = "testDB"
+uri = "https://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg"
+uriEnc = urllib.parse.quote_plis(uri,safe="")
+
+response = requests.get(BASE + f"/api/image/{header}/{graph}")
 print(response.json())
 
-response = requests.post(BASE + f"/api/image/hdtestimage_%_'raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg'_%_testDB")
+response = requests.post(BASE + f"/api/image/")
 print(response)
