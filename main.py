@@ -275,7 +275,10 @@ class fetchImage(Resource):
         conn.close()
 
         try:
-            return {"URI" : str(result[0][0])}
+            url_return = result[0][0]
+            url_return = url_return.replace("-",".")
+            url_return = url_return.replace("+","/")
+            return {"URI" : str(url_return)}
         except IndexError:
             return {"error" : "unable to unpack values", "code" : 54}
 

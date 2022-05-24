@@ -88,7 +88,6 @@ url_parse = "raw.ithubusercontent.com/frroossst/navXE/master/images/test.jpeg"
 url_parse = url_parse.replace(".","-")
 url_parse = url_parse.replace("/","+")
 
-
 # dummy test post
 response = requests.post(BASE + f"/api/image/add/header_dummy/{url_parse}/graph_dummy")
 print(response)
