@@ -279,7 +279,14 @@ class fetchImage(Resource):
         except IndexError:
             return {"error" : "unable to unpack values", "code" : 54}
 
+    def post(self,header,graph):
+        print("POST does not exist for this call")
+
+
 class AddImage(Resource):
+
+    def get(self,header,uri,graph):
+        print("GET does not exist for this call")
 
     def post(self,header,uri,graph):
         """
@@ -311,7 +318,7 @@ class AddImage(Resource):
 
         conn.close()
 
-        return {"message" : "added image", "data" : {"header" : head, "URI" : uri, "graph" : graph}}
+        return {"message" : "added image", "data" : {"header" : header, "URI" : uri, "graph" : graph}}
 
 
 
