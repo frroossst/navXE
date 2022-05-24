@@ -65,29 +65,49 @@ response = requests.get(BASE + f"/api/image/{header}")
 print(response.json())
 '''
 
-import urllib.parse
+"""import urllib.parse
 
 header = "hd test image"
 graph = "testDB"
 uri = "https://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg"
 uriEnc = "(" + uri  + ")"
 
+header = "header_dummy"
+graph = "graph_dummy"
+
 response = requests.get(BASE + f"/api/image/{header}/{graph}")
 print(response.json())
+"""
 
 #response = requests.post(BASE + f"/api/image/add/{header}/{uriEnc}/{graph}")
 #print(response)
 
+"""
 url_parse = "raw.ithubusercontent.com/frroossst/navXE/master/images/test.jpeg"
 
-"""
-    . => -
-    / => +
-"""
+#    . => -
+#    / => +
 
 url_parse = url_parse.replace(".","-")
 url_parse = url_parse.replace("/","+")
 
 # dummy test post
 response = requests.post(BASE + f"/api/image/add/header_dummy/{url_parse}/graph_dummy")
+print(response)"""
+
+
+header = "hd test image"
+graph = "testDB"
+url_parse = "https://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg"
+url_parse = url_parse.replace(".","-")
+url_parse = url_parse.replace("/","+")
+
+response = requests.get(BASE + f"/api/image/{header}/{graph}")
+print(response.json())
+
+response = requests.post(BASE + f"/api/image/add/{header}/{url_parse}/{graph}")
 print(response)
+
+response = requests.get(BASE + f"/api/image/{header}/{graph}")
+print(response.json())
+
