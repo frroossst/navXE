@@ -332,7 +332,7 @@ api.add_resource(update_database,"/api/database/update/<string:type>/<string:tok
 api.add_resource(delete_database,"/api/database/delete/<string:tok>/<string:graph_name>")
 api.add_resource(appUpdate,"/api/update/<string:dev_tok>")
 api.add_resource(fetchImage,"/api/image/<string:header>/<string:graph>")
-api.add_resource(AddImage,"/api/image/<string:header>/<string:uri>/<string:graph>")
+api.add_resource(AddImage,"/api/image/add/<string:header>/<string:uri>/<string:graph>")
 
 
 
