@@ -301,7 +301,15 @@ export default {
             //console.log(liNode,"<=")
             document.getElementById("list-element-parent").style.display = "block";
             document.getElementById("list-element-parent").style.zIndex = 10;
-            document.getElementById("list-element-parent").textContent = liNode
+            document.getElementById("list-element-parent").textContent = liNode;
+
+            let img = document.createElement("img");
+            img.src = "https://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg";
+            let src = document.getElementById("list-element-parent");
+            src.appendChild(img);
+
+
+
         },
         checkboxClick(id_arg){
             if (document.getElementById(id_arg + "-checkbox").checked == true){
