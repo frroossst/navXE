@@ -295,6 +295,8 @@ export default {
         hideLiNavPopup(){
             document.getElementById("list-element-parent").style.zIndex = -1;
             document.getElementById("list-element-parent").style.display = "hidden"
+            document.getElementById("img").style.zIndex = -1;
+            document.getElementById("img").style.display = "none"
         },
         viewLiNavPopup(liNode){
             //console.log("view li nav popup called")
@@ -304,11 +306,16 @@ export default {
             document.getElementById("list-element-parent").textContent = liNode;
 
             let img = document.createElement("img");
+            img.setAttribute("id","img")
+            img.setAttribute("style","height: 100%; width: 100%; object-fit: contain")
+
             img.src = "https://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg";
             let src = document.getElementById("list-element-parent");
             src.appendChild(img);
 
-
+            document.getElementById("img").style.display = "block";
+            document.getElementById("img").style.zIndex = 10;
+            document.getElementById("img").textContent = liNode;
 
         },
         checkboxClick(id_arg){
