@@ -323,6 +323,8 @@ class AddImage(Resource):
                 if j == tok:
                     validated = True
 
+        print(f"validation status : {validated}")
+
         if validated:
             query = f"insert into images (header, uri, graph) values ('{header}','{uri}','{graph}');"
     
