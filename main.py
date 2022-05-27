@@ -291,7 +291,7 @@ class AddImage(Resource):
     def get(self,header,uri,graph):
         print("GET does not exist for this call")
 
-    def post(self,header,uri,graph):
+    def post(self,header,uri,graph,tok):
         """
             A POST header is passed separated by an underscore (_), the first part is the header while the second part is the GitHub URL
             fmt => header<br>url<br>graph
@@ -312,6 +312,11 @@ class AddImage(Resource):
         #head = sep_li[0]
         #uri = sep_li[1]
         #graph = sep_li[2]
+
+        q = f"select token from map;"
+        curr.execute(q)
+        r = curr.fetchall()
+        print(r) 
 
         query = f"insert into images (header, uri, graph) values ('{header}','{uri}','{graph}');"
 
@@ -335,7 +340,7 @@ api.add_resource(update_database,"/api/database/update/<string:type>/<string:tok
 api.add_resource(delete_database,"/api/database/delete/<string:tok>/<string:graph_name>")
 api.add_resource(appUpdate,"/api/update/<string:dev_tok>")
 api.add_resource(fetchImage,"/api/image/<string:header>/<string:graph>")
-api.add_resource(AddImage,"/api/image/add/<string:header>/<string:uri>/<string:graph>")
+api.add_resource(AddImage,"/api/image/add/<string:header>/<string:uri>/<string:graph>/<string:tok>")
 
 
 

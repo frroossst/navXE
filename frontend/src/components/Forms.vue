@@ -305,17 +305,40 @@ export default {
             document.getElementById("list-element-parent").style.zIndex = 10;
             document.getElementById("list-element-parent").textContent = liNode;
 
+            let responseURL = "https://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg"
+
+            const URL = "https://navxe.herokuapp.com/api/image/" + liNode + "/" + this.graph;
+            this.axios
+                .get(URL)
+                .then((response) => {
+                    let responseURL = response.data.URL
+                    console.log(responseURL)
+                    let img = document.createElement("img");
+                    img.setAttribute("id","img")
+                    img.setAttribute("style","height: 100%; width: 100%; object-fit: contain")
+        
+                    img.src = responseURL;
+                    let src = document.getElementById("list-element-parent");
+                    src.appendChild(img);
+        
+                    document.getElementById("img").style.display = "block";
+                    document.getElementById("img").style.zIndex = 10;
+                    document.getElementById("img").textContent = liNode;
+                })
+
+            /*
             let img = document.createElement("img");
             img.setAttribute("id","img")
             img.setAttribute("style","height: 100%; width: 100%; object-fit: contain")
 
-            img.src = "https://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg";
+            img.src = responseURL;
             let src = document.getElementById("list-element-parent");
             src.appendChild(img);
 
             document.getElementById("img").style.display = "block";
             document.getElementById("img").style.zIndex = 10;
             document.getElementById("img").textContent = liNode;
+            */
 
         },
         checkboxClick(id_arg){
