@@ -313,20 +313,29 @@ class AddImage(Resource):
         #uri = sep_li[1]
         #graph = sep_li[2]
 
+        validated = False
+
         q = f"select token from map;"
         curr.execute(q)
         r = curr.fetchall()
-        print(r) 
+        for i in r:
+            for j in i:
+                if j == tok:
+                    validated = True
 
-        query = f"insert into images (header, uri, graph) values ('{header}','{uri}','{graph}');"
+        if validated:
+            query = f"insert into images (header, uri, graph) values ('{header}','{uri}','{graph}');"
+    
+            curr.execute(query)
+    
+            conn.commit()
+    
+            conn.close()
+    
+            return {"message" : "added image", "data" : {"header" : header, "URI" : uri, "graph" : graph}}
 
-        curr.execute(query)
-
-        conn.commit()
-
-        conn.close()
-
-        return {"message" : "added image", "data" : {"header" : header, "URI" : uri, "graph" : graph}}
+        else:
+            return {"error" : "validation failed"}
 
 
 
