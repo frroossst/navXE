@@ -305,13 +305,13 @@ export default {
             document.getElementById("list-element-parent").style.zIndex = 10;
             document.getElementById("list-element-parent").textContent = liNode;
 
-            let responseURL = "https://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg"
+            //let responseURL = "https://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg"
 
             const URL = "https://navxe.herokuapp.com/api/image/" + liNode + "/" + this.graph;
             this.axios
                 .get(URL)
                 .then((response) => {
-                    let responseURL = response.data.URL
+                    let responseURL = response.data.URI
                     console.log(responseURL)
                     let img = document.createElement("img");
                     img.setAttribute("id","img")
