@@ -93,7 +93,7 @@ url_parse = url_parse.replace("/","+")
 
 # dummy test post
 response = requests.post(BASE + f"/api/image/add/header_dummy/{url_parse}/graph_dummy")
-print(response)"""
+print(response)
 
 
 header = "hd test image"
@@ -110,4 +110,15 @@ print(response)
 
 response = requests.get(BASE + f"/api/image/{header}/{graph}")
 print(response.json())
+"""
 
+header = "test txt"
+desc = "This is a dummy description"
+graph = "testDB"
+tok = "S61ec9d21a698a477855453567e2b7b90"
+
+response = requests.post(BASE + f"/api/text/add/{header}/{desc}/{graph}/{tok}")
+print(response)
+
+response = requests.get(BASE + f"/api/text/{header}/{graph}")
+print(response.json())

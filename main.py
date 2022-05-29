@@ -392,7 +392,7 @@ class addTextDesc(Resource):
         print(f"validation status : {validated}")
 
         if validated:
-            query = f"insert into images (header, uri, graph) values ('{header}','{desc}','{graph}');"
+            query = f"insert into text(header, uri, graph) values ('{header}','{desc}','{graph}');"
     
             curr.execute(query)
     
@@ -400,7 +400,7 @@ class addTextDesc(Resource):
     
             conn.close()
     
-            return {"message" : "added image", "data" : {"header" : header, "URI" : desc, "graph" : graph}}
+            return {"message" : "added text description", "data" : {"header" : header, "URI" : desc, "graph" : graph}}
 
         else:
             return {"error" : "validation failed"}
