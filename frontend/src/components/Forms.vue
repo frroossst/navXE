@@ -56,7 +56,6 @@
                 <div class="toDo">
                     <input v-bind:id="j[0] + '-checkbox'" @click="checkboxClick(j[0])" type="checkbox"/>
                 </div>
-                <!--<button type="button" @click="viewLiNavPopup" class="toDoBtn">View Details</button>-->
                 <hr>
             </div>
         </div>
@@ -234,17 +233,14 @@ export default {
                     result_array.push(this.SQ_obj_h[iter])
                 }
             }
-            //console.log(result_array)
 
             this.result_array_home = result_array
-            //JSON.parse(JSON.stringify(this.searchThrough)).homeNodes = result_array
 
         },
         searchFuncDestn(){
             document.getElementById("searchDropdownHome").style.display = "none";
             document.getElementById("searchDropdownDestn").style.display = "block";
             let destnQ = document.getElementById("destn-text-main").value.toLowerCase()
-            //this.SQ_obj_d = JSON.parse(JSON.stringify(this.searchThrough)).destnNodes
             let result_arrayD = []
 
             for (let iter = 0; iter < this.uniqueDestn.length; iter++){
@@ -252,7 +248,6 @@ export default {
                     result_arrayD.push(this.uniqueDestn[iter])
                 }
             }
-            //console.log(result_arrayD)
 
             this.result_array_destn = result_arrayD
 
@@ -301,13 +296,9 @@ export default {
             document.getElementById("desc").style.display = "none"
         },
         viewLiNavPopup(liNode){
-            //console.log("view li nav popup called")
-            //console.log(liNode,"<=")
             document.getElementById("list-element-parent").style.display = "block";
             document.getElementById("list-element-parent").style.zIndex = 10;
             document.getElementById("list-element-parent").textContent = liNode;
-
-            //let responseURL = "https://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg"
 
             const URL= "https://navxe.herokuapp.com/api/image/" + liNode + "/" + this.graph;
             this.axios
@@ -317,7 +308,7 @@ export default {
                     console.log(responseURL)
                     let img = document.createElement("img");
                     img.setAttribute("id","img")
-                    img.setAttribute("style","display: flex; flex-wrap: wrap; white-space: nowrap")
+                    img.setAttribute("style","height: 100%; width: 100%; object-fit: contain")
         
                     img.src = responseURL;
                     let src = document.getElementById("list-element-parent");
@@ -327,16 +318,17 @@ export default {
                     document.getElementById("img").style.zIndex = 10;
                     document.getElementById("img").textContent = liNode;
 
-
                     const URL_txt = "https://navxe.herokuapp.com/api/text/" + liNode + "/" + this.graph;
                     this.axios
                         .get(URL_txt)
                         .then((response) => {
+                            console.log(URL_txt);
                             let responseDesc = response.data.text;
                             console.log(responseDesc);
                             let txt = document.createElement("desc");
                             txt.setAttribute("id","desc");
-                            txt.setAttribute("style","height: 100%; width: 100%; object-fit: contain")
+                            txt.setAttribute("style","width:inherit; min-width: 150px; display: inline-block; text-align: center;")
+                            txt.setAttribute("innerHTML",responseDesc)
                             txt.innerHTML = responseDesc;
 
                             let src = document.getElementById("list-element-parent");
@@ -344,44 +336,8 @@ export default {
 
                             document.getElementById("desc").style.display = "block";
                             document.getElementById("desc").style.zIndex = 10;
-                            document.getElementById("desc").textContent = liNode;
              })
              })
-
-/*            const URL_txt = "https://navxe.herokuapp.com/api/text/" + liNode + "/" + this.graph;
-            this.axios
-                .get(URL_txt)
-                .then((response) => {
-                    let responseDesc = response.data.text;
-                    console.log(responseDesc);
-                    let txt = document.createElement("desc");
-                    txt.setAttribute("id","desc");
-                    //img.setAttribute("style","height: 100%; width: 100%; object-fit: contain")
-                    txt.innerHTML = responseDesc;
-        
-                    let src = document.getElementById("list-element-parent");
-                    src.appendChild(txt);
-                    
-        
-                    document.getElementById("desc").style.display = "block";
-                    document.getElementById("desc").style.zIndex = 10;
-                    document.getElementById("desc").textContent = liNode;
-                })
-*/
-            /*
-            let img = document.createElement("img");
-            img.setAttribute("id","img")
-            img.setAttribute("style","height: 100%; width: 100%; object-fit: contain")
-
-            img.src = responseURL;
-            let src = document.getElementById("list-element-parent");
-            src.appendChild(img);
-
-            document.getElementById("img").style.display = "block";
-            document.getElementById("img").style.zIndex = 10;
-            document.getElementById("img").textContent = liNode;
-            */
-
         },
         checkboxClick(id_arg){
             if (document.getElementById(id_arg + "-checkbox").checked == true){
@@ -392,7 +348,6 @@ export default {
                 /*
                     Do NOT delete the below methods they actually perform in-place operations
                 */
-
                 console.log("---click operations---")
                 console.log(indx)
                 console.log(this.route.push(this.route[indx]))
@@ -402,7 +357,6 @@ export default {
             else{
                 document.getElementById(id_arg + "-label").style.setProperty("text-decoration","none")       
                 document.getElementById(id_arg + "-label").style.fontStyle = "";       
-                //console.log("unchecking",id_arg)
                 document.getElementById(id_arg + "-label").style.setProperty("text-decoration","none");
                 document.getElementById(id_arg + "-label").style.fontStyle = "none";   
 
@@ -456,13 +410,6 @@ export default {
 
                 this.route = arr_unchecked_sorted.concat(arr_checked_sorted)
                 console.log(this.route,"ROUTE")
-
-                /*let indx = this.route.indexOf(id_arg);
-                this.route.splice(indx,1) 
-                let push_indx = this.preserved_route_object[id_arg]
-                console.log(push_indx)
-                this.route.splice(push_indx,0,id_arg)
-                console.log(this.route)*/
             }
         },
         enumerateRouteObject(){
