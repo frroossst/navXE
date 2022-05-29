@@ -340,6 +340,71 @@ class AddImage(Resource):
             return {"error" : "validation failed"}
 
 
+class fetchTextDesc(Resource):
+
+    def get(self,header,graph):
+
+        DATABASE_URL = os.environ.get("DATABASE_URL")
+
+        conn = psycopg2.connect(
+            DATABASE_URL,sslmode="require"
+        )
+
+        curr = conn.cursor()
+
+        query = f"select txtdesc from text where header = '{header}' and graph = '{graph}';"
+
+        curr.execute(query)
+
+        result = curr.fetchall()
+
+        conn.close()
+
+        try:
+            data = result[0][0]
+            return {"text" : str(data)}
+        except IndexError:
+            return {"error" : "unable to unpack values", "code" : 54}
+
+
+class addTextDesc(Resource):
+
+    def post(self,header,desc,graph,tok):
+
+        DATABASE_URL = os.environ.get("DATABASE_URL")
+
+        conn = psycopg2.connect(
+            DATABASE_URL,sslmode="require"
+        )
+
+        curr = conn.cursor()
+
+        validated = False
+
+        q = f"select token from map;"
+        curr.execute(q)
+        r = curr.fetchall()
+        for i in r:
+            for j in i:
+                if j == tok:
+                    validated = True
+
+        print(f"validation status : {validated}")
+
+        if validated:
+            query = f"insert into images (header, uri, graph) values ('{header}','{desc}','{graph}');"
+    
+            curr.execute(query)
+    
+            conn.commit()
+    
+            conn.close()
+    
+            return {"message" : "added image", "data" : {"header" : header, "URI" : desc, "graph" : graph}}
+
+        else:
+            return {"error" : "validation failed"}
+
 
 
 
@@ -352,6 +417,8 @@ api.add_resource(delete_database,"/api/database/delete/<string:tok>/<string:grap
 api.add_resource(appUpdate,"/api/update/<string:dev_tok>")
 api.add_resource(fetchImage,"/api/image/<string:header>/<string:graph>")
 api.add_resource(AddImage,"/api/image/add/<string:header>/<string:uri>/<string:graph>/<string:tok>")
+api.add_resource(fetchTextDesc,"/api/text/<string:header>/<string:graph>")
+api.add_resource(addTextDesc,"/api/text/add/<string:header>/<string:desc>/<string:graph>/<string:tok>")
 
 
 
