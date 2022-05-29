@@ -392,7 +392,7 @@ class addTextDesc(Resource):
         print(f"validation status : {validated}")
 
         if validated:
-            query = f"insert into text(header, uri, graph) values ('{header}','{desc}','{graph}');"
+            query = f"insert into text(header, txtdesc, graph) values ('{header}','{desc}','{graph}');"
     
             curr.execute(query)
     
