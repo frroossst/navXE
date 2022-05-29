@@ -297,6 +297,8 @@ export default {
             document.getElementById("list-element-parent").style.display = "hidden"
             document.getElementById("img").style.zIndex = -1;
             document.getElementById("img").style.display = "none"
+            document.getElementById("desc").style.zIndex = -1;
+            document.getElementById("desc").style.display = "none"
         },
         viewLiNavPopup(liNode){
             //console.log("view li nav popup called")
@@ -307,7 +309,7 @@ export default {
 
             //let responseURL = "https://raw.githubusercontent.com/frroossst/navXE/master/images/test.jpeg"
 
-            const URL = "https://navxe.herokuapp.com/api/image/" + liNode + "/" + this.graph;
+            const URL= "https://navxe.herokuapp.com/api/image/" + liNode + "/" + this.graph;
             this.axios
                 .get(URL)
                 .then((response) => {
@@ -315,7 +317,7 @@ export default {
                     console.log(responseURL)
                     let img = document.createElement("img");
                     img.setAttribute("id","img")
-                    img.setAttribute("style","height: 100%; width: 100%; object-fit: contain")
+                    img.setAttribute("style","display: flex; flex-wrap: wrap; white-space: nowrap")
         
                     img.src = responseURL;
                     let src = document.getElementById("list-element-parent");
@@ -324,8 +326,48 @@ export default {
                     document.getElementById("img").style.display = "block";
                     document.getElementById("img").style.zIndex = 10;
                     document.getElementById("img").textContent = liNode;
-                })
 
+
+                    const URL_txt = "https://navxe.herokuapp.com/api/text/" + liNode + "/" + this.graph;
+                    this.axios
+                        .get(URL_txt)
+                        .then((response) => {
+                            let responseDesc = response.data.text;
+                            console.log(responseDesc);
+                            let txt = document.createElement("desc");
+                            txt.setAttribute("id","desc");
+                            txt.setAttribute("style","height: 100%; width: 100%; object-fit: contain")
+                            txt.innerHTML = responseDesc;
+
+                            let src = document.getElementById("list-element-parent");
+                            src.appendChild(txt);
+
+                            document.getElementById("desc").style.display = "block";
+                            document.getElementById("desc").style.zIndex = 10;
+                            document.getElementById("desc").textContent = liNode;
+             })
+             })
+
+/*            const URL_txt = "https://navxe.herokuapp.com/api/text/" + liNode + "/" + this.graph;
+            this.axios
+                .get(URL_txt)
+                .then((response) => {
+                    let responseDesc = response.data.text;
+                    console.log(responseDesc);
+                    let txt = document.createElement("desc");
+                    txt.setAttribute("id","desc");
+                    //img.setAttribute("style","height: 100%; width: 100%; object-fit: contain")
+                    txt.innerHTML = responseDesc;
+        
+                    let src = document.getElementById("list-element-parent");
+                    src.appendChild(txt);
+                    
+        
+                    document.getElementById("desc").style.display = "block";
+                    document.getElementById("desc").style.zIndex = 10;
+                    document.getElementById("desc").textContent = liNode;
+                })
+*/
             /*
             let img = document.createElement("img");
             img.setAttribute("id","img")

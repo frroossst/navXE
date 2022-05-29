@@ -112,8 +112,8 @@ response = requests.get(BASE + f"/api/image/{header}/{graph}")
 print(response.json())
 """
 
-header = "test txt"
-desc = "This is a dummy description"
+header = "a"
+desc = "This is description for a"
 graph = "testDB"
 tok = "S61ec9d21a698a477855453567e2b7b90"
 
