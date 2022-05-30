@@ -108,16 +108,6 @@ export default  {
             document.getElementById("app-version").firstChild.data = responseData
 
             console.log("version from API",responseData)
-            //console.log("local version",localVersion)
-
-            /*if (localVersion != responseData){
-               if (this.recentUpdate == false){
-               localStorage.setItem("version",responseData)
-               window.location.reload(true)
-               this.recentUpdate = true
-               document.getElementById("app-version").firstChild.data = responseData
-            }
-            }*/
       },
       async wakeUpAPI(){
 

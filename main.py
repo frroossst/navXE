@@ -54,7 +54,8 @@ class route(Resource):
         route_result = P.BFS_SP(G.graphDB,home,destn)
         print(f"[LOG] BFS route = {route_result}")
 
-        return {"home" : home, "destination" : destn, "route" : route_result}                
+        return {"home" : home, "destination" : destn, "route" : route_result}
+
 
 
 class token(Resource):
@@ -65,12 +66,13 @@ class token(Resource):
 
         if len(base) < 9:
             return response_json
-        
+
         else:
             tokenGen = base + secrets.token_hex(16)
             response_json["tokenID"] = tokenGen
             return response_json
-        
+
+
 
 class create_database(Resource):
 
@@ -105,6 +107,7 @@ class create_database(Resource):
         return {"message" : "inserted record"}
 
 
+
 class read_database(Resource):
 
     def get(self,name):
@@ -118,7 +121,7 @@ class read_database(Resource):
         curr = conn.cursor()
 
         if name == "*":
-            query = "select graphname from map;" 
+            query = "select graphname from map;"
         else:
             query = f"select graphdata from map where graphname = '{str(name)}';"
 
@@ -129,6 +132,8 @@ class read_database(Resource):
         conn.close()
 
         return {"result" : result}
+
+
 
 class update_database(Resource):
 
@@ -149,9 +154,9 @@ class update_database(Resource):
             curr.execute(update_query)
 
             conn.commit()
-    
+
             conn.close()
-    
+
             return {"message" : "updated record"}
 
         elif type == "chardata":
@@ -161,9 +166,9 @@ class update_database(Resource):
             curr.execute(update_query)
 
             conn.commit()
-    
+
             conn.close()
-    
+
             return {"message" : "updated record"}
 
         elif type == "undirdata":
@@ -173,14 +178,15 @@ class update_database(Resource):
             curr.execute(update_query)
 
             conn.commit()
-    
+
             conn.close()
-    
+
             return {"message" : "updated record"}
-        
+
         else:
 
             return {"message" : "unable to complete database operation"}
+
 
 
 class delete_database(Resource):
@@ -254,6 +260,7 @@ class appUpdate(Resource):
         return {"newVersion" : dateStr}
 
 
+
 class fetchImage(Resource):
 
     def get(self,header,graph):
@@ -286,6 +293,7 @@ class fetchImage(Resource):
         print("POST does not exist for this call")
 
 
+
 class AddImage(Resource):
 
     def get(self,header,uri,graph):
@@ -298,8 +306,6 @@ class AddImage(Resource):
             eg : placeA<br>https://www.images.com/placeAimg<br>testDB
         """
         print("[LOG] POSTED header")
-        
-        #sep_li = header.split("_%_")
 
         DATABASE_URL = os.environ.get("DATABASE_URL")
 
@@ -308,10 +314,6 @@ class AddImage(Resource):
         )
 
         curr = conn.cursor()
-
-        #head = sep_li[0]
-        #uri = sep_li[1]
-        #graph = sep_li[2]
 
         validated = False
 
@@ -327,17 +329,18 @@ class AddImage(Resource):
 
         if validated:
             query = f"insert into images (header, uri, graph) values ('{header}','{uri}','{graph}');"
-    
+
             curr.execute(query)
-    
+
             conn.commit()
-    
+
             conn.close()
-    
+
             return {"message" : "added image", "data" : {"header" : header, "URI" : uri, "graph" : graph}}
 
         else:
             return {"error" : "validation failed"}
+
 
 
 class fetchTextDesc(Resource):
@@ -367,6 +370,7 @@ class fetchTextDesc(Resource):
             return {"error" : "unable to unpack values", "code" : 54}
 
 
+
 class addTextDesc(Resource):
 
     def post(self,header,desc,graph,tok):
@@ -393,18 +397,17 @@ class addTextDesc(Resource):
 
         if validated:
             query = f"insert into text(header, txtdesc, graph) values ('{header}','{desc}','{graph}');"
-    
+
             curr.execute(query)
-    
+
             conn.commit()
-    
+
             conn.close()
-    
+
             return {"message" : "added text description", "data" : {"header" : header, "URI" : desc, "graph" : graph}}
 
         else:
             return {"error" : "validation failed"}
-
 
 
 
