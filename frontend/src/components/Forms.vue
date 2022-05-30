@@ -496,9 +496,6 @@ export default {
         margin: 10px;
         padding: 5px;
     }
-    div {
-        overflow-y: auto;
-    }
     .submit{
         text-align: center;
         align-self: center;
@@ -573,5 +570,6 @@ export default {
         padding: 40px;
         border-radius: 10px;
         align-items: center;
+        overflow-y: auto;
     }
 </style>
