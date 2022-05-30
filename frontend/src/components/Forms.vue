@@ -496,6 +496,9 @@ export default {
         margin: 10px;
         padding: 5px;
     }
+    div {
+        overflow-y: auto;
+    }
     .submit{
         text-align: center;
         align-self: center;
