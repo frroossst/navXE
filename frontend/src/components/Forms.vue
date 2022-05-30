@@ -308,7 +308,7 @@ export default {
                     console.log(responseURL)
                     let img = document.createElement("img");
                     img.setAttribute("id","img")
-                    img.setAttribute("style","height: 100%; width: 100%; object-fit: contain")
+                    img.setAttribute("style","height: 100px; width: 100%; margin: 25px; object-fit: contain;")
         
                     img.src = responseURL;
                     let src = document.getElementById("list-element-parent");
@@ -327,7 +327,7 @@ export default {
                             console.log(responseDesc);
                             let txt = document.createElement("desc");
                             txt.setAttribute("id","desc");
-                            txt.setAttribute("style","width:inherit; min-width: 150px; display: inline-block; text-align: center;")
+                            txt.setAttribute("style","width:200px; display: inline-block; text-align: center;word-wrap : break-word;")
                             txt.setAttribute("innerHTML",responseDesc)
                             txt.innerHTML = responseDesc;
 
