@@ -32,8 +32,6 @@ class route(Resource):
 
         curr = conn.cursor()
 
-        empty_dict = str({})
-
         query = f"select graphdata from map where graphname = '{graph}';"
         print(query)
 

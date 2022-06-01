@@ -1,5 +1,3 @@
 master : main branch
 
 dev : always merge to dev before master, most of the times dev will have the latest features and bugs
-
-<branch name> : creating a new branch when working on a new feature
