@@ -19,47 +19,55 @@ class Path():
 
         if start not in graph or goal not in graph:
             return "None" # Path does not exist because node does not exist
+
         elif start == goal:
             return "None" # Path is 0 as both nodes are the same
 
         explored = []
-        
+
         # Queue for traversing the
         # graph in the BFS
         queue = [[start]]
-        
+
         # If the desired node is
         # reached
         if start == goal:
             return "None"
-        
+
         # Loop to traverse the graph
         # with the help of the queue
+
         while queue:
             path = queue.pop(0)
             node = path[-1]
-            
+
             # Condition to check if the
             # current node is not visited
+
             if node not in explored:
                 neighbours = graph[node]
-                
+
                 # Loop to iterate over the
                 # neighbours of the node
+
                 for neighbour in neighbours:
                     new_path = list(path)
                     new_path.append(neighbour)
                     queue.append(new_path)
-                    
+
                     # Condition to check if the
                     # neighbour node is the goal
+
                     if neighbour == goal:
                         return new_path
 
                 explored.append(node)
-    
+
     def Astar():
         pass
 
     def Djikstra():
+        pass
+
+    def BellmanFord():
         pass

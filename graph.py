@@ -1,5 +1,3 @@
-# To generate and create a graph
-
 from methods import method
 import secrets
 import copy
@@ -11,7 +9,7 @@ class Graphs():
 
     def __init__(self):
             Graphs.graphDB = None
-            Graphs.propertiesDB = None 
+            Graphs.propertiesDB = None
 
     def addNode(self,name : str,children=[],weight=0.0,isMajor=False):
         """
@@ -32,10 +30,9 @@ class Graphs():
         Graphs.graphDB[name] = children
         Graphs.propertiesDB[name] = propDict
         propDict["nodeName"] = name
-        
+
         method.dumpJSON(Graphs.graphDB,"graphDB.json")
         method.dumpJSON(Graphs.propertiesDB,"propertiesDB.json")
-
 
     def removeNode(self,name : str):
 
@@ -48,8 +45,6 @@ class Graphs():
             del Graphs.desc2key[name]
         except KeyError:
             pass # Ignoring deletion cause node does not exist
-
-
 
     @classmethod
     def undirectGraph(self,graph : dict):
@@ -66,7 +61,7 @@ class Graphs():
                     if val in v:
                         # if val not in undirected_graph[key_undir]:
                             undirected_graph[key_undir].append(k)
-        undirected_graph = method.leafifyChildren(undirected_graph) 
+        undirected_graph = method.leafifyChildren(undirected_graph)
         undirected_graph_iter = copy.deepcopy(undirected_graph)
 
         # Populating empty 
@@ -75,7 +70,7 @@ class Graphs():
                 for k,val_list in undirected_graph_iter.items():
                     if key in val_list:
                         undirected_graph[key].append(k)
-                
+
         # Fixing some key-value pairs
         for key, val in undirected_graph.items():
             for v in val:
@@ -108,25 +103,24 @@ class Graphs():
 
     @classmethod
     def invertGraph(self, graph : dict):
-        
+
         inver = {}
 
         for k,v in graph.items():
             for i in v:
                 if i not in inver:
                     inver[i] = []
-        
+
         for k, v in graph.items():
             for i in v:
                 inver[i].append(k)
 
         print(inver)
-
-
+        return inver
 
     @classmethod
     def generateToken(self, id : str):
-        
+
         token_16 = secrets.token_hex(16)
         token_8 = secrets.token_hex(8)
 

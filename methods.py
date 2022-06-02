@@ -4,6 +4,8 @@ import networkx as nx
 import random
 import json
 
+
+
 class method():
 
     def __init__(self):
@@ -18,7 +20,7 @@ class method():
     @classmethod
     def dumpJSON(self,data : dict,file : str) -> dict:
         """
-        Best practice is to read and write all data rather than modify 
+        Best practice is to read and write all data rather than modify
         """
         with open(file,"w") as fobj:
             json.dump(data,fobj,indent=6)
@@ -26,7 +28,7 @@ class method():
 
     @classmethod
     def clearFileData(self, file : str) -> None:
-        
+
         with open(file,"w") as fobj:
             json.dump({},fobj)
             fobj.close()
@@ -35,19 +37,19 @@ class method():
 
     @classmethod
     def leafifyChildren(self,graph : dict) -> dict:
-        
+
         copyGraph = deepcopy(graph)
 
         for i in copyGraph.values():
             for j in i:
                 if j not in copyGraph:
                     graph[j] = [] # Generating a leaf for the children
-                
+
         return graph
 
     @classmethod
     def generateRandomGraph(self,file):
-        
+
         node_li = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
         num_li = range(0,26)
         graph = {}
@@ -62,7 +64,7 @@ class method():
                 if j == i:
                     graph[i] = graph[i].remove(j)
 
-        iter = deepcopy(graph) 
+        iter = deepcopy(graph)
         for i in iter:
             if graph[i] is None:
                 del graph[i]
@@ -71,14 +73,14 @@ class method():
 
     @classmethod
     def drawNetwork(self,graph : dict):
-        
+
         # content = method.loadJSON(file)
         content = graph
         li = []
         for i in content:
             for j in content[i]:
                 li.append(tuple([i,j]))
-        
+
         GD = nx.MultiDiGraph()
         GD.add_edges_from(li)
         plt.figure(figsize=(80,80))

@@ -6,13 +6,6 @@ from methods import method
 
 views = Blueprint('views',__name__)
 
-'''@app.before_request
-def before_request():
-    if not request.is_secure:
-        url = request.url.replace('http://', 'https://', 1)
-        code = 301
-        return redirect(url, code=code)'''
-
 # Checking for https
 def check_https():
     print(f"[LOG] {request.url}")
@@ -69,8 +62,6 @@ def navigate():
 
         elif request.form.get("scanQR-submit"):
             return redirect(url_for("views.qr_scan"))
-
-
 
 @views.route("/graphs")
 def graphs():
