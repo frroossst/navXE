@@ -43,3 +43,22 @@ Version 3
         terminal graph editor
         more pathfinding algorithms
         accesibility features
+
+--- new roadmap ---
+
+Version 4 - Luke
+
+    Tentative release : 28 September 2022
+
+    Desc
+        migrating the backend from Heroku
+
+    Features
+        migrating the Heroku postgres db to supabase
+        ditching the Python backend and offloading all to either the frontend or edge functions
+        MVP of the usask campus
+        picture and descriptions fetching 
+        start work on attribute graph
+    
+
+Version 5 - Phoenix

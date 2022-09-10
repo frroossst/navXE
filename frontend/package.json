@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@smartweb/vue-flash-message": "^0.6.10",
+    "@supabase/supabase-js": "^1.35.6",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "register-service-worker": "^1.7.2",
